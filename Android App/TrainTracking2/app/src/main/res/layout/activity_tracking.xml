@@ -9,4 +9,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.snov.traintracking.TrackingActivity">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Select Start Station"
+            />
+
+        <Spinner
+            android:id="@+id/Start_Station_DropDown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Select End Station"/>
+
+        <Spinner
+            android:id="@+id/End_Station_DropDown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Train"
+            android:layout_gravity="center_horizontal" />
+
+
+    </LinearLayout>
+
 </RelativeLayout>

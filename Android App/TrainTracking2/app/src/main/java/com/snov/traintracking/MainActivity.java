@@ -8,16 +8,20 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView TrackingCard;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println("Test01");
+        //System.out.println("Test01");
 
-        TrackingCard = (CardView)findViewById(R.id.TrainTrackingView);
+        //Home UI Routing
+        CardView TrackingCard = (CardView)findViewById(R.id.TrainTrackingView);
+        CardView ReservationCard = (CardView)findViewById(R.id.ReservationView);
+        CardView NewsCard = (CardView)findViewById(R.id.NewsFeedView);
+        CardView FeedbackCard = (CardView)findViewById(R.id.FeedbackView);
 
         TrackingCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -26,6 +30,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ReservationCard.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(MainActivity.this, ReservationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        NewsCard.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(MainActivity.this, NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        FeedbackCard.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 }

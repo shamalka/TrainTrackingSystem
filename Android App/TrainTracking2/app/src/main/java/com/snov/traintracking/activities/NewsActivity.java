@@ -1,13 +1,15 @@
-package com.snov.traintracking;
+package com.snov.traintracking.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class FeedbackActivity extends AppCompatActivity {
+import com.snov.traintracking.R;
+
+public class NewsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
+        setContentView(R.layout.activity_news);
     }
 }

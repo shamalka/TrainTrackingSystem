@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.snov.traintracking.R;
 import com.snov.traintracking.adapters.CustomListView;
 import com.snov.traintracking.utilities.Constants;
+import com.snov.traintracking.utilities.JsonConfig;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public class FeedbackActivity extends AppCompatActivity {
     private void collectData(){
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL);
+            URL url = new URL(Constants.SERVER_URL+"?"+ JsonConfig.GET_TRAINS);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());

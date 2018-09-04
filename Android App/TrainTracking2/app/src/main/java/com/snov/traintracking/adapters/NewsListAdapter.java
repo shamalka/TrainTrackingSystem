@@ -18,23 +18,19 @@ import com.snov.traintracking.activities.FeedbackActivity;
 /**
  * Created by Shamalka Navod on 2018-08-30.
  */
-public class CustomListView extends ArrayAdapter<String> {
+public class NewsListAdapter extends ArrayAdapter<String> {
 
-    private String[] TrainName;
-    private String[] StartStation;
-    private String[] EndStation;
-    private String[] Time;
-    private String[] Type;
+    private String[] NewsTitle;
+    private String[] NewsAuthor;
+    private String[] NewsDate;
     private Activity context;
 
-    public CustomListView(Activity context, String[] TrainName, String[] StartStaion, String[] EndStation, String[] Time, String[] Type) {
-        super(context, R.layout.activity_feedback, TrainName);
+    public NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsAuthor, String[] NewsDate) {
+        super(context, R.layout.activity_news, NewsTitle);
         this.context = context;
-        this.TrainName = TrainName;
-        this.StartStation = StartStaion;
-        this.EndStation = EndStation;
-        this.Time = Time;
-        this.Type = Type;
+        this.NewsTitle = NewsTitle;
+        this.NewsAuthor = NewsAuthor;
+        this.NewsDate = NewsDate;
     }
 
 
@@ -47,7 +43,7 @@ public class CustomListView extends ArrayAdapter<String> {
         ViewHolder viewHolder = null;
         if(r==null){
             LayoutInflater layoutInflater = context.getLayoutInflater();
-            r = layoutInflater.inflate(R.layout.trains_list_item,null,true);
+            r = layoutInflater.inflate(R.layout.news_list_item,null,true);
             r.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Toast.makeText(getContext(), "Go to description", Toast.LENGTH_SHORT).show();
@@ -59,28 +55,24 @@ public class CustomListView extends ArrayAdapter<String> {
             viewHolder = (ViewHolder)r.getTag();
         }
 
-        viewHolder.train_name.setText(TrainName[position]);
-        viewHolder.start_st.setText(StartStation[position]);
-        viewHolder.end_st.setText(EndStation[position]);
-        viewHolder.train_time.setText(Time[position]);
-        viewHolder.train_type.setText(Type[position]);
+        viewHolder.news_title.setText(NewsTitle[position]);
+        viewHolder.news_author.setText(NewsAuthor[position]);
+        viewHolder.news_date.setText(NewsDate[position]);
+
 
         return r;
     }
 
     class ViewHolder{
-        TextView train_name;
-        TextView start_st;
-        TextView end_st;
-        TextView train_time;
-        TextView train_type;
+        TextView news_title;
+        TextView news_author;
+        TextView news_date;
+
 
         ViewHolder(View v){
-            train_name = (TextView)v.findViewById(R.id.name);
-            start_st = (TextView)v.findViewById(R.id.start);
-            end_st = (TextView)v.findViewById(R.id.end);
-            train_time = (TextView)v.findViewById(R.id.time);
-            train_type = (TextView)v.findViewById(R.id.type);
+            news_title = (TextView)v.findViewById(R.id.title);
+            news_author = (TextView)v.findViewById(R.id.author);
+            news_date = (TextView)v.findViewById(R.id.date);
         }
 
 

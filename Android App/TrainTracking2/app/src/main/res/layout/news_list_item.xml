@@ -3,62 +3,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="#ffffffff"
-        android:padding="15dp">
+        android:layout_height="100dp"
+        android:layout_margin="10dp">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="70dp"
-            android:layout_height="86dp"
-            android:layout_weight="1"
-            android:src="@drawable/train_item"/>
-
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:textSize="22dp"
-            android:text="News Title"
-            android:layout_alignTop="@+id/image"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"/>
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:paddingBottom="15dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="Author"
-            android:textSize="14dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/name"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginLeft="5dp"/>
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/news"
+                />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="Date Posted"
-            android:textSize="14dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/author"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginLeft="5dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333"
+                    android:textSize="18dp"
+                    android:text="News Title"
+                    android:layout_alignTop="@+id/image"
+                    android:layout_toRightOf="@+id/image"
+                    android:layout_toEndOf="@+id/image"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="7dp"/>
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333"
+                    android:text="Author"
+                    android:textSize="10dp"
+                    android:layout_below="@+id/title"
+                    android:layout_alignLeft="@+id/title"
+                    android:layout_alignStart="@+id/title"
+                    android:layout_marginLeft="7dp"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333"
+                    android:text="Date Posted"
+                    android:textSize="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/author"
+                    android:layout_toRightOf="@+id/image"
+                    android:layout_toEndOf="@+id/image"
+                    android:layout_marginLeft="7dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
 
 
-    </RelativeLayout>
+
+
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.SharingActivity"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Select Start Station"
+            />
+
+        <Spinner
+            android:id="@+id/Start_Station_DropDown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Select End Station"/>
+
+        <Spinner
+            android:id="@+id/End_Station_DropDown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Train"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Latitude"
+            android:id="@+id/latitude"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Longitude"
+            android:id="@+id/longitude"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Data"
+            android:id="@+id/send_button"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Location Data"
+            android:id="@+id/location_data"
+            android:textSize="10dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal">
+
+        <!--<Button-->
+            <!--android:layout_width="140dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Share Location 1"-->
+            <!--android:id="@+id/share_location"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="20dp"/>-->
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/share_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:cardCornerRadius="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            float:cardBackgroundColor="@color/button_background">
+            <TextView
+                android:gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:text="Share Location"
+                android:textColor="#000"/>
+        </android.support.v7.widget.CardView>
+
+    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+        android:id="@+id/share_loading_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share Location"
+        android:background="@drawable/shape_default"
+        app:spinning_bar_color="#fff"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="4dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/stop_sharing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:cardCornerRadius="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            float:cardBackgroundColor="@color/button_background"
+
+
+            >
+            <TextView
+                android:gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:text="Stop Sharing"
+                android:textColor="#000"/>
+        </android.support.v7.widget.CardView>
+
+    <!--<Button-->
+        <!--android:layout_width="140dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Stop Sharing"-->
+        <!--android:id="@+id/stop_sharing"-->
+        <!--android:layout_below="@+id/share_location"-->
+        <!--android:layout_alignLeft="@+id/share_location"-->
+        <!--android:layout_alignStart="@+id/share_location"-->
+        <!--android:layout_marginTop="10dp"/>-->
+
+    </LinearLayout>
+
+
+</RelativeLayout>

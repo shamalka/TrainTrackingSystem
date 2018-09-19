@@ -8,88 +8,157 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.MainActivity"
-    android:background="@color/CardBackground">
+    android:background="@drawable/background"
+
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/logged_in"
+        android:text="Logged In"
+        android:textColor="#fff"
+        android:gravity="right"/>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/TrainTrackingView"
-            android:layout_gravity="center"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            card_view:cardCornerRadius="8dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center">
 
-            <TextView
-                android:text="Train Tracking"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="35dp"/>
+            <ImageButton
+                android:id="@+id/TrainTrackingView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/train_tracking"
+                android:layout_margin="10dp"
 
-        </android.support.v7.widget.CardView>
+                />
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ReservationView"
-            android:layout_gravity="center"
+            <ImageButton
+                android:id="@+id/ReservationView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/reservation"
+                android:layout_margin="10dp"
+                />
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/TrainTrackingView"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--card_view:cardCornerRadius="8dp">-->
+
+
+                <!--<TextView-->
+                    <!--android:text="Train Tracking"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_marginTop="35dp"/>-->
+
+            <!--</android.support.v7.widget.CardView>-->
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/ReservationView"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--card_view:cardCornerRadius="8dp"-->
+                <!--android:layout_marginLeft="100dp"-->
+                <!--&gt;-->
+
+                <!--<TextView-->
+                    <!--android:text="Ticket Reservation"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="10dp"-->
+                    <!--android:layout_marginTop="35dp"/>-->
+
+            <!--</android.support.v7.widget.CardView>-->
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            card_view:cardCornerRadius="8dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <TextView
-                android:text="Ticket Reservation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="35dp"/>
+            <ImageButton
+                android:id="@+id/NewsFeedView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/news_feed"
+                android:layout_margin="10dp"
+                />
 
-        </android.support.v7.widget.CardView>
+            <ImageButton
+                android:id="@+id/FeedbackView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/ratings"
+                android:layout_margin="10dp"
+                />
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/NewsFeedView"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            card_view:cardCornerRadius="8dp"
-            android:layout_marginTop="10dp">
+            <!--<android.support.v7.widget.CardView-->
+                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/NewsFeedView"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--card_view:cardCornerRadius="8dp"-->
+                <!--android:layout_marginTop="10dp">-->
 
-            <TextView
-                android:text="NEWS Feed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="35dp"/>
+                <!--<TextView-->
+                    <!--android:text="NEWS Feed"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_marginTop="35dp"/>-->
 
-        </android.support.v7.widget.CardView>
+            <!--</android.support.v7.widget.CardView>-->
 
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/FeedbackView"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            card_view:cardCornerRadius="8dp"
-            android:layout_marginTop="10dp">
+            <!--<android.support.v7.widget.CardView-->
+                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/FeedbackView"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--card_view:cardCornerRadius="8dp"-->
+                <!--android:layout_marginTop="10dp">-->
 
-            <TextView
-                android:text="Ratings and Feedbacks"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="35dp"/>
+                <!--<TextView-->
+                    <!--android:text="Ratings and Feedbacks"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_marginTop="35dp"/>-->
 
-        </android.support.v7.widget.CardView>
+            <!--</android.support.v7.widget.CardView>-->
+
+        </LinearLayout>
+
+
+
+
 
 
 

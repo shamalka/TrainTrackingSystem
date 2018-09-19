@@ -1,9 +1,13 @@
 package com.snov.traintracking.activities;
 
+import android.content.Intent;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.snov.traintracking.R;
@@ -42,6 +46,16 @@ public class NewsActivity extends AppCompatActivity {
 
         NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsAuthor, NewsDate);
         listView.setAdapter(newsListAdapter);
+
+        FloatingActionButton AddNews = findViewById(R.id.add_news);
+        AddNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewsActivity.this, PostNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void collectData(){
@@ -51,12 +65,8 @@ public class NewsActivity extends AppCompatActivity {
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());
-
-            //Toast.makeText(FeedbackActivity.this, "Connection Established.!", Toast.LENGTH_SHORT).show();
-
         } catch (Exception e) {
             e.printStackTrace();
-            //Toast.makeText(FeedbackActivity.this, "Connection Failed.!", Toast.LENGTH_SHORT).show();
         }
 
         //content
@@ -69,10 +79,8 @@ public class NewsActivity extends AppCompatActivity {
             bis.close();
             result = stringBuilder.toString();
             Log.d("data", result);
-            //Toast.makeText(FeedbackActivity.this, "Content Received.!", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             e.printStackTrace();
-            //Toast.makeText(FeedbackActivity.this, "Content Failed.!", Toast.LENGTH_SHORT).show();
         }
 
         //JSON

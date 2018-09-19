@@ -38,15 +38,16 @@ public class NewsListAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
 
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent){
         View r = convertView;
         ViewHolder viewHolder = null;
+
         if(r==null){
             LayoutInflater layoutInflater = context.getLayoutInflater();
             r = layoutInflater.inflate(R.layout.news_list_item,null,true);
             r.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Go to description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Go to  " + NewsTitle[position], Toast.LENGTH_SHORT).show();
                 }
             });
             viewHolder = new ViewHolder(r);
@@ -61,6 +62,7 @@ public class NewsListAdapter extends ArrayAdapter<String> {
 
 
         return r;
+
     }
 
     class ViewHolder{

@@ -1,115 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="#ffffffff"
-        android:padding="15dp">
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="70dp"
-            android:layout_height="86dp"
-            android:layout_weight="1"
-            android:src="@drawable/train_item"/>
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/train"
+            />
 
-        <TextView
-            android:id="@+id/name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:textSize="22dp"
-            android:text="Name"
-            android:layout_alignTop="@+id/image"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"/>
+            android:orientation="vertical"
+            >
 
-        <TextView
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="Start Station"
-            android:textSize="@dimen/trains_item_textsize"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/name"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginLeft="5dp"/>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333"
+                android:textSize="18dp"
+                android:text="Train"
+                android:layout_alignTop="@+id/image"
+                android:layout_toRightOf="@+id/image"
+                android:layout_toEndOf="@+id/image"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="7dp"/>
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="To"
-            android:textSize="@dimen/trains_item_textsize"
-            android:id="@+id/to"
-            android:layout_alignTop="@+id/start"
-            android:layout_toLeftOf="@+id/end"
-            android:layout_toRightOf="@+id/start"
-            android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333"
+                    android:text="Start"
+                    android:textSize="10dp"
+                    android:layout_below="@+id/title"
+                    android:layout_alignLeft="@+id/title"
+                    android:layout_alignStart="@+id/title"
+                    android:layout_marginLeft="7dp"/>
 
-        <TextView
-            android:id="@+id/end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="End Station"
-            android:textSize="@dimen/trains_item_textsize"
-            android:layout_alignTop="@+id/to"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="23dp"
-            android:layout_marginEnd="23dp" />
+                <TextView
+                    android:id="@+id/end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333"
+                    android:text="End"
+                    android:textSize="10dp"
+                    android:layout_below="@+id/title"
+                    android:layout_alignLeft="@+id/title"
+                    android:layout_alignStart="@+id/title"
+                    android:layout_marginLeft="7dp"/>
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="Time"
-            android:textSize="@dimen/trains_item_textsize"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/start"
-            android:layout_toRightOf="@+id/image"
-            android:layout_toEndOf="@+id/image"
-            android:layout_marginLeft="5dp"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333"
+                android:text="Time"
+                android:textSize="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/author"
+                android:layout_toRightOf="@+id/image"
+                android:layout_toEndOf="@+id/image"
+                android:layout_marginLeft="7dp"/>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="|"
-            android:textSize="@dimen/trains_item_textsize"
-            android:id="@+id/textView"
-            android:textAlignment="center"
-            android:layout_alignTop="@+id/time"
-            android:layout_toLeftOf="@+id/type"
-            android:layout_toRightOf="@+id/name"
-             />
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333"
+                android:text="8/10 Ratings"
+                android:textSize="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/author"
+                android:layout_toRightOf="@+id/image"
+                android:layout_toEndOf="@+id/image"
+                android:layout_marginLeft="7dp"/>
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333"
-            android:text="Type"
-            android:textSize="@dimen/trains_item_textsize"
-            android:layout_alignTop="@+id/textView"
-            android:layout_alignLeft="@+id/to"
-            android:layout_alignStart="@+id/to"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp" />
 
-    </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:background="#ffffffff"-->
+        <!--android:padding="15dp">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/image"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="86dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/train_item"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:textSize="22dp"-->
+            <!--android:text="Name"-->
+            <!--android:layout_alignTop="@+id/image"-->
+            <!--android:layout_toRightOf="@+id/image"-->
+            <!--android:layout_toEndOf="@+id/image"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginLeft="5dp"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/start"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="Start Station"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_below="@+id/name"-->
+            <!--android:layout_toRightOf="@+id/image"-->
+            <!--android:layout_toEndOf="@+id/image"-->
+            <!--android:layout_marginLeft="5dp"/>-->
+
+        <!--<TextView-->
+
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="To"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:id="@+id/to"-->
+            <!--android:layout_alignTop="@+id/start"-->
+            <!--android:layout_toLeftOf="@+id/end"-->
+            <!--android:layout_toRightOf="@+id/start"-->
+            <!--android:textAlignment="center" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/end"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="End Station"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:layout_alignTop="@+id/to"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginRight="23dp"-->
+            <!--android:layout_marginEnd="23dp" />-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="Time"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_below="@+id/start"-->
+            <!--android:layout_toRightOf="@+id/image"-->
+            <!--android:layout_toEndOf="@+id/image"-->
+            <!--android:layout_marginLeft="5dp"/>-->
+
+        <!--<TextView-->
+
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="|"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_alignTop="@+id/time"-->
+            <!--android:layout_toLeftOf="@+id/type"-->
+            <!--android:layout_toRightOf="@+id/name"-->
+             <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/type"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#333"-->
+            <!--android:text="Type"-->
+            <!--android:textSize="@dimen/trains_item_textsize"-->
+            <!--android:layout_alignTop="@+id/textView"-->
+            <!--android:layout_alignLeft="@+id/to"-->
+            <!--android:layout_alignStart="@+id/to"-->
+            <!--android:layout_marginLeft="27dp"-->
+            <!--android:layout_marginStart="27dp" />-->
+
+    <!--</RelativeLayout>-->
 
 </LinearLayout>

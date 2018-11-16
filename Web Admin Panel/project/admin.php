@@ -11,7 +11,7 @@
 <body>
 
 	<!-- Navigation -->
-<div class="topnav" id="myTopnav">
+<div class="topnav" >
   <a href="admin.php" class="active">Dashboard</a>
   <a href="admin_reserve.php">Reservations</a>
   <a href="admin_train.php">Trains</a>
@@ -33,7 +33,7 @@
 </div>
 
 <!-- Footer -->
-<div id="footer">
+<div class="footer">
 	<p>&copy; TRAIN TRACKING & RESERVATION SYSTEM</a></p>
 </div>
 <!-- End Footer -->

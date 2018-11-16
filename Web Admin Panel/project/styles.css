@@ -140,5 +140,5 @@ input[type=submit]:hover {
 
 
 
-#footer { text-align: center; font-size:11px; padding:10px 0 0 0; color:#666; background:url(footer.gif) repeat-x 0 0; height:148px; }
-#footer a{ color:#333; }
+.footer { text-align: center; font-size:11px; padding:10px 0 0 0; color:#666; background:url(footer.gif) repeat-x 0 0; height:148px; }
+.footer a{ color:#333; }

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "com.snov.traintracking"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -36,7 +36,7 @@ dependencies {
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     compile 'com.github.medyo:fancybuttons:1.9.0'
 
-
+    compile 'com.firebase:geofire-android:2.3.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

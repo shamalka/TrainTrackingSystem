@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SharingActivity" />
-        <activity android:name=".activities.ReservationActivity" />
+        <activity android:name=".activities.Reservation.ReservationActivity" />
         <activity android:name=".activities.NewsActivity" />
         <activity android:name=".activities.FeedbackActivity" />
         <activity android:name=".activities.SharingTrainListActivity" />
@@ -43,8 +44,12 @@
         <activity android:name=".activities.TrackingTrainListActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.PostNewsActivity"></activity>
-        <activity android:name=".activities.SelectStationsActivity"></activity>
+        <activity android:name=".activities.PostNewsActivity" />
+        <activity android:name=".activities.SelectStationsActivity" />
+        <activity android:name=".activities.Reservation.ReservationMenuActivity" />
+        <activity android:name=".activities.Reservation.MyReservationsActivity" />
+        <activity android:name=".activities.Reservation.ReservationTrainListActivity"></activity>
+        <activity android:name=".activities.TrainListActivity"></activity>
     </application>
 
 </manifest>

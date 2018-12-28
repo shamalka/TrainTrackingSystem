@@ -1,15 +1,15 @@
-package com.snov.traintracking.activities;
+package com.snov.traintracking.activities.Reservation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.snov.traintracking.R;
 
-public class ReservationActivity extends AppCompatActivity {
+public class ReservationTrainListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+        setContentView(R.layout.activity_reservation_train_list);
     }
 }

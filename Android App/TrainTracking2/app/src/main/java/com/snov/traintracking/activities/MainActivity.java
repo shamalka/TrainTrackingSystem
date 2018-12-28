@@ -3,18 +3,15 @@ package com.snov.traintracking.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.Reservation.ReservationActivity;
 import com.snov.traintracking.utilities.Config;
 
 public class MainActivity extends AppCompatActivity {
-
-
 
 
     @Override
@@ -61,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ReservationCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReservationActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         FeedbackCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                Intent intent = new Intent(MainActivity.this, TrainListActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,14 @@
 package com.snov.traintracking.activities;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +23,10 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -24,12 +36,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseError;
 import com.snov.traintracking.R;
 import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
+
+import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -51,6 +68,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public double longg;
 
     Marker myMarker;
+
+    GeoFire geoFire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +154,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        LatLng InvalidArea = new LatLng(6.738947,79.9734234);
+        mMap.addCircle(new CircleOptions()
+                    .center(InvalidArea)
+                    .radius(30000)
+                    .strokeColor(Color.BLUE)
+                    .fillColor(0x22000FF)
+                    .strokeWidth(5.0f)
+        );
 
+//        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(InvalidArea.latitude,InvalidArea.longitude), 0.5f);
+//        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
+//            @Override
+//            public void onKeyEntered(String key, GeoLocation location) {
+//                SendNotification("Train Tracking App", String.format("%s Invalid Location"),key);
+//            }
+//
+//            @Override
+//            public void onKeyExited(String key) {
+//
+//            }
+//
+//            @Override
+//            public void onKeyMoved(String key, GeoLocation location) {
+//
+//            }
+//
+//            @Override
+//            public void onGeoQueryReady() {
+//
+//            }
+//
+//            @Override
+//            public void onGeoQueryError(DatabaseError error) {
+//
+//            }
+//        });
+
+//        Circle circle = mMap.addCircle(new CircleOptions()
+//                .center(new LatLng(6, 79))
+//                .radius(10000)
+//                .strokeColor(Color.RED)
+//                .fillColor(Color.BLUE));
 
         // Add a marker in Sydney and move the camera
 //        sydney = new LatLng(8.552161651991246, 79.94052328405958);
@@ -153,6 +213,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    private void SendNotification(String title, String content, String key) {
+        Notification.Builder builder = new Notification.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(content);
+        NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+        Intent intent = new Intent(this,MapsActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_IMMUTABLE);
+        builder.setContentIntent(contentIntent);
+        Notification notification = builder.build();
+
+
+        notificationManager.notify(new Random().nextInt(),notification);
+
+    }
 
 
     @Override
@@ -229,6 +305,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
+
 
     private void UpdateMap(){
         //Toast.makeText(MapsActivity.this, lati + " " + longi, Toast.LENGTH_SHORT).show();

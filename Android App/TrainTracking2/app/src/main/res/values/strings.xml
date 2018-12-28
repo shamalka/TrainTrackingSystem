@@ -22,6 +22,14 @@
         <item>Maradana</item>
         <item>Colombo Fort</item>
     </string-array>
+
+    <string-array name="Class_Array">
+        <item>Select Class</item>
+        <item>1st Class</item>
+        <item>2nd Class</item>
+        <item>3rd Class</item>
+    </string-array>
+
     <string name="title_activity_maps">Map</string>
     <string name="google_maps_key">AIzaSyATumerD6RBBx3pqs2TnEpm8bK8xXT9HDs</string>
 

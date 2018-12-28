@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
 import com.snov.traintracking.utilities.JsonConfig;
 
@@ -31,44 +32,40 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class NewsActivity extends AppCompatActivity {
+public class TrainListActivity extends AppCompatActivity {
 
-    String[] NewsTitle;
-    String[] NewsAuthor;
-    String[] NewsDate;
+    String[] TrainName;
+    String[] StartStation;
+    String[] EndStation;
+    String[] Time;
     ListView listView;
     BufferedInputStream bis;
     String line = null;
     String result = null;
 
+    String SendStartStation = Config.START_STATION;
+    String SendEndStation = Config.END_STATION;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_train_list);
 
-        listView = (ListView)findViewById(R.id.NewsList);
+        listView = (ListView)findViewById(R.id.TrainList);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
         collectData();
 
-        NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsAuthor, NewsDate);
+        NewsListAdapter newsListAdapter = new NewsListAdapter(this, TrainName, StartStation, EndStation, Time);
         listView.setAdapter(newsListAdapter);
 
-        FloatingActionButton AddNews = findViewById(R.id.add_news);
-        AddNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NewsActivity.this, PostNewsActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 
     private void collectData(){
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL+"?"+ JsonConfig.GET_NEWS_TITLE);
+            URL url = new URL(Constants.SERVER_URL+"?"+ "get_trains=" + SendStartStation + "&" + "name=" + SendEndStation);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());
@@ -94,18 +91,20 @@ public class NewsActivity extends AppCompatActivity {
         try {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
-            NewsTitle = new String[jsonarray.length()];
-            NewsAuthor = new String[jsonarray.length()];
-            NewsDate = new String[jsonarray.length()];
+            TrainName = new String[jsonarray.length()];
+            StartStation = new String[jsonarray.length()];
+            EndStation = new String[jsonarray.length()];
+            Time = new String[jsonarray.length()];
             Log.d("data", "received");
 
 
             for(int i=0;i<=jsonarray.length();i++){
 
                 jsonobject = jsonarray.getJSONObject(i);
-                NewsTitle[i]=jsonobject.getString("title");
-                NewsAuthor[i]=jsonobject.getString("author");
-                NewsDate[i]=jsonobject.getString("date");
+                TrainName[i]=jsonobject.getString("name");
+                StartStation[i]=jsonobject.getString("start_station");
+                EndStation[i]=jsonobject.getString("end_station");
+                Time[i]=jsonobject.getString("time");
 
 
 
@@ -120,17 +119,19 @@ public class NewsActivity extends AppCompatActivity {
 
     private class NewsListAdapter extends ArrayAdapter<String> {
 
-        private String[] NewsTitle;
-        private String[] NewsAuthor;
-        private String[] NewsDate;
+        private String[] TrainName;
+        private String[] StartStation;
+        private String[] EndStation;
+        private String[] Time;
         private Activity context;
 
-        private NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsAuthor, String[] NewsDate) {
-            super(context, R.layout.activity_news, NewsTitle);
+        private NewsListAdapter(Activity context, String[] TrainName, String[] StartStation, String[] EndStation, String[] Time) {
+            super(context, R.layout.activity_train_list, TrainName);
             this.context = context;
-            this.NewsTitle = NewsTitle;
-            this.NewsAuthor = NewsAuthor;
-            this.NewsDate = NewsDate;
+            this.TrainName = TrainName;
+            this.StartStation = StartStation;
+            this.EndStation = EndStation;
+            this.Time = Time;
         }
 
 
@@ -144,10 +145,10 @@ public class NewsActivity extends AppCompatActivity {
 
             if(r==null){
                 LayoutInflater layoutInflater = context.getLayoutInflater();
-                r = layoutInflater.inflate(R.layout.news_list_item,null,true);
+                r = layoutInflater.inflate(R.layout.trains_list_item,null,true);
                 r.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Go to  " + NewsTitle[position], Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Go to  " + TrainName[position], Toast.LENGTH_SHORT).show();
                     }
                 });
                 viewHolder = new ViewHolder(r);
@@ -156,9 +157,11 @@ public class NewsActivity extends AppCompatActivity {
                 viewHolder = (ViewHolder)r.getTag();
             }
 
-            viewHolder.news_title.setText(NewsTitle[position]);
-            viewHolder.news_author.setText(NewsAuthor[position]);
-            viewHolder.news_date.setText(NewsDate[position]);
+            viewHolder.train_name.setText(TrainName[position]);
+            viewHolder.start_st.setText(StartStation[position]);
+            viewHolder.end_st.setText(EndStation[position]);
+            viewHolder.train_time.setText(Time[position]);
+            viewHolder.train_type.setText("wat?");
 
 
             return r;
@@ -166,15 +169,20 @@ public class NewsActivity extends AppCompatActivity {
         }
 
         class ViewHolder{
-            TextView news_title;
-            TextView news_author;
-            TextView news_date;
+            TextView train_name;
+            TextView start_st;
+            TextView end_st;
+            TextView train_time;
+            TextView train_type;
 
 
             ViewHolder(View v){
-                news_title = (TextView)v.findViewById(R.id.title);
-                news_author = (TextView)v.findViewById(R.id.author);
-                news_date = (TextView)v.findViewById(R.id.date);
+                train_name = (TextView)v.findViewById(R.id.name);
+                start_st = (TextView)v.findViewById(R.id.start);
+                end_st = (TextView)v.findViewById(R.id.end);
+                train_time = (TextView)v.findViewById(R.id.time);
+                train_type = (TextView)v.findViewById(R.id.type);
+
             }
 
 

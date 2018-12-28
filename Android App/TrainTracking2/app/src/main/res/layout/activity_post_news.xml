@@ -11,6 +11,21 @@
     android:orientation="vertical"
     tools:context="com.snov.traintracking.activities.PostNewsActivity">
 
+    <LinearLayout
+        android:id="@+id/linlaHeaderProgress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/pbHeaderProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ProgressBar>
+    </LinearLayout>
+
     <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

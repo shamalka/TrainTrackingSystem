@@ -37,6 +37,7 @@ public class SelectStationsActivity extends AppCompatActivity {
                                        int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
                 Toast.makeText(SelectStationsActivity.this, "Item " + (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                Config.START_STATION=(String) parent.getItemAtPosition(position);
             }
 
             @Override
@@ -63,6 +64,7 @@ public class SelectStationsActivity extends AppCompatActivity {
                                        int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
                 Toast.makeText(SelectStationsActivity.this, "Item " + (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                Config.END_STATION=(String) parent.getItemAtPosition(position);
             }
 
             @Override

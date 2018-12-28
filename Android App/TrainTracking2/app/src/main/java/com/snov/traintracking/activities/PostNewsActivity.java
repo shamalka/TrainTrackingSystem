@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
@@ -46,6 +47,8 @@ public class PostNewsActivity extends AppCompatActivity {
         NewsTitle = (EditText)findViewById(R.id.news_title);
         NewsDescription = (EditText)findViewById(R.id.news_description);
 
+
+
     }
 
     public void AddNews(View view){
@@ -62,6 +65,7 @@ public class PostNewsActivity extends AppCompatActivity {
 
     private class AddNewsTask extends AsyncTask<String,Void,String> {
         Context context;
+        LinearLayout linlaHeaderProgress = (LinearLayout) findViewById(R.id.linlaHeaderProgress);
         AddNewsTask(Context context){
             this.context = context;
 
@@ -69,6 +73,7 @@ public class PostNewsActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            linlaHeaderProgress.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -126,6 +131,7 @@ public class PostNewsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+            linlaHeaderProgress.setVisibility(View.GONE);
 
             AlertDialog alertDialog = new AlertDialog.Builder(PostNewsActivity.this).create();
             alertDialog.setTitle("News Posted");

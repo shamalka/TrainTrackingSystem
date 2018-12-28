@@ -1,5 +1,6 @@
 package com.snov.traintracking.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,11 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+
 
 
     }
@@ -105,8 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Login Status");
+            progressDialog.show();
         }
 
         @Override
@@ -157,6 +164,10 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+
+            if(progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
 
             //Toast.makeText(LoginActivity.this, result , Toast.LENGTH_SHORT).show();
             if(result.contains("Success")){

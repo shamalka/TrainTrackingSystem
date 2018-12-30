@@ -25,6 +25,8 @@ public class Config implements Serializable {
         //Selected train for reservation, train_id
     public static String SELECTED_TRAIN;
 
+    public static String SELECTED_SEATS;
+
 
 
 }

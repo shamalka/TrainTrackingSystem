@@ -1,15 +1,22 @@
 package com.snov.traintracking.activities.Reservation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.SharingActivity;
+import com.snov.traintracking.activities.SharingTrainListActivity;
 import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
 
@@ -47,8 +54,14 @@ public class SelectSeatsActivity extends AppCompatActivity {
     List<String> FinalReservedSeatList = new ArrayList<String>();
     List<String> FinalAvailableSeatList = new ArrayList<String>();
 
+    List<String> SelectedSeatList = new ArrayList<String>();
+
     String[] TempSeatList;
     String[] Temp;
+
+    Button SubmitButton;
+
+    String SelectedSeats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +81,24 @@ public class SelectSeatsActivity extends AppCompatActivity {
         ReservationClass.setText(Config.RESERVATION_CLASS);
         ReservationDate.setText(Config.RESERVATION_DATE);
 
-
-
-
+        SelectedSeats="";
+        Config.SELECTED_SEATS="";
 
         CollectSeatData();
         CollectReservationData();
         BuildCheckBox();
 
+        SubmitButton = (Button)findViewById(R.id.done_seats_button);
+        SubmitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
+                startActivity(intent);
+                MergeList();
+                Config.SELECTED_SEATS=SelectedSeats;
+
+            }
+        });
     }
 
 
@@ -150,7 +173,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
         }
 
-        Toast.makeText(SelectSeatsActivity.this, "Train: " + SeatNumberList[0], Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(SelectSeatsActivity.this, "Train: " + SeatNumberList[0], Toast.LENGTH_SHORT).show();
 
 
 
@@ -242,10 +265,10 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
         //Toast.makeText(SelectSeatsActivity.this, "Train: " + ReservedSeatNumber[0], Toast.LENGTH_LONG).show();
         //Toast.makeText(SelectSeatsActivity.this, "Seat: " + SeatNumber[0], Toast.LENGTH_SHORT).show();
-        for(int i=0; i<ReservedSeatNumber.length; i++){
-            Toast.makeText(SelectSeatsActivity.this, "Train: " + ReservedSeatNumber[i], Toast.LENGTH_LONG).show();
-
-        }
+//        for(int i=0; i<ReservedSeatNumber.length; i++){
+//            Toast.makeText(SelectSeatsActivity.this, "Train: " + ReservedSeatNumber[i], Toast.LENGTH_LONG).show();
+//
+//        }
 
 
         try{
@@ -267,10 +290,10 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
         }
 
-        for(int i=0; i<FinalReservedSeatList.size(); i++){
-            Toast.makeText(SelectSeatsActivity.this, "Reserved: " + FinalReservedSeatList.get(i), Toast.LENGTH_LONG).show();
-
-        }
+//        for(int i=0; i<FinalReservedSeatList.size(); i++){
+//            Toast.makeText(SelectSeatsActivity.this, "Reserved: " + FinalReservedSeatList.get(i), Toast.LENGTH_LONG).show();
+//
+//        }
 
 
 //        SeatCount = (TextView)findViewById(R.id.seat_count);
@@ -340,9 +363,58 @@ public class SelectSeatsActivity extends AppCompatActivity {
         //Build checkboxus
         LinearLayout l1 = (LinearLayout)findViewById(R.id.linear_view);
         for(int i = 0; i < FinalSeatList.size(); i++) {
-            CheckBox cb = new CheckBox(this);
+            final CheckBox cb = new CheckBox(this);
             cb.setText(FinalSeatList.get(i));
             l1.addView(cb);
+//            cb.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    // TODO Auto-generated method stub
+//                    if(cb.isChecked()){
+//                        SelectedSeatList.add(FinalSeatList.get(finalI));
+//
+//                        Toast.makeText(SelectSeatsActivity.this, "Added: " + SelectedSeatList.get(finalI), Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if(SelectedSeatList.contains(FinalSeatList.get(finalI))){
+//                        SelectedSeatList.remove(FinalSeatList.get(finalI));
+//                        Toast.makeText(SelectSeatsActivity.this, "Removed: " + SelectedSeatList.get(finalI), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (buttonView.isChecked()) {
+                        SelectedSeatList.add((String) cb.getText());
+                        Toast.makeText(SelectSeatsActivity.this, "Added: " + (String) cb.getText(), Toast.LENGTH_SHORT).show();
+                    }else{
+                        if(SelectedSeatList.contains((String) cb.getText())){
+                            SelectedSeatList.remove((String) cb.getText());
+                            Toast.makeText(SelectSeatsActivity.this, "Removed: " + (String) cb.getText(), Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(SelectSeatsActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+
+            });
         }
+    }
+
+    //Merge SelectedSeatList to one string
+    public void MergeList(){
+        for(int i=0; i<SelectedSeatList.size(); i++){
+            if(!SelectedSeats.contains(SelectedSeatList.get(i))){
+                if(SelectedSeats.equals("")){
+                    SelectedSeats=SelectedSeatList.get(i);
+                }else{
+                    SelectedSeats=SelectedSeats+","+SelectedSeatList.get(i);
+                }
+            }
+        }
+        //Toast.makeText(SelectSeatsActivity.this, "Selected Seats: " + SelectedSeats, Toast.LENGTH_LONG).show();
     }
 }

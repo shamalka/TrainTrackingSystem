@@ -50,6 +50,7 @@
         <activity android:name=".activities.Reservation.MyReservationsActivity" />
         <activity android:name=".activities.Reservation.SelectSeatsActivity"></activity>
         <activity android:name=".activities.TrainListActivity"></activity>
+        <activity android:name=".activities.Reservation.PlaceOrderActivity"></activity>
     </application>
 
 </manifest>

@@ -80,7 +80,7 @@ public class SelectStationsActivity extends AppCompatActivity {
                     Intent intent = new Intent(SelectStationsActivity.this, SharingTrainListActivity.class);
                     startActivity(intent);
                 }else{
-                    Intent intent = new Intent(SelectStationsActivity.this, TrackingTrainListActivity.class);
+                    Intent intent = new Intent(SelectStationsActivity.this, TrainListActivity.class);
                     startActivity(intent);
                 }
 

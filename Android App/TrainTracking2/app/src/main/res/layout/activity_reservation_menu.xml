@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.Reservation.ReservationMenuActivity"
+    tools:context=".activities.Reservation.ReservationHomeActivity"
     android:orientation="vertical"
     android:layout_gravity="center">
 

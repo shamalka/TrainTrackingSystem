@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.snov.traintracking.R;
 import com.snov.traintracking.activities.SharingTrainListActivity;
 import com.snov.traintracking.activities.TrackingTrainListActivity;
+import com.snov.traintracking.activities.TrainListActivity;
 import com.snov.traintracking.utilities.Config;
 
 public class ReservationActivity extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class ReservationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        Config.CHECK_TRAIN_LIST_REQUEST="2";
 
         ClassText = (TextView)findViewById(R.id.class_text);
 
@@ -55,6 +58,7 @@ public class ReservationActivity extends AppCompatActivity {
                                        int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
                 Toast.makeText(ReservationActivity.this, "Item " + (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                Config.START_STATION=(String) parent.getItemAtPosition(position);
             }
 
             @Override
@@ -81,6 +85,7 @@ public class ReservationActivity extends AppCompatActivity {
                                        int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
                 Toast.makeText(ReservationActivity.this, "Item " + (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                Config.END_STATION=(String) parent.getItemAtPosition(position);
             }
 
             @Override
@@ -107,6 +112,7 @@ public class ReservationActivity extends AppCompatActivity {
                                        int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
                 ClassText.setText((String) parent.getItemAtPosition(position));
+                Config.RESERVATION_CLASS = ClassText.getText().toString();
             }
 
             @Override
@@ -118,14 +124,10 @@ public class ReservationActivity extends AppCompatActivity {
         CardView SearchTrain = (CardView)findViewById(R.id.search_train);
         SearchTrain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(Config.CHECK_TRAIN_LIST_REQUEST=="0"){
-                    Intent intent = new Intent(ReservationActivity.this, SharingTrainListActivity.class);
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(ReservationActivity.this, TrackingTrainListActivity.class);
-                    startActivity(intent);
-                }
 
+
+                Intent intent = new Intent(ReservationActivity.this, TrainListActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -155,6 +157,7 @@ public class ReservationActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int day, int month, int year) {
                         DateText.setText(day + "/" + (month+1) + "/" + year);
+                        Config.RESERVATION_DATE=DateText.getText().toString();
                     }
                 },Day , Month , Year);
                 Datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);

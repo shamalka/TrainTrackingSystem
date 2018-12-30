@@ -9,7 +9,7 @@
         <item>Ragama</item>
         <item>Mirigama</item>
         <item>Maradana</item>
-        <item>Colombo Fort</item>
+        <item>Colombo</item>
     </string-array>
 
     <string-array name="End_Station_Array">
@@ -20,7 +20,7 @@
         <item>Ragama</item>
         <item>Mirigama</item>
         <item>Maradana</item>
-        <item>Colombo Fort</item>
+        <item>Colombo</item>
     </string-array>
 
     <string-array name="Class_Array">

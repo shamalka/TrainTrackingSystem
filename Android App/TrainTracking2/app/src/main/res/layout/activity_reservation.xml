@@ -13,57 +13,57 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
             android:text="Select Start Station"
-            />
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/Start_Station_DropDown"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Select End Station"/>
+            android:text="Select End Station"
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/End_Station_DropDown"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
-            />
+            android:layout_marginBottom="20dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/select_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                float:cardCornerRadius="30dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                float:cardBackgroundColor="@color/button_background">
+                float:cardBackgroundColor="@color/button_background"
+                float:cardCornerRadius="30dp">
+
                 <TextView
-                    android:gravity="center"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
+                    android:gravity="center"
                     android:text="Select Date"
-                    android:textColor="#000"/>
+                    android:textColor="#000" />
             </android.support.v7.widget.CardView>
 
 
@@ -71,8 +71,8 @@
                 android:id="@+id/select_class_dropdown"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
 
@@ -80,9 +80,9 @@
             android:id="@+id/search_train"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            float:cardCornerRadius="30dp"
             android:layout_gravity="center"
-            float:cardBackgroundColor="@color/button_background">
+            float:cardBackgroundColor="@color/button_background"
+            float:cardCornerRadius="30dp">
 
             <TextView
                 android:layout_width="150dp"
@@ -93,52 +93,54 @@
         </android.support.v7.widget.CardView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Latitude"
-            android:visibility="gone"
             android:id="@+id/latitude"
-            android:layout_gravity="center_horizontal" />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Latitude"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Longitude"
-            android:visibility="gone"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/longitude"
-            android:layout_gravity="center_horizontal" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Longitude"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
 
         <Button
+            android:id="@+id/send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send Data"
-            android:id="@+id/send_button"
             android:layout_gravity="center_horizontal"
-            android:visibility="gone"/>
+            android:text="Send Data"
+            android:visibility="gone" />
 
         <TextView
+            android:id="@+id/location_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_horizontal"
             android:text="Location Data"
-            android:id="@+id/location_data"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="10dp"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"/>
+            android:text="Date" />
 
         <TextView
             android:id="@+id/class_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+
             android:layout_marginTop="5dp"
-            android:text="Class"/>
+            android:text="Class" />
 
 
     </LinearLayout>

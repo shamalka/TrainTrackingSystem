@@ -46,9 +46,9 @@
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.PostNewsActivity" />
         <activity android:name=".activities.SelectStationsActivity" />
-        <activity android:name=".activities.Reservation.ReservationMenuActivity" />
+        <activity android:name=".activities.Reservation.ReservationHomeActivity" />
         <activity android:name=".activities.Reservation.MyReservationsActivity" />
-        <activity android:name=".activities.Reservation.ReservationTrainListActivity"></activity>
+        <activity android:name=".activities.Reservation.SelectSeatsActivity"></activity>
         <activity android:name=".activities.TrainListActivity"></activity>
     </application>
 

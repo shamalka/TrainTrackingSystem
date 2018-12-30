@@ -14,10 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.snov.traintracking.R;
 import com.snov.traintracking.activities.Reservation.ReservationHomeActivity;
 import com.snov.traintracking.activities.Reservation.SelectSeatsActivity;
+import com.snov.traintracking.model.Train;
 import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
 
@@ -29,13 +31,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrainListActivity extends AppCompatActivity {
 
     String[] TrainName;
-    String[] StartStation;
-    String[] EndStation;
-    String[] Time;
+    String[] ArrivalTime;
+    String[] DepartureTime;
     ListView listView;
     BufferedInputStream bis;
     String line = null;
@@ -43,6 +46,18 @@ public class TrainListActivity extends AppCompatActivity {
 
     String SendStartStation = Config.START_STATION;
     String SendEndStation = Config.END_STATION;
+
+    String[] TrainIDList;
+    String[] StationList;
+
+    String[] TrainNameArray;
+    String[] ArrivalTimeArray;
+    String[] DepartureTimeArray;
+
+    List<String> TempList = new ArrayList<String>();
+    List<String> TrainNameList = new ArrayList<String>();
+    List<String> ArrivalTimeList = new ArrayList<String>();
+    List<String> DepartureTimeList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +67,117 @@ public class TrainListActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.TrainList);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
-        collectData();
 
-        TrainListAdapter trainListAdapter = new TrainListAdapter(this, TrainName, StartStation, EndStation, Time);
+
+        SearchTrains();
+        //CollectTrainData("T001", "Anuradhapura");
+
+
+        //Toast.makeText(TrainListActivity.this, "Test: " + TrainName[0] + " " + ArrivalTime[0], Toast.LENGTH_SHORT).show();
+
+        //4.SearchTrains() eken ena train_id gaanata adalawa CollectTrainData eka loop karanawa
+        //ethakota e e train ekata adaala name,arrival,departure time enawa
+        for(int i=0; i<TempList.size(); i++){
+            CollectTrainData(TempList.get(i), Config.START_STATION);
+            //Toast.makeText(TrainListActivity.this, "Name: " + TrainNameList.get(i), Toast.LENGTH_SHORT).show();
+        }
+
+        //5.adapter ekata daanna puluwan arrays witharai so, array walata size set karanawa
+        TrainNameArray = new String[TrainNameList.size()];
+        ArrivalTimeArray = new String[TrainNameList.size()];
+        DepartureTimeArray = new String[TrainNameList.size()];
+
+        //6.uda loop eken aapu ewa arrays walata danawa
+        for(int i=0; i<TrainNameList.size(); i++){
+            //CollectTrainData(TrainNameList.get(i), Config.START_STATION);
+            TrainNameArray[i]=TrainNameList.get(i);
+            ArrivalTimeArray[i]=ArrivalTimeList.get(i);
+            DepartureTimeArray[i]=DepartureTimeList.get(i);
+            Toast.makeText(TrainListActivity.this, "Name: " + TrainNameArray[i] + "," + ArrivalTimeArray[i] + "," + DepartureTimeArray[i], Toast.LENGTH_SHORT).show();
+        }
+
+
+        //7.arrays walin apuwa adapater ekata danawa
+        TrainListAdapter trainListAdapter = new TrainListAdapter(this, TrainNameArray, ArrivalTimeArray, DepartureTimeArray);
         listView.setAdapter(trainListAdapter);
+
 
 
     }
 
-    private void collectData(){
+
+
+
+    //1.Stations dekata adaala train_id deka stations table eken ganna
+    public void SearchTrains(){
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL+"?"+ "get_trains=" + SendStartStation + "&" + "name=" + SendEndStation);
+            URL url = new URL(Constants.SERVER_URL+"?" + "select_stations&start=" + SendStartStation + "&end=" + SendEndStation);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            bis = new BufferedInputStream(con.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //content
+        try {
+            BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(bis)));
+            StringBuilder stringBuilder = new StringBuilder();
+            while((line = bufferedReader.readLine())!=null){
+                stringBuilder.append(line+"\n");
+            }
+            bis.close();
+            result = stringBuilder.toString();
+            Log.d("data", result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //JSON
+        try {
+            JSONArray jsonarray = new JSONArray(result);
+            JSONObject jsonobject = null;
+            TrainIDList = new String[jsonarray.length()];
+            StationList = new String[jsonarray.length()];
+            Log.d("data", "received");
+
+
+            for(int i=0;i<=jsonarray.length();i++){
+                jsonobject = jsonarray.getJSONObject(i);
+                TrainIDList[i]=jsonobject.getString("train_id");
+                StationList[i]=jsonobject.getString("stations");
+
+
+                //Toast.makeText(TrainListActivity.this, "Test: " + TrainName[i], Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
+        for(int i=0; i<TrainIDList.length;i++){
+            TempList.add(TrainIDList[i]);
+        }
+
+//        for(int i=0; i<TrainIDList.length; i++){
+//            Toast.makeText(TrainListActivity.this, "Path: " + TrainIDList[i], Toast.LENGTH_SHORT).show();
+//            Toast.makeText(TrainListActivity.this, "Path: " + StationList[i], Toast.LENGTH_SHORT).show();
+//        }
+
+
+
+    }
+
+    //2.train_id and Start station ekakata adaala name,arival time,departure time ganna
+    //meken 1 row ekai enne, okkoma ganna loop ekak one
+    private void CollectTrainData(String TrainID, String Station){
+        //connection
+        try {
+            URL url = new URL(Constants.SERVER_URL+"?"+ "get_train_details&train_id=" + TrainID + "&start_station="+ Station);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());
@@ -90,9 +204,8 @@ public class TrainListActivity extends AppCompatActivity {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
             TrainName = new String[jsonarray.length()];
-            StartStation = new String[jsonarray.length()];
-            EndStation = new String[jsonarray.length()];
-            Time = new String[jsonarray.length()];
+            ArrivalTime = new String[jsonarray.length()];
+            DepartureTime = new String[jsonarray.length()];
             Log.d("data", "received");
 
 
@@ -100,12 +213,13 @@ public class TrainListActivity extends AppCompatActivity {
 
                 jsonobject = jsonarray.getJSONObject(i);
                 TrainName[i]=jsonobject.getString("name");
-                StartStation[i]=jsonobject.getString("start_station");
-                EndStation[i]=jsonobject.getString("end_station");
-                Time[i]=jsonobject.getString("time");
+                ArrivalTime[i]=jsonobject.getString("arrival_time");
+                DepartureTime[i]=jsonobject.getString("departure_time");
 
-
-
+                //3.ena ena eka mutable lists walta add karanawa
+                TrainNameList.add(TrainName[i]);
+                ArrivalTimeList.add(ArrivalTime[i]);
+                DepartureTimeList.add(DepartureTime[i]);
             }
 
 
@@ -118,18 +232,16 @@ public class TrainListActivity extends AppCompatActivity {
     private class TrainListAdapter extends ArrayAdapter<String> {
 
         private String[] TrainName;
-        private String[] StartStation;
-        private String[] EndStation;
-        private String[] Time;
+        private String[] ArrivalTime;
+        private String[] DepartureTime;
         private Activity context;
 
-        private TrainListAdapter(Activity context, String[] TrainName, String[] StartStation, String[] EndStation, String[] Time) {
+        private TrainListAdapter(Activity context, String[] TrainName, String[] ArrivalTime, String[] DepartureTime) {
             super(context, R.layout.activity_train_list, TrainName);
             this.context = context;
             this.TrainName = TrainName;
-            this.StartStation = StartStation;
-            this.EndStation = EndStation;
-            this.Time = Time;
+            this.ArrivalTime = ArrivalTime;
+            this.DepartureTime = DepartureTime;
         }
 
 
@@ -146,7 +258,7 @@ public class TrainListActivity extends AppCompatActivity {
                 r = layoutInflater.inflate(R.layout.trains_list_item,null,true);
                 r.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                       // Toast.makeText(getContext(), "Go to  " + TrainName[position], Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "Go to  " + TrainName[position], Toast.LENGTH_SHORT).show();
 
                         //CHECK_TRAIN_LIST_REQUEST=0 if you share your location
                         //CHECK_TRAIN_LIST_REQUEST=1 if you view shared location
@@ -174,9 +286,8 @@ public class TrainListActivity extends AppCompatActivity {
             }
 
             viewHolder.train_name.setText(TrainName[position]);
-            viewHolder.start_st.setText(StartStation[position]);
-            viewHolder.end_st.setText(EndStation[position]);
-            viewHolder.train_time.setText(Time[position]);
+            viewHolder.start_st.setText(ArrivalTime[position]);
+            viewHolder.end_st.setText(DepartureTime[position]);
             viewHolder.train_type.setText("wat?");
 
 
@@ -204,5 +315,8 @@ public class TrainListActivity extends AppCompatActivity {
 
         }
     }
+
+    //To_do
+    //end station ekata adala ticket price aragena adapter ekata set karanna
 
 }

@@ -197,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(Config.CHECK_LOGIN_PREFS, Flag);
-        editor.putString(Config.USER_EMAIL, Email);
+        editor.putString(Config.USER_EMAIL_PREFS, Email);
         editor.commit();
     }
 }

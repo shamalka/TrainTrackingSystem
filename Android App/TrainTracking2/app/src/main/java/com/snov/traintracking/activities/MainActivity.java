@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.snov.traintracking.R;
 import com.snov.traintracking.activities.Reservation.ReservationActivity;
+import com.snov.traintracking.activities.Reservation.ReservationHomeActivity;
 import com.snov.traintracking.activities.Reservation.SelectSeatsActivity;
 import com.snov.traintracking.utilities.Config;
 
@@ -36,21 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREFS, MODE_PRIVATE);
         LoginStatus = sharedPreferences.getString(Config.CHECK_LOGIN_PREFS, "0");
-        UserEmail = sharedPreferences.getString(Config.USER_EMAIL, "");
+        UserEmail = sharedPreferences.getString(Config.USER_EMAIL_PREFS, "");
         Toast.makeText(MainActivity.this, "Login Status: " + LoginStatus, Toast.LENGTH_SHORT).show();
         Toast.makeText(MainActivity.this, "Email: " + UserEmail, Toast.LENGTH_SHORT).show();
 
-
-        LoggedIn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent intent = new Intent(MainActivity.this, TrackingHomeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
+        //Check login status using shared preferences and then assign status and user email to two normal static variables.
+        //Because now its easy to call the normal variables rather than calling shared prefs every time
         if(LoginStatus.equals("0")){
+            Config.CHECK_LOGIN="0";
+            Config.USER_EMAIL = UserEmail;
             LoggedIn.setText("Login Here");
             LoggedIn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -60,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }else{
+            Config.CHECK_LOGIN="1";
+            Config.USER_EMAIL = UserEmail;
             LoggedIn.setText("Log Out");
             LoggedIn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         ReservationCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(MainActivity.this, ReservationActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReservationHomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(Config.CHECK_LOGIN_PREFS, Flag);
-        editor.putString(Config.USER_EMAIL, Email);
+        editor.putString(Config.USER_EMAIL_PREFS, Email);
         editor.commit();
     }
 }

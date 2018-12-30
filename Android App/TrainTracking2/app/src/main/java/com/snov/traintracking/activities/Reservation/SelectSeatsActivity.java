@@ -213,7 +213,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
         }
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL+"?"+ ReservedClassJsonPath +"&date=2018/12/30&train_id=T001");
+            URL url = new URL(Constants.SERVER_URL+"?"+ ReservedClassJsonPath +"&date=" + Config.RESERVATION_DATE +"&train_id=T001");
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());

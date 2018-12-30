@@ -11,6 +11,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class ReservationActivity extends AppCompatActivity {
     Calendar calender;
     DatePickerDialog Datepickerdialog;
 
-    CardView SelectDate;
+    Button SelectDate;
     TextView DateText;
     TextView ClassText;
 
@@ -132,7 +133,7 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
 
-        SelectDate = (CardView)findViewById(R.id.select_date);
+        SelectDate = (Button)findViewById(R.id.select_date);
         DateText = (TextView) findViewById(R.id.date_text);
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

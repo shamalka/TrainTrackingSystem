@@ -12,16 +12,19 @@
     android:layout_gravity="center">
 
     <Button
+        android:id="@+id/new_booking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Booking"/>
 
     <Button
+        android:id="@+id/my_bookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Bookings"/>
 
     <Button
+        android:id="@+id/cancel_bookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel/Edit Bookings"/>

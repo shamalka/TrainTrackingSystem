@@ -10,7 +10,7 @@ public class Config implements Serializable {
     public static String TRAIN_ID = "T000";
     public static String JSON_PATH = "PATH";
     public static String CHECK_TRAIN_LIST_REQUEST = "0";
-    public static String CHECK_LOGIN = "0";
+
 
 
     public static String START_STATION = "Anuradhapura";
@@ -27,10 +27,13 @@ public class Config implements Serializable {
 
     public static String SELECTED_SEATS;
 
+    //Shared Preferences
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CHECK_LOGIN_PREFS = "0";
-    public static final String USER_EMAIL="";
+    public static final String USER_EMAIL_PREFS="";
 
-
+    //Not Shared Prefs
+    public static String CHECK_LOGIN = "0";
+    public static String USER_EMAIL = "";
 
 }

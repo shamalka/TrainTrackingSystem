@@ -27,6 +27,10 @@ public class Config implements Serializable {
 
     public static String SELECTED_SEATS;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String CHECK_LOGIN_PREFS = "0";
+    public static final String USER_EMAIL="";
+
 
 
 }

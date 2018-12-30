@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.Reservation.SelectSeatsActivity;
 import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
 
@@ -42,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog alertDialog;
 
     ProgressDialog progressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,13 +175,14 @@ public class LoginActivity extends AppCompatActivity {
 
             //Toast.makeText(LoginActivity.this, result , Toast.LENGTH_SHORT).show();
             if(result.contains("Success")){
-                Config.CHECK_LOGIN="1";
+                SetSharedPref("1", LoginEmail.getText().toString());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }else{
-                Config.CHECK_LOGIN="0";
-                alertDialog.setMessage(result);
-                alertDialog.show();
+                SetSharedPref("0", "");
+                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                alertDialog.setMessage(result);
+//                alertDialog.show();
             }
         }
 
@@ -185,5 +190,14 @@ public class LoginActivity extends AppCompatActivity {
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
+    }
+
+    public void SetSharedPref(String Flag, String Email){
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(Config.CHECK_LOGIN_PREFS, Flag);
+        editor.putString(Config.USER_EMAIL, Email);
+        editor.commit();
     }
 }

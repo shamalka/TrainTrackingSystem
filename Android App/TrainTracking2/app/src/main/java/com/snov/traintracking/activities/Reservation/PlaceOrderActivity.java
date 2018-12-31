@@ -21,6 +21,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
     TextView ReservationSeats;
     TextView ReservationPrice;
 
+    String[] SeatsArray;
+    Integer TotalTicketPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,23 @@ public class PlaceOrderActivity extends AppCompatActivity {
         ReservationTrain.setText(Config.TRAIN_ID);
         ReservationSeats.setText(Config.SELECTED_SEATS);
 
+        CalculateTotalTicketPrice();
 
 
+
+    }
+
+    public void CalculateTotalTicketPrice(){
+        SeatsArray=Config.SELECTED_SEATS.split(",");
+        Toast.makeText(PlaceOrderActivity.this, "Selected Seats: " + SeatsArray.length, Toast.LENGTH_LONG).show();
+        TotalTicketPrice = (SeatsArray.length)*Integer.parseInt(Config.SELECTED_TICKET_PRICE);
+        ReservationPrice.setText(TotalTicketPrice.toString());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PlaceOrderActivity.this, SelectSeatsActivity.class);
+        startActivity(intent);
     }
 }

@@ -20,10 +20,14 @@ public class SignUpActivity extends AppCompatActivity {
     EditText SignUpEmail;
     EditText SignUpPassword;
     EditText SignUpPasswordConfirm;
+    EditText SignUpPhoneNumber;
+    EditText SignUpNIC;
 
     String Name;
     String Email;
     String Password;
+    String PhoneNumber;
+    String NIC;
 
 
 
@@ -38,6 +42,8 @@ public class SignUpActivity extends AppCompatActivity {
         SignUpEmail = (EditText)findViewById(R.id.signup_email);
         SignUpPassword = (EditText)findViewById(R.id.signup_password);
         SignUpPasswordConfirm = (EditText)findViewById(R.id.signup_password_confirm);
+        SignUpPhoneNumber = (EditText)findViewById(R.id.phone_number);
+        SignUpNIC = (EditText)findViewById(R.id.nic);
 
 
 
@@ -48,13 +54,15 @@ public class SignUpActivity extends AppCompatActivity {
         Name = SignUpName.getText().toString();
         Email = SignUpEmail.getText().toString();
         Password = SignUpPassword.getText().toString();
+        PhoneNumber = SignUpPhoneNumber.getText().toString();
+        NIC = SignUpNIC.getText().toString();
 
 
         String Method = "register";
 
 
         BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(Method,Name,Email,Password);
+        backgroundTask.execute(Method,Name,Email,Password,PhoneNumber,NIC);
 
         AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
         alertDialog.setTitle("Sign Up");

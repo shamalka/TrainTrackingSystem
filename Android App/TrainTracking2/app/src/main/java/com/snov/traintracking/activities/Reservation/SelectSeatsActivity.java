@@ -1,6 +1,8 @@
 package com.snov.traintracking.activities.Reservation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.BackgroundTask;
 import com.snov.traintracking.activities.SharingActivity;
 import com.snov.traintracking.activities.SharingTrainListActivity;
 import com.snov.traintracking.utilities.Config;
@@ -25,9 +28,16 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +76,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
     String[] TicketPriceArray;
 
+    String[] SeatsArray;
+    Integer TotalTicketPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,15 +107,18 @@ public class SelectSeatsActivity extends AppCompatActivity {
         GetTicketPrice();
 
         SeatCount.setText(TicketPriceArray[0]);
+        Config.SELECTED_TICKET_PRICE=TicketPriceArray[0];
 
         SubmitButton = (Button)findViewById(R.id.done_seats_button);
         SubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
-                startActivity(intent);
                 MergeList();
                 Config.SELECTED_SEATS=SelectedSeats;
+                SetTempReservation();
+                Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
+                startActivity(intent);
+
 
             }
         });
@@ -493,5 +509,119 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void SetTempReservation(){
+        CalculateTotalTicketPrice();
+
+        String Method = "reserve_temp";
+
+        String TrainID = Config.SELECTED_TRAIN_ID;
+        String UserID = Config.USER_EMAIL;
+        String Seats = SelectedSeats;
+        String TicketPrice = TotalTicketPrice.toString();
+        String Date = Config.RESERVATION_DATE;
+        String Status = "Pending";
+        String Empty="";
+
+        ReservationTask reservationTask = new ReservationTask(this);
+        if(Config.RESERVATION_CLASS.equals("1st Class")){
+            reservationTask.execute(Method,TrainID,UserID,Seats,Empty,Empty,TicketPrice,Date,Status);
+        }else if(Config.RESERVATION_CLASS.equals("2nd Class")){
+            reservationTask.execute(Method,TrainID,UserID,Empty,Seats,Empty,TicketPrice,Date,Status);
+        }else{
+            reservationTask.execute(Method,TrainID,UserID,Empty,Empty,Seats,TicketPrice,Date,Status);
+        }
+    }
+
+    public class ReservationTask extends AsyncTask<String,Void,String> {
+
+        Context context;
+
+
+        ReservationTask(Context context){
+            this.context = context;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String TempReserveUrl = Constants.TEMP_RESERVE_URL;
+            String LoginUrl = Constants.SERVER_URL;
+
+            String method = params[0];
+            if(method.equals("reserve_temp")){
+                String TrainID = params[1];
+                String UserID = params[2];
+                String FirstClassSeats = params[3];
+                String SecondClassSeats = params[4];
+                String ThirdClassSeats = params[5];
+                String TotalPrice = params[6];
+                String Date = params[7];
+                String Status = params[8];
+
+                try {
+                    URL url = new URL(TempReserveUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    OutputStream OS = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+
+                    String data = URLEncoder.encode("train_id","UTF-8") + "=" + URLEncoder.encode(TrainID,"UTF-8") + "&" +
+                            URLEncoder.encode("user_id","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8") + "&" +
+                            URLEncoder.encode("first_class_seats","UTF-8") + "=" + URLEncoder.encode(FirstClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("second_class_seats","UTF-8") + "=" + URLEncoder.encode(SecondClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("third_class_seats","UTF-8") + "=" + URLEncoder.encode(ThirdClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("total_price","UTF-8") + "=" + URLEncoder.encode(TotalPrice,"UTF-8") + "&" +
+                            URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(Date,"UTF-8") + "&" +
+                            URLEncoder.encode("status","UTF-8") + "=" + URLEncoder.encode(Status,"UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    OS.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    inputStream.close();
+                    return "Succesful..!!";
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    public void CalculateTotalTicketPrice(){
+        SeatsArray=SelectedSeats.split(",");
+        Toast.makeText(SelectSeatsActivity.this, "Selected Seats: " + SeatsArray.length, Toast.LENGTH_LONG).show();
+        TotalTicketPrice = (SeatsArray.length)*Integer.parseInt(Config.SELECTED_TICKET_PRICE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(SelectSeatsActivity.this, ReservationActivity.class);
+        startActivity(intent);
     }
 }

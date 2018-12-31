@@ -51,6 +51,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String Name = params[1];
             String Email = params[2];
             String Password = params[3];
+            String PhoneNumber = params[4];
+            String NIC = params[5];
 
             try {
                 URL url = new URL(RegisterUrl);
@@ -62,7 +64,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String data = URLEncoder.encode("name","UTF-8") + "=" + URLEncoder.encode(Name,"UTF-8") + "&" +
                               URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(Email,"UTF-8") + "&" +
-                              URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(Password,"UTF-8");
+                              URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(Password,"UTF-8") + "&" +
+                              URLEncoder.encode("phone_number","UTF-8") + "=" + URLEncoder.encode(PhoneNumber,"UTF-8") + "&" +
+                              URLEncoder.encode("nic","UTF-8") + "=" + URLEncoder.encode(NIC,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/panel"
         >
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="10dp">
             <EditText
                 android:id="@+id/signup_name"
                 android:layout_width="match_parent"
@@ -41,7 +41,35 @@
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:paddingBottom="5dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/nic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="NIC" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="5dp">
             <EditText
                 android:id="@+id/signup_email"
                 android:layout_width="match_parent"
@@ -58,7 +86,7 @@
 
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <EditText
                 android:id="@+id/signup_password"
@@ -74,7 +102,7 @@
 
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <EditText
                 android:id="@+id/signup_password_confirm"
@@ -90,7 +118,7 @@
             android:layout_height="wrap_content"
             float:cardCornerRadius="20dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             float:cardBackgroundColor="#D81B60"
             android:onClick="UserRegistration"
             >

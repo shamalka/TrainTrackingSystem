@@ -37,5 +37,6 @@ public class Config implements Serializable {
     public static String USER_EMAIL = "";
 
     public static String SELECTED_TRAIN_ID = "T000";
+    public static String SELECTED_TICKET_PRICE;
 
 }

@@ -49,6 +49,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
     String ClassJsonPath;
     String ReservedClassJsonPath;
+    String PriceJsonPath;
 
     List<String> FinalSeatList = new ArrayList<String>();
     List<String> FinalReservedSeatList = new ArrayList<String>();
@@ -63,6 +64,8 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
     String SelectedSeats;
 
+    String[] TicketPriceArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
         TrainID = (TextView)findViewById(R.id.train_id);
         ReservationClass = (TextView)findViewById(R.id.resevation_class);
         ReservationDate = (TextView)findViewById(R.id.date);
+        SeatCount = (TextView)findViewById(R.id.seat_count);
 
         TrainID.setText(Config.TRAIN_ID);
         ReservationClass.setText(Config.RESERVATION_CLASS);
@@ -87,6 +91,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
         CollectSeatData();
         CollectReservationData();
         BuildCheckBox();
+        GetTicketPrice();
+
+        SeatCount.setText(TicketPriceArray[0]);
 
         SubmitButton = (Button)findViewById(R.id.done_seats_button);
         SubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +106,8 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
             }
         });
+
+        Toast.makeText(SelectSeatsActivity.this, "TrainID: " + Config.SELECTED_TRAIN_ID, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -121,7 +130,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL+"?"+ ClassJsonPath + "&train_id=T001");
+            URL url = new URL(Constants.SERVER_URL+"?"+ ClassJsonPath + "&train_id=" + Config.SELECTED_TRAIN_ID);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());
@@ -213,7 +222,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
         }
         //connection
         try {
-            URL url = new URL(Constants.SERVER_URL+"?"+ ReservedClassJsonPath +"&date=" + Config.RESERVATION_DATE +"&train_id=T001");
+            URL url = new URL(Constants.SERVER_URL+"?"+ ReservedClassJsonPath +"&date=" + Config.RESERVATION_DATE +"&train_id=" + Config.SELECTED_TRAIN_ID);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             bis = new BufferedInputStream(con.getInputStream());
@@ -416,5 +425,73 @@ public class SelectSeatsActivity extends AppCompatActivity {
             }
         }
         //Toast.makeText(SelectSeatsActivity.this, "Selected Seats: " + SelectedSeats, Toast.LENGTH_LONG).show();
+    }
+
+    public void GetTicketPrice(){
+        if(ReservationClass.getText().equals("1st Class")){
+            PriceJsonPath="get_first_class_ticket_price";
+            // ReservedClassJsonPath="get_first_class_reserved_seats";
+            //Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }else if(ReservationClass.getText().equals("2nd Class")){
+            PriceJsonPath="get_second_class_ticket_price";
+            // ReservedClassJsonPath="get_second_class_reserved_seats";
+            // Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }else{
+            PriceJsonPath="get_third_class_ticket_price";
+            // ReservedClassJsonPath="get_third_class_reserved_seats";
+            // Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }
+
+        //connection
+        try {
+            URL url = new URL(Constants.SERVER_URL+"?"+ PriceJsonPath + "&train_id=" + Config.SELECTED_TRAIN_ID + "&end_station=" + Config.END_STATION);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            bis = new BufferedInputStream(con.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //content
+        try {
+            BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(bis)));
+            StringBuilder stringBuilder = new StringBuilder();
+            while((line = bufferedReader.readLine())!=null){
+                stringBuilder.append(line+"\n");
+            }
+            bis.close();
+            result = stringBuilder.toString();
+            Log.d("data", result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //JSON
+        try {
+            JSONArray jsonarray = new JSONArray(result);
+            JSONObject jsonobject = null;
+            TicketPriceArray = new String[jsonarray.length()];
+            Log.d("data", "received");
+
+
+            for(int i=0;i<=jsonarray.length();i++){
+
+                jsonobject = jsonarray.getJSONObject(i);
+
+                if(Config.RESERVATION_CLASS.equals("1st Class")){
+                    TicketPriceArray[i]=jsonobject.getString("first_class_price");
+                }else if(Config.RESERVATION_CLASS.equals("2nd Class")){
+                    TicketPriceArray[i]=jsonobject.getString("second_class_price");
+                }else{
+                    TicketPriceArray[i]=jsonobject.getString("third_class_price");
+                }
+
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 }

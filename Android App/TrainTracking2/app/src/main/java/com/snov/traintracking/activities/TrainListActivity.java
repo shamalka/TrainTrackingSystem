@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TrainListActivity extends AppCompatActivity {
@@ -50,6 +51,9 @@ public class TrainListActivity extends AppCompatActivity {
     String[] TrainIDList;
     String[] StationList;
 
+    String[] TrainIDForAdapter;
+
+    String[] TrainIDForAdapterArray;
     String[] TrainNameArray;
     String[] ArrivalTimeArray;
     String[] DepartureTimeArray;
@@ -58,6 +62,12 @@ public class TrainListActivity extends AppCompatActivity {
     List<String> TrainNameList = new ArrayList<String>();
     List<String> ArrivalTimeList = new ArrayList<String>();
     List<String> DepartureTimeList = new ArrayList<String>();
+
+    List<String> TrainIDListForAdapter = new ArrayList<String>();
+
+    List<String> TrainIDFinalList = new ArrayList<String>();
+    String[] StationTempArray;
+    List<String> StationTempArrayList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,37 +79,41 @@ public class TrainListActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
 
 
-        SearchTrains();
-        //CollectTrainData("T001", "Anuradhapura");
 
 
-        //Toast.makeText(TrainListActivity.this, "Test: " + TrainName[0] + " " + ArrivalTime[0], Toast.LENGTH_SHORT).show();
+        try{
+            SearchTrains();
 
-        //4.SearchTrains() eken ena train_id gaanata adalawa CollectTrainData eka loop karanawa
-        //ethakota e e train ekata adaala name,arrival,departure time enawa
-        for(int i=0; i<TempList.size(); i++){
-            CollectTrainData(TempList.get(i), Config.START_STATION);
-            //Toast.makeText(TrainListActivity.this, "Name: " + TrainNameList.get(i), Toast.LENGTH_SHORT).show();
+            //4.SearchTrains() eken ena train_id gaanata adalawa CollectTrainData eka loop karanawa
+            //ethakota e e train ekata adaala name,arrival,departure time enawa
+            for(int i=0; i<TempList.size(); i++){
+                CollectTrainData(TempList.get(i), Config.START_STATION);
+                //Toast.makeText(TrainListActivity.this, "Name: " + TrainNameList.get(i), Toast.LENGTH_SHORT).show();
+            }
+
+            //5.adapter ekata daanna puluwan arrays witharai so, array walata size set karanawa
+            TrainIDForAdapterArray = new String[TrainNameList.size()];
+            TrainNameArray = new String[TrainNameList.size()];
+            ArrivalTimeArray = new String[TrainNameList.size()];
+            DepartureTimeArray = new String[TrainNameList.size()];
+
+            //6.uda loop eken aapu ewa arrays walata danawa
+            for(int i=0; i<TrainNameList.size(); i++){
+                //CollectTrainData(TrainNameList.get(i), Config.START_STATION);
+                TrainIDForAdapterArray[i]=TrainIDListForAdapter.get(i);
+                TrainNameArray[i]=TrainNameList.get(i);
+                ArrivalTimeArray[i]=ArrivalTimeList.get(i);
+                DepartureTimeArray[i]=DepartureTimeList.get(i);
+                //Toast.makeText(TrainListActivity.this, "Name: " + TrainNameArray[i] + "," + ArrivalTimeArray[i] + "," + DepartureTimeArray[i], Toast.LENGTH_SHORT).show();
+            }
+
+            //7.arrays walin apuwa adapater ekata danawa
+            TrainListAdapter trainListAdapter = new TrainListAdapter(this, TrainNameArray, TrainIDForAdapterArray, ArrivalTimeArray, DepartureTimeArray);
+            listView.setAdapter(trainListAdapter);
+
+        }catch(Exception e){
+            Toast.makeText(TrainListActivity.this, "Try Again.!", Toast.LENGTH_SHORT).show();
         }
-
-        //5.adapter ekata daanna puluwan arrays witharai so, array walata size set karanawa
-        TrainNameArray = new String[TrainNameList.size()];
-        ArrivalTimeArray = new String[TrainNameList.size()];
-        DepartureTimeArray = new String[TrainNameList.size()];
-
-        //6.uda loop eken aapu ewa arrays walata danawa
-        for(int i=0; i<TrainNameList.size(); i++){
-            //CollectTrainData(TrainNameList.get(i), Config.START_STATION);
-            TrainNameArray[i]=TrainNameList.get(i);
-            ArrivalTimeArray[i]=ArrivalTimeList.get(i);
-            DepartureTimeArray[i]=DepartureTimeList.get(i);
-            Toast.makeText(TrainListActivity.this, "Name: " + TrainNameArray[i] + "," + ArrivalTimeArray[i] + "," + DepartureTimeArray[i], Toast.LENGTH_SHORT).show();
-        }
-
-
-        //7.arrays walin apuwa adapater ekata danawa
-        TrainListAdapter trainListAdapter = new TrainListAdapter(this, TrainNameArray, ArrivalTimeArray, DepartureTimeArray);
-        listView.setAdapter(trainListAdapter);
 
 
 
@@ -149,6 +163,9 @@ public class TrainListActivity extends AppCompatActivity {
                 StationList[i]=jsonobject.getString("stations");
 
 
+
+
+
                 //Toast.makeText(TrainListActivity.this, "Test: " + TrainName[i], Toast.LENGTH_SHORT).show();
 
             }
@@ -159,8 +176,27 @@ public class TrainListActivity extends AppCompatActivity {
 
         }
 
-        for(int i=0; i<TrainIDList.length;i++){
-            TempList.add(TrainIDList[i]);
+        for(int i=0; i<StationList.length;i++){
+            //Toast.makeText(TrainListActivity.this, "Stations: " + StationList[i], Toast.LENGTH_SHORT).show();
+            StationTempArray=StationList[i].split(",");
+            for(int j=0; j<StationTempArray.length; j++){
+                StationTempArrayList.add(StationTempArray[j]);
+            }
+
+            int StartIndex = Arrays.asList(StationTempArray).indexOf(Config.START_STATION);
+            int EndIndex = Arrays.asList(StationTempArray).indexOf(Config.END_STATION);
+
+            Toast.makeText(TrainListActivity.this, "Indexus: " + StartIndex + "," + EndIndex , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TrainListActivity.this, "Test: " + StationTempArrayList.indexOf(Config.START_STATION) + "," + StationTempArrayList.indexOf(Config.END_STATION), Toast.LENGTH_SHORT).show();
+            if(StartIndex<EndIndex){
+                TrainIDFinalList.add(TrainIDList[i]);
+
+            }
+        }
+
+
+        for(int i=0; i<TrainIDFinalList.size();i++){
+            TempList.add(TrainIDFinalList.get(i));
         }
 
 //        for(int i=0; i<TrainIDList.length; i++){
@@ -203,6 +239,7 @@ public class TrainListActivity extends AppCompatActivity {
         try {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
+            TrainIDForAdapter = new String[jsonarray.length()];
             TrainName = new String[jsonarray.length()];
             ArrivalTime = new String[jsonarray.length()];
             DepartureTime = new String[jsonarray.length()];
@@ -212,11 +249,13 @@ public class TrainListActivity extends AppCompatActivity {
             for(int i=0;i<=jsonarray.length();i++){
 
                 jsonobject = jsonarray.getJSONObject(i);
+                TrainIDForAdapter[i]=jsonobject.getString("train_id");
                 TrainName[i]=jsonobject.getString("name");
                 ArrivalTime[i]=jsonobject.getString("arrival_time");
                 DepartureTime[i]=jsonobject.getString("departure_time");
 
                 //3.ena ena eka mutable lists walta add karanawa
+                TrainIDListForAdapter.add(TrainIDForAdapter[i]);
                 TrainNameList.add(TrainName[i]);
                 ArrivalTimeList.add(ArrivalTime[i]);
                 DepartureTimeList.add(DepartureTime[i]);
@@ -231,15 +270,17 @@ public class TrainListActivity extends AppCompatActivity {
 
     private class TrainListAdapter extends ArrayAdapter<String> {
 
+        private String[] TrainID;
         private String[] TrainName;
         private String[] ArrivalTime;
         private String[] DepartureTime;
         private Activity context;
 
-        private TrainListAdapter(Activity context, String[] TrainName, String[] ArrivalTime, String[] DepartureTime) {
+        private TrainListAdapter(Activity context, String[] TrainName, String[] TrainID, String[] ArrivalTime, String[] DepartureTime) {
             super(context, R.layout.activity_train_list, TrainName);
             this.context = context;
             this.TrainName = TrainName;
+            this.TrainID = TrainID;
             this.ArrivalTime = ArrivalTime;
             this.DepartureTime = DepartureTime;
         }
@@ -270,6 +311,7 @@ public class TrainListActivity extends AppCompatActivity {
                             Intent intent = new Intent(TrainListActivity.this, MapsActivity.class);
                             startActivity(intent);
                         }else{
+                            Config.SELECTED_TRAIN_ID=TrainID[position];
                             Intent intent = new Intent(TrainListActivity.this, SelectSeatsActivity.class);
                             startActivity(intent);
                         }

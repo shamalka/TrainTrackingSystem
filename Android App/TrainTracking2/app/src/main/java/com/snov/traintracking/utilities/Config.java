@@ -36,4 +36,6 @@ public class Config implements Serializable {
     public static String CHECK_LOGIN = "0";
     public static String USER_EMAIL = "";
 
+    public static String SELECTED_TRAIN_ID = "T000";
+
 }

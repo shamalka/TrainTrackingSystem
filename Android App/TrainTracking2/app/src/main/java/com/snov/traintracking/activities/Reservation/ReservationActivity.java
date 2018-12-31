@@ -126,10 +126,12 @@ public class ReservationActivity extends AppCompatActivity {
         SearchTrain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
-                Intent intent = new Intent(ReservationActivity.this, TrainListActivity.class);
-                startActivity(intent);
-
+                try{
+                    Intent intent = new Intent(ReservationActivity.this, TrainListActivity.class);
+                    startActivity(intent);
+                }catch(Exception e){
+                    Toast.makeText(ReservationActivity.this, "Try Again.!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

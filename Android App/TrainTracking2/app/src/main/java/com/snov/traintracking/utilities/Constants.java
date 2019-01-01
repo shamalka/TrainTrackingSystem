@@ -13,5 +13,6 @@ public class Constants implements Serializable {
     public static String USER_LOGIN_SERVER_URL = "http://railway.sinhalafunnystories.com/railway_system/user_info_api.php/";
     public static String FIREBASE_DATABASE_URL = "https://train-tracking-app.firebaseio.com/";
     public static String TEMP_RESERVE_URL = "http://railway.sinhalafunnystories.com/railway_system/temp_reservation_api.php/";
+    public static String DELETE_TEMP_RESERVATION_URL = "http://railway.sinhalafunnystories.com/railway_system/delete_temp_reservation.php/";
 
 }

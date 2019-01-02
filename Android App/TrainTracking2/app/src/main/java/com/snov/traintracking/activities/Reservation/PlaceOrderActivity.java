@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
@@ -37,20 +40,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
     String[] SeatsArray;
     Integer TotalTicketPrice;
 
+    Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
 
-        Button GoBack = (Button)findViewById(R.id.go_back);
-        GoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteTempReservation();
-                Intent intent = new Intent(PlaceOrderActivity.this, SelectSeatsActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         Toast.makeText(PlaceOrderActivity.this, "Selected Seats: " + Config.SELECTED_SEATS, Toast.LENGTH_LONG).show();
 
@@ -62,14 +59,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
         ReservationPrice = (TextView)findViewById(R.id.reservation_price);
 
         ReservationDate.setText(Config.RESERVATION_DATE);
-        ReservationClass.setText(Config.RESERVATION_CLASS);
+        //ReservationClass.setText(Config.RESERVATION_CLASS);
         ReservationUser.setText(Config.USER_EMAIL);
         ReservationTrain.setText(Config.TRAIN_ID);
         ReservationSeats.setText(Config.SELECTED_SEATS);
 
         CalculateTotalTicketPrice();
 
-        Button DeleteRecord = (Button)findViewById(R.id.delete_record);
+        Button DeleteRecord = (Button)findViewById(R.id.checkout);
         DeleteRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +74,30 @@ public class PlaceOrderActivity extends AppCompatActivity {
             }
         });
 
+        CountDown();
 
+        //You got 10seconds to confirm and go to payment, otherwise you are redirected to ReservationActivity
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                DeleteTempReservation();
+                Intent intent = new Intent(PlaceOrderActivity.this, ReservationActivity.class);
+                startActivity(intent);
+            }
+        },20000);
+
+        Button GoBack = (Button)findViewById(R.id.go_back);
+        GoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteTempReservation();
+                Intent intent = new Intent(PlaceOrderActivity.this, SelectSeatsActivity.class);
+                startActivity(intent);
+                finish();
+                timer.cancel();
+            }
+        });
 
     }
 
@@ -95,6 +115,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         Intent intent = new Intent(PlaceOrderActivity.this, SelectSeatsActivity.class);
         startActivity(intent);
     }
+
 
     public void DeleteTempReservation(){
 
@@ -169,5 +190,18 @@ public class PlaceOrderActivity extends AppCompatActivity {
             Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    public void CountDown(){
+        new CountDownTimer(20000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                ReservationClass.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                ReservationClass.setText("done!");
+            }
+        }.start();
     }
 }

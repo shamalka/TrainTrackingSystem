@@ -79,6 +79,12 @@ public class SelectSeatsActivity extends AppCompatActivity {
     String[] SeatsArray;
     Integer TotalTicketPrice;
 
+    Boolean SimilarSeats=false;
+
+    //Checking Similar seats GetReservedSeats Method
+    String CheckReservedClassJsonPath;
+    String[] CheckReservedSeats;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +93,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
 
 
-        Toast.makeText(SelectSeatsActivity.this, "Train: " + Config.TRAIN_ID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SelectSeatsActivity.this, "Train: " + Config.TRAIN_ID, Toast.LENGTH_SHORT).show();
 
         TrainID = (TextView)findViewById(R.id.train_id);
         ReservationClass = (TextView)findViewById(R.id.resevation_class);
@@ -115,15 +121,29 @@ public class SelectSeatsActivity extends AppCompatActivity {
                 // Perform action on click
                 MergeList();
                 Config.SELECTED_SEATS=SelectedSeats;
-                SetTempReservation();
-                Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
-                startActivity(intent);
+                CheckSimilerSeats();
+                //Toast.makeText(SelectSeatsActivity.this, "Similar Seats: " + SimilarSeats, Toast.LENGTH_SHORT).show();
+
+                if(SimilarSeats){
+                    Toast.makeText(SelectSeatsActivity.this, "Seats are taken.", Toast.LENGTH_SHORT).show();
+                }else if(SelectedSeats.equals("")){
+                    Toast.makeText(SelectSeatsActivity.this, "Please Select Seats", Toast.LENGTH_SHORT).show();
+                }else{
+                    SetTempReservation();
+                    Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
+                    startActivity(intent);
+                }
+                //
+//                Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
+//                startActivity(intent);
 
 
             }
         });
 
-        Toast.makeText(SelectSeatsActivity.this, "TrainID: " + Config.SELECTED_TRAIN_ID, Toast.LENGTH_SHORT).show();
+
+
+        //
     }
 
 
@@ -417,9 +437,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
                     }else{
                         if(SelectedSeatList.contains((String) cb.getText())){
                             SelectedSeatList.remove((String) cb.getText());
-                            Toast.makeText(SelectSeatsActivity.this, "Removed: " + (String) cb.getText(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SelectSeatsActivity.this, "Removed: " + (String) cb.getText(), Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(SelectSeatsActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SelectSeatsActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -614,7 +634,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
     public void CalculateTotalTicketPrice(){
         SeatsArray=SelectedSeats.split(",");
-        Toast.makeText(SelectSeatsActivity.this, "Selected Seats: " + SeatsArray.length, Toast.LENGTH_LONG).show();
+        //Toast.makeText(SelectSeatsActivity.this, "Selected Seats: " + SeatsArray.length, Toast.LENGTH_LONG).show();
         TotalTicketPrice = (SeatsArray.length)*Integer.parseInt(Config.SELECTED_TICKET_PRICE);
     }
 
@@ -624,4 +644,100 @@ public class SelectSeatsActivity extends AppCompatActivity {
         Intent intent = new Intent(SelectSeatsActivity.this, ReservationActivity.class);
         startActivity(intent);
     }
+
+    public void GetReservedSeats(){
+
+        if(ReservationClass.getText().equals("1st Class")){
+            //ClassJsonPath="get_first_class_seat_numbers";
+            CheckReservedClassJsonPath="get_first_class_reserved_seats";
+            //Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }else if(ReservationClass.getText().equals("2nd Class")){
+            //ClassJsonPath="get_second_class_seat_numbers";
+            CheckReservedClassJsonPath="get_second_class_reserved_seats";
+            // Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }else{
+            //ClassJsonPath="get_third_class_seat_numbers";
+            CheckReservedClassJsonPath="get_third_class_reserved_seats";
+            // Toast.makeText(SelectSeatsActivity.this, "Path: " + ReservationClass.getText(), Toast.LENGTH_SHORT).show();
+        }
+        //connection
+        try {
+            URL url = new URL(Constants.SERVER_URL+"?"+ CheckReservedClassJsonPath +"&date=" + Config.RESERVATION_DATE +"&train_id=" + Config.SELECTED_TRAIN_ID);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            bis = new BufferedInputStream(con.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //content
+        try {
+            BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(bis)));
+            StringBuilder stringBuilder = new StringBuilder();
+            while((line = bufferedReader.readLine())!=null){
+                stringBuilder.append(line+"\n");
+            }
+            bis.close();
+            result = stringBuilder.toString();
+            Log.d("data", result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //JSON
+        try {
+            JSONArray jsonarray = new JSONArray(result);
+            JSONObject jsonobject = null;
+            CheckReservedSeats = new String[jsonarray.length()];
+            Log.d("data", "received");
+
+
+            for(int i=0;i<=jsonarray.length();i++){
+
+                jsonobject = jsonarray.getJSONObject(i);
+
+                if(Config.RESERVATION_CLASS.equals("1st Class")){
+                    CheckReservedSeats[i]=jsonobject.getString("first_class_seats");
+                }else if(Config.RESERVATION_CLASS.equals("2nd Class")){
+                    CheckReservedSeats[i]=jsonobject.getString("second_class_seats");
+                }else{
+                    CheckReservedSeats[i]=jsonobject.getString("third_class_seats");
+                }
+
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public void CheckSimilerSeats(){
+        GetReservedSeats();
+        String[] TempArray;
+        List<String> TempList = new ArrayList<String>();
+        for(int i=0; i<CheckReservedSeats.length; i++){
+            TempArray=CheckReservedSeats[i].split(",");
+            for(int j=0; j<TempArray.length; j++){
+                TempList.add(TempArray[j]);
+            }
+//            if(CheckReservedSeats[i].contains(SelectedSeats) || CheckReservedSeats[i].equals(SelectedSeats)){
+//                Toast.makeText(SelectSeatsActivity.this, "seats: " + CheckReservedSeats[i], Toast.LENGTH_SHORT).show();
+//                SimilarSeats=true;
+//            }else{
+//                Toast.makeText(SelectSeatsActivity.this, "seats: " + CheckReservedSeats[i], Toast.LENGTH_SHORT).show();
+//                SimilarSeats=false;
+//            }
+        }
+
+        if(TempList.containsAll(SelectedSeatList)){
+            SimilarSeats=true;
+        }else{
+            SimilarSeats=false;
+        }
+    }
+
+
 }

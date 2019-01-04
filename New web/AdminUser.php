@@ -31,7 +31,7 @@ if(!isset($_SESSION['email'])){
     </script>
 
 
-<!--<script type="text/javascript" src="js/action2.js"></script>-->
+<script type="text/javascript" src="js/action2.js"></script>
     <title></title>
   </head>
   <body>
@@ -62,16 +62,14 @@ if(!isset($_SESSION['email'])){
                <span id="message"></span>
                <div class="table-responsive" id="user_data">
           <div style="overflow-x:auto;">
-            <table class="table table-striped">
+            <table id="data" class="table table-striped">
               <thead style="color:black">
             <tr>
-              <th >USER ID</th>
+
               <th >NAME</th>
-              <th >NIC</th>
-              <th >EMAIL</th>
+              <th >Email</th>
               <th >PHONE</th>
-              <th >ADDRESS</th>
-              <th >PASSWORD</th>
+              <th >NIC</th>
               <th >STATUS</th>
               <th >ACTION</th>
             </tr>
@@ -79,35 +77,33 @@ if(!isset($_SESSION['email'])){
           </thead>
           <?php
           include('dbcon.php');
-          $query='SELECT * FROM user';
+          $query='SELECT * FROM user_info';
           $result=mysqli_query($connect,$query);
 
 
       while ($row=mysqli_fetch_array($result)) {
             $status='';
-            if($row[7]=='ACTIVE'){
+            if($row[5]=='ACTIVE'){
               $status='<span class="label label-success"> ACTIVE </span>';
             }
             else{
               $status='<span class="label label-danger">Banned</span>';
             }
             ?>
-
               <tr>
                 <td><?php  echo $row[0]?></td>
                 <td><?php  echo $row[1]?></td>
-                <td><?php  echo $row[2]?></td>
                 <td><?php  echo $row[3]?></td>
                 <td><?php  echo $row[4]?></td>
-                <td><?php  echo $row[5]?></td>
-                <td><?php  echo $row[6]?></td>
                 <td><?php  echo $status?></td>
-                <?php if($row[7]=='ACTIVE'){?>
-                <td><button type="submit" name="action" class="btn btn-danger" onclick="confirmation1()">BANNED</button></td>
+                <?php if($row[5]=='ACTIVE'){?>
+
+                <td><button id="submit_data" type="submit" name="action" class="btn btn-danger" onclick="confirmation1();cf('<?php echo $row[4]?>');refresh();">BANNED</button></td>
               <?php }
                 else { ?>
-                    <td><button type="submit" name="action" class="btn btn-success" onclick="confirmation2()">ACTIVATE</button></td>
-                <?php } ?>
+                    <td><button id="submit_data" type="submit" name="action" class="btn btn-success" onclick="confirmation2(); cf('<?php echo $row[4] ?>'); refresh();">ACTIVATE</button></td>
+                <?php }
+                ?>
 
             </tr>
 
@@ -122,67 +118,32 @@ if(!isset($_SESSION['email'])){
         </div>
       </div>
     </div>
-<script type="text/javascript">
 
-    function confirmation1() {
-      var msg;
-      var r = confirm("Are you sure you want to BANNED this account!");
-      if (r == true) {
-        msg="confirmed";
-        document.cookie="message=Banned";
-        location.reload();
-      /*  $(document).ready(function(){
-          $("button").click(function(){
-        $.ajax({
-           url:'http://localhost/TrainTrackingSystem/New%20web/Adminaction.php',
-           method:"POST",
-           data:{msg:msg},
-         });
-       });
-     });*/
-   }
-      else {
-        msg = "Canceled!";
-        document.cookie="message=Cancelled";
-        location.reload();
-      }
-
-
-      document.getElementById("message").innerHTML = msg;
-    }
-
-    function confirmation2() {
-      var msg;
-
-      var r = confirm("Are you sure you want to ACTIVE this account!");
-      if (r == true) {
-        msg="Activated";
-        document.cookie="message=Activated";
-        location.reload();
-      /* $(document).ready(function(){
-          $("button").click(function(){
-        $.ajax({
-          url:'http://localhost/TrainTrackingSystem/New%20web/Adminaction.php',
-          method:"POST",
-          data:{msg:msg},
-        });
-      });
-    });*/
-      }
-      else {
-        msg = "Canceled!";
-        document.cookie="message=Cancelled";
-        location.reload();
-      }
-
-      document.getElementById("message").innerHTML = msg;
-    }
-
-
-</script>
 <?php
-$data=$_COOKIE['message'];
-echo $data;
+if(isset($_COOKIE['message'])){
+
+  include('dbcon.php');
+  $data=$_COOKIE['message'];
+  $nic=$_COOKIE['nic'];
+  $staus='';
+  if($data=="Banned"){
+      $staus="BANNED";
+
+  }
+  elseif ($data=="Activated") {
+      $staus="ACTIVE";
+  }
+  else{
+    exit;
+  }
+  $query="UPDATE user_info SET status='$staus' WHERE nic='$nic'";
+  mysqli_query($connect,$query);
+  mysqli_close($connect);
+
+}
+else{
+  echo "error";
+}
  ?>
   </body>
 </html>

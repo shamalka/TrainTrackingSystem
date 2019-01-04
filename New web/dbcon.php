@@ -2,7 +2,7 @@
 $server="localhost";
 $user="root";
 $password="";
-$dtabase="Train";
+$dtabase="Train2";
 
 $connect=mysqli_connect($server, $user, $password, $dtabase) ;
 

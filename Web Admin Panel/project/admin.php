@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link rel="stylesheet" type="text/css" href="style2.css">
+	<link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+	<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+	<link rel="stylesheet" type="text/css"  href="st.css" media="st">
+	<link rel="stylesheet" type="text/css" href="/css/master.css">
 	<title></title>
 </head>
 <body>
@@ -21,7 +23,7 @@
 </div>
 
 			<!-- End Navigation -->
-			
+
 		</div>
 	</div>
 	<!-- End Header -->

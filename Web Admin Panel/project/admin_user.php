@@ -1,7 +1,17 @@
 <?php
 	include 'header.php';
 ?>
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<body>		
+<head>
+	<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+<link rel="stylesheet" type="text/css"  href="st.css" media="st">
+<link rel="stylesheet" type="text/css" href="/css/master.css">
+</head>
+	<body>
 	<!-- Navigation -->
 <div class="topnav" id="myTopnav">
   <a href="admin.php">Dashboard</a>
@@ -13,19 +23,19 @@
 </div>
 
 			<!-- End Navigation -->
-			
+
 		</div>
 	</div>
 	<!-- End Header -->
 	<!-- Content -->
 	<div id="content" class="shell">
-		
+
 <div id="main">
 			<div class="cl">&nbsp;</div>
-			
+
 			<!-- Content -->
 			<div id="content">
-						
+
 				<!-- Box -->
 				<div class="box">
 					<!-- Box Head -->
@@ -43,22 +53,22 @@
 							  <th align="center">E -MAIL ID</th>
 							  <th align="center">MOBILE NO</th>
 							  <th align="center">ADDRESS</th>
-							  <th align="center">ACCOUNT STATUS</th>							  
+							  <th align="center">ACCOUNT STATUS</th>
 							  <th align="center">CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from user where status='ACTIVE'";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -76,7 +86,7 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
@@ -91,22 +101,22 @@
 							  <th align="center">E -MAIL ID</th>
 							  <th align="center">MOBILE NO</th>
 							  <th align="center">ADDRESS</th>
-							  <th align="center">ACCOUNT STATUS</th>							  
+							  <th align="center">ACCOUNT STATUS</th>
 							  <th align="center">CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from user where status='BANNED'";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -124,13 +134,13 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
 
-	
-	
+
+
 
 <!-- Footer -->
 <div id="footer">

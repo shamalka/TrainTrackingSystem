@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="design/styles.css">
+  <link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+	<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+	<link rel="stylesheet" type="text/css"  href="st.css" media="st">
+	<link rel="stylesheet" type="text/css" href="/css/master.css">
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');

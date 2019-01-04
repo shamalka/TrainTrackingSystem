@@ -2,9 +2,9 @@
 .right { float:right; display:inline; }
 
 
-.shell { width: 1300px; 
-        margin:0 
-        auto; 
+.shell { width: 1300px;
+        margin:0
+        auto;
 }
 
 #header { background:#56baed; height:100px; }
@@ -17,7 +17,7 @@
 #header .right p{ padding-top:12px; padding-right:100px;}
 #header .right a strong{ text-decoration: underline; }
 
-.topnav {
+.top {
   overflow: hidden;
   background-color: #56baed;
   padding-top: 15px;
@@ -71,7 +71,7 @@
 }
 
 .button {
-    background-color: #111863; 
+    background-color: #111863;
     border: none;
     color: white;
     padding: 15px 32px;

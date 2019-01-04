@@ -8,6 +8,6 @@ import java.io.Serializable;
 public class JsonConfig implements Serializable {
 
     public static final String GET_TRAINS = "get_trains";
-    public static final String GET_NEWS_TITLE = "get_news_title";
+    public static final String GET_NEWS_TITLE = "get_news";
 
 }

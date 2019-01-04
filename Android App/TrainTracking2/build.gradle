@@ -23,7 +23,7 @@ allprojects {
         jcenter()
     }
 
-    buildDir = "C:/tmp/${rootProject.name}/${project.name}"
+    //buildDir = "C:/tmp/${rootProject.name}/${project.name}"
 }
 
 task clean(type: Delete) {

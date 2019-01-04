@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.Reservation.PaymentActivity;
 import com.snov.traintracking.activities.Reservation.ReservationActivity;
 import com.snov.traintracking.activities.Reservation.ReservationHomeActivity;
 import com.snov.traintracking.activities.Reservation.SelectSeatsActivity;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         FeedbackCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent intent = new Intent(MainActivity.this, TrainListActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewsViewActivity.class);
                 startActivity(intent);
             }
         });

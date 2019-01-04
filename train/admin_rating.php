@@ -9,7 +9,8 @@
   <a href="admin_train.php">Trains</a>
   <a href="admin_user.php">User Management</a>
   <a href="admin_news.php">News Feed</a>
-  <a href="admin_rating.php" class="active">Ratings & Feedback</a>
+  <a href="admin_addnews.php">Add News</a>
+  <a href="admin_rating.php">Ratings & Feedback</a>
 </div>
 
 			<!-- End Navigation -->

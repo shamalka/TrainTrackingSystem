@@ -9,6 +9,7 @@
   <a href="admin_train.php" class="active">Trains</a>
   <a href="admin_user.php">User Management</a>
   <a href="admin_news.php">News Feed</a>
+  <a href="admin_addnews.php">Add News</a>
   <a href="admin_rating.php">Ratings & Feedback</a>
 </div>
 

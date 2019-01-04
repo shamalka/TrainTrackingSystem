@@ -50,7 +50,7 @@ if(!isset($_SESSION['email'])){
         </ul>
       </div>
     </nav>
-
+       <?php date_default_timezone_set('Asia/Colombo'); ?>
 
 						<br><br><br>
 						<div class="container">
@@ -72,7 +72,7 @@ echo "$date[weekday], $date[month] $date[mday], $date[year]";?>"/>
 
                 <div class="form-group">
                   <label for="Time">Time: </label>
-                  <input type="text" name="time" id="time" value="<?php ?>"/>
+                  <input type="text" name="time" id="time" value="<?php echo date("h:i:sa"); ?>"/>
                 </div>
                 <br>
                 <div class="form-group">

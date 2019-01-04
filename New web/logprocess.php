@@ -25,7 +25,7 @@ if (isset($_POST['Email']) && isset($_POST['psw'])) {}
     $pwd=stripslashes($pwd);
   }
 if (empty($emlerr) && empty($pswerr)) {
-  $sql = "SELECT * FROM logininfo WHERE Email = '$eml'";
+  $sql = "SELECT * FROM loginfo WHERE Email = '$eml'";
   $result = mysqli_query($connect,$sql);
   $row=mysqli_fetch_assoc($result);
 
@@ -33,7 +33,7 @@ if (empty($emlerr) && empty($pswerr)) {
     session_start();
     $_SESSION['email']=$eml;
     $_SESSION['username']=$row['username'];
-    $_SESSION['position']=$row['positiion'];
+    $_SESSION['position']=$row['position'];
     echo"hi";
     header('location:http://localhost/TrainTrackingSystem/New%20web/Home.php');
 }

@@ -66,11 +66,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         CalculateTotalTicketPrice();
 
-        Button DeleteRecord = (Button)findViewById(R.id.checkout);
-        DeleteRecord.setOnClickListener(new View.OnClickListener() {
+        Button GoToPayment = (Button)findViewById(R.id.checkout);
+        GoToPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PlaceOrderActivity.this, PaymentActivity.class);
+                startActivity(intent);
+                finish();
+                timer.cancel();
             }
         });
 
@@ -106,6 +109,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         Toast.makeText(PlaceOrderActivity.this, "Selected Seats: " + SeatsArray.length, Toast.LENGTH_LONG).show();
         TotalTicketPrice = (SeatsArray.length)*Integer.parseInt(Config.SELECTED_TICKET_PRICE);
         ReservationPrice.setText(TotalTicketPrice.toString());
+        Config.TOTAL_TICKET_PRICE=TotalTicketPrice.toString();
     }
 
     @Override

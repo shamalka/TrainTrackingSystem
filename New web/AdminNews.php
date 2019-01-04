@@ -64,16 +64,18 @@ if(!isset($_SESSION['email'])){
                 </div>
                 <br>
                 <div class="form-group">
-                  <label for="Date">Date: </label>
+                  <label for="Date">Date </label>
                   <input type ="text" id="time" name="time" value="<?php $date=getdate(date("U"));
 echo "$date[weekday], $date[month] $date[mday], $date[year]";?>"/>
                   </div>
                   <br>
 
                 <div class="form-group">
-                  <label for="Time">Time: </label>
+                  <label for="Time">Time </label>
                   <input type="text" name="time" id="time" value="<?php echo date("h:i:sa"); ?>"/>
                 </div>
+                <input type="button" class="btn btn-info" value="refresh" onclick='window.location.reload();'></input>
+                <br>
                 <br>
                 <div class="form-group">
                   <label for="Date">Added By: </label>

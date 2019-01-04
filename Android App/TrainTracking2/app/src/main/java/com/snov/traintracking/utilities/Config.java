@@ -38,5 +38,22 @@ public class Config implements Serializable {
 
     public static String SELECTED_TRAIN_ID = "T000";
     public static String SELECTED_TICKET_PRICE;
+    public static String TOTAL_TICKET_PRICE;
+    public static String ARRIVAL_TIME;
+
+    //News
+    public static String NEWS_DESCRIPTION="";
+    public static String NEWS_TITLE="";
+    public static String NEWS_DATE="";
+    public static String NEWS_AUTHOR="";
+
+    //My Reservation
+    public static String MY_START_STATION;
+    public static String MY_END_STATION;
+    public static String MY_TRAIN_ID;
+    public static String MY_DATE;
+    public static String MY_TIME;
+    public static String MY_SEAT_NUMBERS;
+    public static String MY_PRICE;
 
 }

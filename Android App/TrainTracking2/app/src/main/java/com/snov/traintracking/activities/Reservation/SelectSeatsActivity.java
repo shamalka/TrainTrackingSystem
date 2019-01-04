@@ -85,6 +85,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
     String CheckReservedClassJsonPath;
     String[] CheckReservedSeats;
 
+    String TimeJsonPath;
+    String[] ArrivalTimeArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +114,10 @@ public class SelectSeatsActivity extends AppCompatActivity {
         CollectReservationData();
         BuildCheckBox();
         GetTicketPrice();
+        GetArrivalTime();
+
+        Config.ARRIVAL_TIME=ArrivalTimeArray[0];
+       // Toast.makeText(SelectSeatsActivity.this, ArrivalTimeArray[0], Toast.LENGTH_SHORT).show();
 
         SeatCount.setText(TicketPriceArray[0]);
         Config.SELECTED_TICKET_PRICE=TicketPriceArray[0];
@@ -540,17 +547,20 @@ public class SelectSeatsActivity extends AppCompatActivity {
         String UserID = Config.USER_EMAIL;
         String Seats = SelectedSeats;
         String TicketPrice = TotalTicketPrice.toString();
+        String StartStation = Config.START_STATION;
+        String EndStation = Config.END_STATION;
+        String ArrivalTime = Config.ARRIVAL_TIME;
         String Date = Config.RESERVATION_DATE;
         String Status = "Pending";
         String Empty="";
 
         ReservationTask reservationTask = new ReservationTask(this);
         if(Config.RESERVATION_CLASS.equals("1st Class")){
-            reservationTask.execute(Method,TrainID,UserID,Seats,Empty,Empty,TicketPrice,Date,Status);
+            reservationTask.execute(Method,TrainID,UserID,Seats,Empty,Empty,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
         }else if(Config.RESERVATION_CLASS.equals("2nd Class")){
-            reservationTask.execute(Method,TrainID,UserID,Empty,Seats,Empty,TicketPrice,Date,Status);
+            reservationTask.execute(Method,TrainID,UserID,Empty,Seats,Empty,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
         }else{
-            reservationTask.execute(Method,TrainID,UserID,Empty,Empty,Seats,TicketPrice,Date,Status);
+            reservationTask.execute(Method,TrainID,UserID,Empty,Empty,Seats,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
         }
     }
 
@@ -583,8 +593,11 @@ public class SelectSeatsActivity extends AppCompatActivity {
                 String SecondClassSeats = params[4];
                 String ThirdClassSeats = params[5];
                 String TotalPrice = params[6];
-                String Date = params[7];
-                String Status = params[8];
+                String StartStation = params[7];
+                String EndStation = params[8];
+                String ArrivalTime = params[9];
+                String Date = params[10];
+                String Status = params[11];
 
                 try {
                     URL url = new URL(TempReserveUrl);
@@ -600,6 +613,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
                             URLEncoder.encode("second_class_seats","UTF-8") + "=" + URLEncoder.encode(SecondClassSeats,"UTF-8") + "&" +
                             URLEncoder.encode("third_class_seats","UTF-8") + "=" + URLEncoder.encode(ThirdClassSeats,"UTF-8") + "&" +
                             URLEncoder.encode("total_price","UTF-8") + "=" + URLEncoder.encode(TotalPrice,"UTF-8") + "&" +
+                            URLEncoder.encode("start_station","UTF-8") + "=" + URLEncoder.encode(StartStation,"UTF-8") + "&" +
+                            URLEncoder.encode("end_station","UTF-8") + "=" + URLEncoder.encode(EndStation,"UTF-8") + "&" +
+                            URLEncoder.encode("arrival_time","UTF-8") + "=" + URLEncoder.encode(ArrivalTime,"UTF-8") + "&" +
                             URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(Date,"UTF-8") + "&" +
                             URLEncoder.encode("status","UTF-8") + "=" + URLEncoder.encode(Status,"UTF-8");
 
@@ -737,6 +753,60 @@ public class SelectSeatsActivity extends AppCompatActivity {
         }else{
             SimilarSeats=false;
         }
+    }
+
+    public void GetArrivalTime(){
+
+        TimeJsonPath="get_arrival_time";
+
+
+        //connection
+        try {
+            URL url = new URL(Constants.SERVER_URL+"?"+ TimeJsonPath + "&train_id=" + Config.SELECTED_TRAIN_ID + "&start_station=" + Config.START_STATION);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            bis = new BufferedInputStream(con.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //content
+        try {
+            BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(bis)));
+            StringBuilder stringBuilder = new StringBuilder();
+            while((line = bufferedReader.readLine())!=null){
+                stringBuilder.append(line+"\n");
+            }
+            bis.close();
+            result = stringBuilder.toString();
+            Log.d("data", result);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //JSON
+        try {
+            JSONArray jsonarray = new JSONArray(result);
+            JSONObject jsonobject = null;
+            ArrivalTimeArray = new String[jsonarray.length()];
+            Log.d("data", "received");
+
+
+            for(int i=0;i<=jsonarray.length();i++){
+
+                jsonobject = jsonarray.getJSONObject(i);
+
+
+                ArrivalTimeArray[i]=jsonobject.getString("arrival_time");
+
+
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
 

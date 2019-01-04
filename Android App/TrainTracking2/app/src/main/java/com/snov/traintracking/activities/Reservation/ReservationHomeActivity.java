@@ -40,5 +40,19 @@ public class ReservationHomeActivity extends AppCompatActivity {
             }
         });
 
+        MyBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Config.CHECK_LOGIN.equals("1")){
+                    Intent intent = new Intent(ReservationHomeActivity.this, MyReservationsActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(ReservationHomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
     }
 }

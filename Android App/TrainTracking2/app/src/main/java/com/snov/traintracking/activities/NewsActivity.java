@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
 import com.snov.traintracking.utilities.JsonConfig;
 
@@ -33,7 +34,9 @@ import java.net.URL;
 
 public class NewsActivity extends AppCompatActivity {
 
+    String[] NewsID;
     String[] NewsTitle;
+    String[] NewsDescription;
     String[] NewsAuthor;
     String[] NewsDate;
     ListView listView;
@@ -51,7 +54,7 @@ public class NewsActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
         collectData();
 
-        NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsAuthor, NewsDate);
+        NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsID, NewsDescription, NewsAuthor, NewsDate);
         listView.setAdapter(newsListAdapter);
 
         FloatingActionButton AddNews = findViewById(R.id.add_news);
@@ -95,6 +98,8 @@ public class NewsActivity extends AppCompatActivity {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
             NewsTitle = new String[jsonarray.length()];
+            NewsID = new String[jsonarray.length()];
+            NewsDescription = new String[jsonarray.length()];
             NewsAuthor = new String[jsonarray.length()];
             NewsDate = new String[jsonarray.length()];
             Log.d("data", "received");
@@ -104,6 +109,8 @@ public class NewsActivity extends AppCompatActivity {
 
                 jsonobject = jsonarray.getJSONObject(i);
                 NewsTitle[i]=jsonobject.getString("title");
+                NewsDescription[i]=jsonobject.getString("description");
+                NewsID[i]=jsonobject.getString("news_id");
                 NewsAuthor[i]=jsonobject.getString("author");
                 NewsDate[i]=jsonobject.getString("date");
 
@@ -120,15 +127,19 @@ public class NewsActivity extends AppCompatActivity {
 
     private class NewsListAdapter extends ArrayAdapter<String> {
 
+        private String[] NewsID;
         private String[] NewsTitle;
+        private String[] NewsDescription;
         private String[] NewsAuthor;
         private String[] NewsDate;
         private Activity context;
 
-        private NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsAuthor, String[] NewsDate) {
+        private NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsID, String[] NewsDescription, String[] NewsAuthor, String[] NewsDate) {
             super(context, R.layout.activity_news, NewsTitle);
             this.context = context;
             this.NewsTitle = NewsTitle;
+            this.NewsID = NewsID;
+            this.NewsDescription = NewsDescription;
             this.NewsAuthor = NewsAuthor;
             this.NewsDate = NewsDate;
         }
@@ -147,7 +158,13 @@ public class NewsActivity extends AppCompatActivity {
                 r = layoutInflater.inflate(R.layout.news_list_item,null,true);
                 r.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Go to  " + NewsTitle[position], Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Go to  " + NewsID[position], Toast.LENGTH_SHORT).show();
+                        Config.NEWS_DESCRIPTION=NewsDescription[position];
+                        Config.NEWS_TITLE=NewsTitle[position];
+                        Config.NEWS_AUTHOR=NewsAuthor[position];
+                        Config.NEWS_DATE=NewsDate[position];
+                        Intent intent = new Intent(NewsActivity.this, NewsViewActivity.class);
+                        startActivity(intent);
                     }
                 });
                 viewHolder = new ViewHolder(r);

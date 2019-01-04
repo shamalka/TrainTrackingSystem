@@ -1,8 +1,19 @@
 <?php
 	include 'header.php';
 ?>
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">		
+<head>
+	<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+<link rel="stylesheet" type="text/css"  href="st.css" media="st">
+<link rel="stylesheet" type="text/css" href="/css/master.css">
+</head>
+<body>
 	<!-- Navigation -->
+
+
 			<div class="topnav" id="myTopnav">
   <a href="admin.php">Dashboard</a>
   <a href="admin_reserve.php">Reservations</a>
@@ -13,19 +24,19 @@
 </div>
 
 			<!-- End Navigation -->
-			
+
 		</div>
 	</div>
 	<!-- End Header -->
 	<!-- Content -->
 	<div id="content" class="shell">
-		
+
 <div id="main">
 			<div class="cl">&nbsp;</div>
-			
+
 			<!-- Content -->
 			<div id="content">
-						
+
 				<!-- Box -->
 				<div class="box">
 					<!-- Box Head -->
@@ -37,11 +48,11 @@
 
 						</div>
 					</div>
-					<!-- End Box Head -->	
+					<!-- End Box Head -->
 					<br>
 
-			
-			<div class="cl">&nbsp;</div>			
+
+			<div class="cl">&nbsp;</div>
 		</div>
 		<!-- Main -->
 
@@ -58,5 +69,3 @@
 
 </body>
 </html>
-
-

@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/master.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+	<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+	<link rel="stylesheet" type="text/css"  href="st.css" media="st">
     <title></title>
   </head>
   <body>
@@ -31,7 +34,7 @@
   			  crossorigin="anonymous"></script>
   	<script src="js/bootstrap.js"></script>
 
-  
+
     </div>
   </body>
 </html>

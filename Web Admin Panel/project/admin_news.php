@@ -1,31 +1,42 @@
 <?php
-	include 'header.php';
+//	include 'header.php';
 ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	
+	<link rel="stylesheet" type="text/css" href="/css/master.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
 
 	<!-- Navigation -->
-			<div class="topnav" id="myTopnav">
-  <a href="admin.php">Dashboard</a>
-  <a href="admin_reserve.php">Reservations</a>
-  <a href="admin_train.php">Trains</a>
-  <a href="admin_user.php">User Management</a>
-  <a href="admin_news.php"  class="active">News Feed</a>
-  <a href="admin_rating.php">Ratings & Feedback</a>
-</div>
-
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
 			<!-- End Navigation -->
-			
-		</div>
-	</div>
+
 	<!-- End Header -->
 	<!-- Content -->
 	<div id="content" class="shell">
-		
+
 <div id="main">
 			<div class="cl">&nbsp;</div>
-			
+
 			<!-- Content -->
 			<div id="content">
-						
+
 				<!-- Box -->
 				<div class="box">
 					<!-- Box Head -->
@@ -44,19 +55,19 @@
 							  <th>VERIFIED/ NOT VERIFIED</th>
 							  <th>CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from news where verify = 'VERIFIED' order by date DESC";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -72,7 +83,7 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
@@ -88,19 +99,19 @@
 							  <th>VERIFIED/ NOT VERIFIED</th>
 							  <th>CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from news where verify = 'NOT VERIFIED' order by date DESC";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -114,7 +125,7 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
@@ -157,7 +168,7 @@
 								  <option value="11">11</option>
 								  <option value="12">12</option>
 								</select>
-							  </div>						
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="date" name="date">
@@ -193,7 +204,7 @@
 								  <option value="30">30</option>
 								  <option value="31">31</option>
 								</select>
-							  </div>						
+							  </div>
 								<br>
 								<div class="row">
 							  <div class="col-25">
@@ -226,7 +237,7 @@
 								  <option value="23">23</option>
 								  <option value="24">24</option>
 								</select>
-							  </div>		
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="min" name="min">
@@ -291,7 +302,7 @@
 								  <option value="59">59</option>
 								  <option value="60">60</option>
 								</select>
-							  </div>					
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="sec" name="sec">
@@ -371,7 +382,7 @@
 							  <input type="submit" name="INSERT" id="INSERT" value="INSERT">
 							</div>
 						  </form>
-						  
+
 						  <?php
 								$conn = mysqli_connect("localhost", "root", "", "train");
 
@@ -380,9 +391,9 @@
 								}
 
 							?>
-						  
+
 						  <?php
-						  						  
+
 								if(isset($_POST['INSERT'])){
 									$title = $_POST['title'];
 									$year = $_POST['year'];
@@ -394,10 +405,10 @@
 									$desc = $_POST['desc'];
 									$added = 'ADMIN';
 									$verify = 'VERIFIED';
-									
-									
+
+
 									$sql1 = "INSERT INTO news(`Title`, `Date`, `Time`, `Description`, `added by`, `verify`) VALUES ('$title','$year-$mon-$date', '$hour:$min:$sec', '$desc', '$added', '$verify')";
-									
+
 									if($conn->query($sql1)===TRUE){
 										echo("News sucessfully added!!");
 									}else{
@@ -409,11 +420,11 @@
 
 						</div>
 					</div>
-					<!-- End Box Head -->	
+					<!-- End Box Head -->
 					<br>
 
-			
-			<div class="cl">&nbsp;</div>			
+
+			<div class="cl">&nbsp;</div>
 		</div>
 		<!-- Main -->
 
@@ -426,9 +437,4 @@
 
 
 </body>
-
-
-</body>
 </html>
-
-

@@ -1,7 +1,10 @@
 <?php
 	include 'header.php';
 ?>
-
+<link rel="stylesheet" type="text/css" href="style2.css" media="style2">
+<link rel="stylesheet" type="text/css" href="styles.css" media="styles">
+<link rel="stylesheet" type="text/css"  href="st.css" media="st">
+<link rel="stylesheet" type="text/css" href="/css/master.css">
 	<!-- Navigation -->
 			<div class="topnav" id="myTopnav">
   <a href="admin.php">Dashboard</a>
@@ -13,19 +16,19 @@
 </div>
 
 			<!-- End Navigation -->
-			
+
 		</div>
 	</div>
 	<!-- End Header -->
 	<!-- Content -->
 	<div id="content" class="shell">
-		
+
 <div id="main">
 			<div class="cl">&nbsp;</div>
-			
+
 			<!-- Content -->
 			<div id="content">
-						
+
 				<!-- Box -->
 				<div class="box">
 					<!-- Box Head -->
@@ -44,22 +47,22 @@
 							  <th align="center">START TIME</th>
 							  <th align="center">END TIME</th>
 							  <th align="center">TOTAL SEATS</th>
-							  <th align="center">AVAILABLE FOR BOOKING</th>							  
+							  <th align="center">AVAILABLE FOR BOOKING</th>
 							  <th align="center">CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from timetable where available>0";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -78,7 +81,7 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
@@ -94,22 +97,22 @@
 							  <th align="center">START TIME</th>
 							  <th align="center">END TIME</th>
 							  <th align="center">TOTAL SEATS</th>
-							  <th align="center">AVAILABLE FOR BOOKING</th>						  
+							  <th align="center">AVAILABLE FOR BOOKING</th>
 							  <th align="center">CONTROL</th>
 							</tr>
-							
+
 						<?php
 							mysql_connect("localhost","root","") or die (mysql_error());
 							mysql_select_db ("train");
 							$sql = "select * from timetable where available=0";
 							$result = mysql_query($sql);
-							
+
 							if (!$result) {
 								echo "An error has occured: ".mysql_error();
 							} else {
 								while($tr=mysql_fetch_array($result)) {
 						?>
-						
+
 							<tr>
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><?php echo $tr[1]; ?></td>
@@ -128,7 +131,7 @@
 								}
 							}
 						?>
-							
+
 						  </table>
 						</div>
 						<br><br><br>
@@ -179,7 +182,7 @@
 								  <option value="11">11</option>
 								  <option value="12">12</option>
 								</select>
-							  </div>						
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="date" name="date">
@@ -215,7 +218,7 @@
 								  <option value="30">30</option>
 								  <option value="31">31</option>
 								</select>
-							  </div>						
+							  </div>
 								<br>
 								<div class="row">
 							  <div class="col-25">
@@ -248,7 +251,7 @@
 								  <option value="23">23</option>
 								  <option value="24">24</option>
 								</select>
-							  </div>		
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="smin" name="smin">
@@ -313,7 +316,7 @@
 								  <option value="59">59</option>
 								  <option value="60">60</option>
 								</select>
-							  </div>					
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="ssec" name="ssec">
@@ -411,7 +414,7 @@
 								  <option value="23">23</option>
 								  <option value="24">24</option>
 								</select>
-							  </div>		
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="fmin" name="fmin">
@@ -476,7 +479,7 @@
 								  <option value="59">59</option>
 								  <option value="60">60</option>
 								</select>
-							  </div>					
+							  </div>
 								<br>
 							  <div class="col-75">
 								<select id="fsec" name="fsec">
@@ -556,7 +559,7 @@
 							  <input type="submit" name="INSERT" id="INSERT" value="INSERT">
 							</div>
 						  </form>
-						  
+
 						  <?php
 								$conn = mysqli_connect("localhost", "root", "", "train");
 
@@ -565,9 +568,9 @@
 								}
 
 							?>
-						  
+
 						  <?php
-						  						  
+
 								if(isset($_POST['INSERT'])){
 									$start = $_POST['start'];
 									$dest = $_POST['dest'];
@@ -582,10 +585,10 @@
 									$fsec = $_POST['fsec'];
 									$total = $_POST['total'];
 									$availbale = $_POST['total'];
-									
-									
+
+
 									$sql1 = "INSERT INTO timetable(`start`, `destination`, `date`, `start_time`, `end_time`, `for_reserve`, `available`) VALUES ('$start', '$dest', '$year-$mon-$date', '$shour:$smin:$ssec', '$fhour:$fmin:$fsec', '$total', '$availbale')";
-									
+
 									if($conn->query($sql1)===TRUE){
 										echo("New record sucessfully added!!");
 									}else{
@@ -597,11 +600,11 @@
 
 						</div>
 					</div>
-					<!-- End Box Head -->	
+					<!-- End Box Head -->
 					<br>
 
-			
-			<div class="cl">&nbsp;</div>			
+
+			<div class="cl">&nbsp;</div>
 		</div>
 		<!-- Main -->
 
@@ -618,5 +621,3 @@
 
 </body>
 </html>
-
-

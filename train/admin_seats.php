@@ -27,7 +27,7 @@ if(isset($_POST['INSERT'])){
 
     }
 
-    $sql1 = "INSERT INTO stations(`train_id`, `stations`) VALUES ('$train_id', '$stations');";
+    $sql1 = "INSERT INTO stations(`train_id`, `stations`) VALUES ('$train_id', '$stations')";
     $res2 = mysqli_query($conn,$sql1);
 
     if (!$res2) {

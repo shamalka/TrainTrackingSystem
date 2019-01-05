@@ -13,6 +13,7 @@
   <a href="admin.php">Dashboard</a>
   <a href="admin_reserve.php">Reservations</a>
   <a href="admin_train.php">Trains</a>
+  <a href="admin_addtrain.php">Add Trains</a>
   <a href="admin_user.php">User Management</a>
   <a href="admin_news.php">News Feed</a>
   <a href="admin_addnews.php"  class="active">Add News</a>
@@ -21,8 +22,7 @@
 
 			<!-- End Navigation -->
 
-		</div>
-	</div>
+
 	<!-- End Header -->
 	<!-- Content -->
 	<div id="content" class="shell">
@@ -176,6 +176,8 @@
 					</div>
 					<!-- End Box Head -->
 					<br>
+            </div>
+</div>
 
 
 			<div class="cl">&nbsp;</div>

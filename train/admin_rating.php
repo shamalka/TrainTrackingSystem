@@ -7,6 +7,7 @@
   <a href="admin.php">Dashboard</a>
   <a href="admin_reserve.php">Reservations</a>
   <a href="admin_train.php">Trains</a>
+  <a href="admin_addtrain.php">Add Trains</a>
   <a href="admin_user.php">User Management</a>
   <a href="admin_news.php">News Feed</a>
   <a href="admin_addnews.php">Add News</a>
@@ -72,10 +73,14 @@
 						</div>
 						<br><br><br><br>
 
-			
+                    </div>
+                </div>
+            </div>
+
 			<div class="cl">&nbsp;</div>			
 		</div>
 		<!-- Main -->
+    </div>
 
 <!-- Footer -->
 <div id="footer">

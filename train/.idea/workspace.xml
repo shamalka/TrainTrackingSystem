@@ -2,19 +2,155 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660f0e9a-62a3-410a-ae70-ccaf8e5f0359" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/admin_addtrain.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_seats.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_stations.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_ticketprice.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_addnews.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_addnews.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_news.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_news.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_rating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_reserve.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_train.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_train.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view_news.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_news.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_seats.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_seats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-ball.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-bar-ping-pong.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-bouncing.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-clock.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-curtain.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-double.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-music.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-pokeball.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/loader-smartphone.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/menus-dropdown.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/menus-scrollable.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/base/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/base/generic.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/base/helpers.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/base/minireset.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/breadcrumb.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/card.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/dropdown.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/level.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/list.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/media.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/menu.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/message.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/modal.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/navbar.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/pagination.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/panel.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/components/tabs.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/box.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/button.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/container.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/content.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/form.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/icon.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/image.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/notification.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/other.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/progress.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/table.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/tag.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/elements/title.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/grid/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/grid/columns.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/grid/tiles.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/layout/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/layout/footer.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/layout/hero.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/layout/section.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/_all.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/animations.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/controls.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/derived-variables.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/functions.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/initial-variables.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sass/utilities/mixins.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/boot.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/component.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/global.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/hooks.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/instance.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/api/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/countdown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/internal/lightbox-animations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/internal/slider-transitioner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/internal/slideshow-animations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/lightbox-panel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/lightbox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/notification.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/parallax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/slider-parallax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/slider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/slideshow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/sortable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/tooltip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/upload.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/accordion.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/alert.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/cover.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/drop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/dropdown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/form-custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/gif.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/grid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/height-match.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/height-viewport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/icon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/img.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/leader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/margin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/modal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/nav.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/navbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/offcanvas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/overflow-auto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/responsive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/scroll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/scrollspy-nav.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/scrollspy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/sticky.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/svg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/switcher.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/tab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/toggle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/core/video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/animate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/class.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/container.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/flex-bug.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/internal/slideshow-animations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/internal/slideshow-transitioner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/media.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/modal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/parallax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/position.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slider-autoplay.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slider-drag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slider-nav.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slider-reactive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/slideshow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mixin/togglable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/animation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/attr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/class.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/dimensions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/dom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/env.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/event.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/fastdom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/lang.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/mouse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/player.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/promise.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/selector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/util/touch.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,10 +162,11 @@
     <session id="-1801893334">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.30" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -59,7 +196,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin_addtrain.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
+            <state relative-caret-position="833">
               <caret line="49" column="77" selection-start-line="49" selection-start-column="77" selection-end-line="49" selection-end-column="77" />
             </state>
           </provider>
@@ -68,8 +205,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin_ticketprice.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6273">
-              <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+            <state relative-caret-position="918">
+              <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -77,7 +214,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin_stations.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="1751">
               <caret line="103" column="259" selection-start-line="103" selection-start-column="259" selection-end-line="103" selection-end-column="259" />
             </state>
           </provider>
@@ -86,8 +223,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin_seats.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="24" column="39" lean-forward="true" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+            <state relative-caret-position="391">
+              <caret line="29" column="91" selection-start-line="29" selection-start-column="91" selection-end-line="29" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -133,9 +270,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -189,18 +326,19 @@
       <option name="presentableId" value="Default" />
       <updated>1546611561049</updated>
       <workItem from="1546611562678" duration="7923000" />
-      <workItem from="1546667114013" duration="10073000" />
+      <workItem from="1546667114013" duration="10267000" />
+      <workItem from="1546685438341" duration="56000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17996000" />
+    <option name="totallyTimeSpent" value="18246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -329,9 +467,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin_seatfinal.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_seatfinal.php" />
     <entry file="file://$PROJECT_DIR$/admin_user.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
@@ -341,29 +477,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin_addtrain.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="833">
           <caret line="49" column="77" selection-start-line="49" selection-start-column="77" selection-end-line="49" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin_stations.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="103" column="259" selection-start-line="103" selection-start-column="259" selection-end-line="103" selection-end-column="259" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin_ticketprice.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6273">
-          <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+        <state relative-caret-position="918">
+          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_stations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="103" column="259" selection-start-line="103" selection-start-column="259" selection-end-line="103" selection-end-column="259" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin_seats.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="24" column="39" lean-forward="true" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        <state relative-caret-position="391">
+          <caret line="29" column="91" selection-start-line="29" selection-start-column="91" selection-end-line="29" selection-end-column="91" />
         </state>
       </provider>
     </entry>

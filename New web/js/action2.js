@@ -36,5 +36,30 @@ function cf(id){
   document.cookie = 'nic='+id+'';
 }
 function refresh(){
-        childWindow.location.href="http://localhost/TrainTrackingSystem/New%20web/AdminUser.php";
+        location.reload();
     }
+setInterval('refresh()', 3000);
+
+function verify(id){
+    var ver=id;
+    var r= confirm("Are you sure you want to VERIFY this post");
+    if(r==true){
+      document.cookie='verify='+ver+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}
+
+function deleterow(id){
+    var der=id;
+    var r= confirm("Are you sure you want to DELETE this post");
+    if(r==true){
+      document.cookie='delete='+der+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}

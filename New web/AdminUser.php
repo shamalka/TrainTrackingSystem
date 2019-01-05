@@ -120,7 +120,7 @@ if(!isset($_SESSION['email'])){
     </div>
 
 <?php
-if(isset($_COOKIE['message'])){
+if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
 
   include('dbcon.php');
   $data=$_COOKIE['message'];
@@ -140,6 +140,8 @@ if(isset($_COOKIE['message'])){
   mysqli_query($connect,$query);
   mysqli_close($connect);
 
+  mysqli_close($connect);
+header('Location::http://localhost/TrainTrackingSystem/New%20web/AdminUser.php');
 }
 else{
   echo "error";

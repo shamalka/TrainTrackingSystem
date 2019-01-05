@@ -20,9 +20,9 @@ if(isset($_POST['INSERT'])){
     if (!$result) {
         echo "An error has occured: ".mysql_error();
     } else {
-        while ($tr = mysql_fetch_array($result)) {
-            $stations = $stations.$tr;
-            $stations = $stations.", ";
+        foreach($result as $a){
+            $b = ", ";
+            $stations = $a.$b;
         }
 
     }
@@ -89,7 +89,12 @@ if(isset($_POST['INSERT'])){
     }
 }
 
+header("Location: admin_train.php");
+
 ?>
+
+
+
 
 
 

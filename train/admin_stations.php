@@ -5,8 +5,6 @@
  */
 include 'header.php';
 
-$_SESSION['train_id'] = 'train_id';
-
 ?>
 
     <!-- Navigation -->
@@ -75,44 +73,7 @@ $_SESSION['train_id'] = 'train_id';
                                     </div>
                                 </form>
 
-<?php
-/**
- * Created by PhpStorm.
- * User: Kaeshavan
- */
-	$conn = mysqli_connect("localhost", "root", "", "train");
 
-	if (!$conn) {
-		die("Connection failed: ".mysqli_connect_error());
-	}
-
-
-	if(isset($_POST['INSERT'])){
-		$train_id = $_POST['train_id'];
-		$station = $_POST['station'];
-		$shour = $_POST['shour'];
-		$smin = $_POST['smin'];
-		$ssec = $_POST['ssec'];
-		$fhour = $_POST['fhour'];
-        $fmin = $_POST['fmin'];
-        $fsec = $_POST['fsec'];
-        $fc = $_POST['fc'];
-        $sc = $_POST['sc'];
-        $tc = $_POST['tc'];
-
-
-		$sql1 = "INSERT INTO ticket_price(`train_id`, `station`, `arrival_time`, `departure_time`, `first_class_price`, `second_class_price`, `third_class_price`) VALUES ('$train_id', '$station', '$shour:$smin:$ssec', '$fhour:$fmin:$fsec', '$fc', '$sc', '$tc')";
-
-		if($conn->query($sql1)===TRUE){
-           //header("Location: admin_ticketprice.php");
-		}else{
-		echo "Error: " . $sql1 . "<br>" . $conn->error;
-		}
-	}
-
-
-
-?>
 
                             </div>
                     </div>

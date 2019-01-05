@@ -5,10 +5,8 @@
  */
 	include 'header.php';
 
-
-
-$_SESSION['train_id'] = 'train_id';
-
+//$_SESSION['train_id'] = 'train_id';
+//$train_id = $_POST['train_id'];
 ?>
 
 	<!-- Navigation -->
@@ -45,13 +43,13 @@ $_SESSION['train_id'] = 'train_id';
 						<h2 class="left button">ADD SUB STATIONS</h2>
 						<br><br><br>
 						<div class="container">
-						  <form method="post" action="admin_stations.php">
+						  <form method="post" action="admin_ticketprice.php">
                               <div class="row">
                                   <div class="col-25">
                                       <label for="train_id">TRAIN ID</label>
                                   </div>
                                   <div class="col-75">
-                                      <input type="text" id="train_id" name="train_id" placeholder="train id">
+                                      <input type="text" id="train_id" name="train_id" placeholder="train_id">
                                   </div>
                               </div>
 							<div class="row">
@@ -419,7 +417,7 @@ $_SESSION['train_id'] = 'train_id';
                         <div class="container">
                             <br>
 							<div class="row">
-							  <input type="submit" name="INSERT" id="INSERT" value="NEXT">
+							  <input type="submit" name="ADD" id="ADD" value="ADD">
 							</div>
 
                               <br>
@@ -457,6 +455,28 @@ $_SESSION['train_id'] = 'train_id';
 
 
                         $sql1 = "INSERT INTO trains(`train_id`, `name`, `type`, `start_station`, `end_station`, `time`) VALUES ('$train_id', '$title', '$type', '$start', '$dest', '$shour:$smin:$ssec')";
+
+                        if($conn->query($sql1)===TRUE){
+                            //header("Location: admin_ticketprice.php");
+                        }else{
+                            echo "Error: " . $sql1 . "<br>" . $conn->error;
+                        }
+                    }
+                    if(isset($_POST['ADD'])){
+                        $train_id = $_POST['train_id'];
+                        $station = $_POST['station'];
+                        $shour = $_POST['shour'];
+                        $smin = $_POST['smin'];
+                        $ssec = $_POST['ssec'];
+                        $fhour = $_POST['fhour'];
+                        $fmin = $_POST['fmin'];
+                        $fsec = $_POST['fsec'];
+                        $fc = $_POST['fc'];
+                        $sc = $_POST['sc'];
+                        $tc = $_POST['tc'];
+
+
+                        $sql1 = "INSERT INTO ticket_price(`train_id`, `station`, `arrival_time`, `departure_time`, `first_class_price`, `second_class_price`, `third_class_price`) VALUES ('$train_id', '$station', '$shour:$smin:$ssec', '$fhour:$fmin:$fsec', '$fc', '$sc', '$tc')";
 
                         if($conn->query($sql1)===TRUE){
                             //header("Location: admin_ticketprice.php");

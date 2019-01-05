@@ -41,7 +41,7 @@
 						<h2 class="left button">ADD NEW NEWS</h2>
 						<br><br><br>
 						<div class="container">
-						  <form method="post" action="admin_news.php">
+						  <form method="post" action="admin_addnews.php">
 						  <div class="row">
 							  <div class="col-25">
 								<label for="id">NEWS ID</label>

@@ -36,9 +36,9 @@ function cf(id){
   document.cookie = 'nic='+id+'';
 }
 function refresh(){
-        location.reload();
+        window.location.reload();
     }
-setInterval('refresh()', 3000);
+//setInterval('refresh()', 30000);
 
 function verify(id){
     var ver=id;

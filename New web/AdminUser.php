@@ -58,9 +58,19 @@ if(!isset($_SESSION['email'])){
           <div class="container">
           <div class="panel panel-default">
               <div class="panel-heading" style="color:black;text-align:center"><b>ACCOUNTS DETAILS</b></div>
+              <form class="form-inline" action="index.html" method="post">
+                <div class="form-group">
+                <input type="text" id="search" class="form-control"  placeholder="Search" >
+                </div>
+                <div class="form-group">
+                  <input type="button" style="color:black;background-color:#66e0ff" name="refresh" value="Refresh" class="form-control" onclick="window.location.reload();">
+                  </div>
+              </form>
+
               <div class="panel-body">
                <span id="message"></span>
                <div class="table-responsive" id="user_data">
+                   <div class="tbody1">
           <div style="overflow-x:auto;">
             <table id="data" class="table table-striped">
               <thead style="color:black">
@@ -75,6 +85,7 @@ if(!isset($_SESSION['email'])){
             </tr>
 
           </thead>
+
           <?php
           include('dbcon.php');
           $query='SELECT * FROM user_info';
@@ -107,9 +118,11 @@ if(!isset($_SESSION['email'])){
 
             </tr>
 
+
           <?php
           }
           ?>
+        </div>
           </table>
 
 
@@ -140,12 +153,37 @@ if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
   mysqli_query($connect,$query);
   mysqli_close($connect);
 
-  mysqli_close($connect);
-header('Location::http://localhost/TrainTrackingSystem/New%20web/AdminUser.php');
+
 }
 else{
   echo "error";
 }
  ?>
+ <script>
+      $(document).ready(function(){
+           $('#search').keyup(function(){
+                search_table($(this).val());
+           });
+           function search_table(value){
+                $('#data tr').each(function(){
+                     var found = 'false';
+                     $(this).each(function(){
+                          if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                          {
+                               found = 'true';
+                          }
+                     });
+                     if(found == 'true')
+                     {
+                          $(this).show();
+                     }
+                     else
+                     {
+                          $(this).hide();
+                     }
+                });
+           }
+      });
+ </script>
   </body>
 </html>

@@ -57,7 +57,7 @@ if(!isset($_SESSION['email'])){
               <h3>ADD NEW NEWS</h3>
               <br>
               <br>
-              <form class="border">
+              <form class="border" action="addnews.php" method="post">
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input type="title" class="form-control" name="title" placeholder="Title">

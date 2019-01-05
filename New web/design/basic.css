@@ -71,3 +71,13 @@ input[type=text],  textarea {
 .button1{
   margin-left: 1000px;
 }
+.tbody1{
+    height:550px;
+    overflow-y:auto;
+    }
+#search{
+  margin-left:830px;
+}
+#box{
+  margin-left: 1025px;
+}

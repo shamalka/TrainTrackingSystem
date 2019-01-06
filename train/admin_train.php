@@ -68,7 +68,7 @@
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center">
-							  <a href="news_view.php? method ="post" txtid=<?php echo $tr[0];?>">VIEW DETAILS</a> | <a href="Edit_Form.php? txtid=<?php echo $tr[0];?>">EDIT</a>
+							  <a href="viewtrain.php? train_id=<?php echo $tr[0];?>">VIEW DETAILS</a> | <a href="edittrain.php? train_id=<?php echo $tr[0];?>">EDIT</a> | <a href="delete_train.php? train_id=<?php echo $tr[0];?>">DELETE</a>
 							  </td>
 							</tr>
 

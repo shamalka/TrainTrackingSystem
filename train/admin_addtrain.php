@@ -41,7 +41,7 @@
 						<h2 class="left button">ADD NEW TRAIN FOR BOOKING</h2>
 						<br><br><br>
 						<div class="container">
-						  <form method="post" action="admin_ticketprice.php">
+						  <form method="post" action="addtrain.php">
 							<div class="row">
 							  <div class="col-25">
 								<label for="tid">TRAIN ID</label>
@@ -88,6 +88,7 @@
 							  </div>
 							  <div class="col-25">
 								<select id="shour" name="shour">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -117,6 +118,7 @@
 								<br>
 							  <div class="col-25">
 								<select id="smin" name="smin">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -182,6 +184,7 @@
 								<br>
 							  <div class="col-25">
 								<select id="ssec" name="ssec">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -247,8 +250,11 @@
 							</div>
 							<br>
 							<div class="row">
+                                <div class="col-25">
 							  <input type="submit" name="INSERT" id="INSERT" value="NEXT">
+                                </div>
 							</div>
+                              <br><br>
 						  </form>
 
 

@@ -45,6 +45,14 @@ include 'header.php';
                                 <form method="post" action="admin_seats.php">
                                     <div class="row">
                                         <div class="col-25">
+                                            <label for="train_id">TRAIN ID</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <input type="text" id="train_id" name="train_id" placeholder="train_id">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
                                             <label for="fc">FIRST CLASS SEATS</label>
                                         </div>
                                         <div class="col-75">

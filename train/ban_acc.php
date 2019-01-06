@@ -13,6 +13,9 @@ if($result==true){
     echo '<script language="javascript">';
     echo 'alert("Account banned!!")';
     echo '</script>';
+    ?>
+    <a href="admin_user.php">GO BACK TO USER MANAGEMENT</a>
+    <?php
 }
 
 ?>

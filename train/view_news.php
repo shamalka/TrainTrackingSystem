@@ -37,7 +37,6 @@
                         <div style="overflow-x:auto;">
                                 <?php
                                 $news_id = $_GET['news_id'];
-                                include ("dbcon.php");
 		                        mysql_connect("localhost","root","") or die (mysql_error());
                                 mysql_select_db ("train");
                                 $sql = "select * from news where news_id = '$news_id'";
@@ -106,7 +105,7 @@
 			<div class="cl">&nbsp;</div>			
 		</div>
 		<!-- Main -->
-
+    </div>
 <!-- Footer -->
 <div id="footer">
 	<p>&copy; TRAIN TRACKING & RESERVATION SYSTEM</a></p>

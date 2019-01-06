@@ -33,7 +33,7 @@
 					<!-- Box Head -->
 					<div class="box-head">
 						<br><br>
-						<h2 class="left button">CURRENT NEWS FEED</h2>
+						<h2 class="left button">PUBLISHED NEWS</h2>
 						<br><br><br>
 						<div style="overflow-x:auto;">
 						  <table>
@@ -42,13 +42,12 @@
 							  <th align="center">TITLE</th>
 							  <th align="center">ADDED BY</th>
 							  <th align="center">DATE</th>
-							  <th align="center">VERIFICATION</th>							
 							  <th align="center">CONTROL</th>
 							</tr>
 							<?php
 								mysql_connect("localhost","root","") or die (mysql_error());
 								mysql_select_db ("train");
-								$sql = "select * from news order by date DESC";
+								$sql = "select * from news where verify = 'VERIFIED' order by date DESC";
 								$result = mysql_query($sql);
 								
 								if (!$result) {
@@ -62,9 +61,8 @@
 							  <td align="center"><?php echo $tr[1]; ?></td>
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
-							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center">
-							  <a href="view_news.php? news_id=<?php echo $tr[0];?>">VIEW</a>
+							  <a href="view_news.php? news_id=<?php echo $tr[0];?>">VIEW</a> | <a href="edit_news.php? news_id=<?php echo $tr[0];?>">EDIT</a> | <a href="deletenews.php? news_id=<?php echo $tr[0];?>">DELETE</a>  | <a href="unpublish.php? news_id=<?php echo $tr[0];?>">UNPUBLISH</a>
 							  </td>
 							  
 							</tr>
@@ -75,7 +73,47 @@
 						?>
 						  </table>
 						</div>
-						<br>
+						<br><br><br>
+                        <h2 class="left button">UNPUBLISHED NEWS</h2>
+                        <br><br><br>
+                        <div style="overflow-x:auto;">
+                            <table>
+                                <tr>
+                                    <th align="center">NEWS ID</th>
+                                    <th align="center">TITLE</th>
+                                    <th align="center">ADDED BY</th>
+                                    <th align="center">DATE</th>
+                                    <th align="center">CONTROL</th>
+                                </tr>
+                                <?php
+                                mysql_connect("localhost","root","") or die (mysql_error());
+                                mysql_select_db ("train");
+                                $sql = "select * from news where verify = 'NOT VERIFIED' order by date DESC";
+                                $result = mysql_query($sql);
+
+                                if (!$result) {
+                                    echo "An error has occured: ".mysql_error();
+                                } else {
+                                    while($tr=mysql_fetch_array($result)) {
+                                        ?>
+
+                                        <tr>
+                                            <td align="center"><?php echo $tr[0]; ?></td>
+                                            <td align="center"><?php echo $tr[1]; ?></td>
+                                            <td align="center"><?php echo $tr[3]; ?></td>
+                                            <td align="center"><?php echo $tr[4]; ?></td>
+                                            <td align="center">
+                                                <a href="view_news.php? news_id=<?php echo $tr[0];?>">VIEW</a> | <a href="edit_news.php? news_id=<?php echo $tr[0];?>">EDIT</a> | <a href="deletenews.php? news_id=<?php echo $tr[0];?>">DELETE</a> | <a href="publish.php? news_id=<?php echo $tr[0];?>">PUBLISH</a>
+                                            </td>
+
+                                        </tr>
+
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </table>
+                        </div>
 						</div>
 
 						</div>

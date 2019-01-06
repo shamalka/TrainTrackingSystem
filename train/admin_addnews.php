@@ -2,8 +2,6 @@
 /**
  * Created by PhpStorm.
  * User: Kaeshavan
- * Date: 04/01/2019
- * Time: 7:51 PM
  */
 	include 'header.php';
 ?>
@@ -137,6 +135,7 @@
 							<div class="row">
 							  <input type="submit" name="INSERT" id="INSERT" value="INSERT">
 							</div>
+                                <br><br>
 						  </form>
 
 						  <?php
@@ -164,7 +163,9 @@
 									$sql1 = "INSERT INTO news(`news_id`, `title`, `date`, `description`, `author`, `verify`) VALUES ('$id', '$title', '$year-$mon-$date', '$desc', '$added', '$verify')";
 
 									if($conn->query($sql1)===TRUE){
-										echo("News sucessfully added!!");
+                                        echo '<script language="javascript">';
+                                        echo 'alert("NEWS UNPUBLISHED!!")';
+                                        echo '</script>';
 									}else{
 										//echo "Error: " . $sql1 . "<br>" . $conn->error;
 									}

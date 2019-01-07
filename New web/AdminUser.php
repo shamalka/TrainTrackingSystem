@@ -30,7 +30,7 @@ if(!isset($_SESSION['email'])){
     crossorigin="anonymous">
     </script>
 
-
+<script type="text/javascript" src="js/action.js"></script>
 <script type="text/javascript" src="js/action2.js"></script>
     <title></title>
   </head>
@@ -95,10 +95,10 @@ if(!isset($_SESSION['email'])){
       while ($row=mysqli_fetch_array($result)) {
             $status='';
             if($row[5]=='ACTIVE'){
-              $status='<span class="label label-success"> ACTIVE </span>';
+              $status='<span class="label label-success" style="font-size:15px"> ACTIVE </span>';
             }
             else{
-              $status='<span class="label label-danger">Banned</span>';
+              $status='<span class="label label-danger" style="font-size:15px">Banned</span>';
             }
             ?>
               <tr>
@@ -109,7 +109,7 @@ if(!isset($_SESSION['email'])){
                 <td><?php  echo $status?></td>
                 <?php if($row[5]=='ACTIVE'){?>
 
-                <td><button id="submit_data" type="submit" name="action" class="btn btn-danger" onclick="confirmation1();cf('<?php echo $row[4]?>');refresh();">BANNED</button></td>
+                <td><button id="submit_data" type="submit" name="action" class="btn btn-warning" onclick="confirmation1();cf('<?php echo $row[4]?>');refresh();">BANNED</button></td>
               <?php }
                 else { ?>
                     <td><button id="submit_data" type="submit" name="action" class="btn btn-success" onclick="confirmation2(); cf('<?php echo $row[4] ?>'); refresh();">ACTIVATE</button></td>
@@ -158,32 +158,10 @@ if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
 else{
   echo "error";
 }
+
  ?>
  <script>
-      $(document).ready(function(){
-           $('#search').keyup(function(){
-                search_table($(this).val());
-           });
-           function search_table(value){
-                $('#data tr').each(function(){
-                     var found = 'false';
-                     $(this).each(function(){
-                          if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-                          {
-                               found = 'true';
-                          }
-                     });
-                     if(found == 'true')
-                     {
-                          $(this).show();
-                     }
-                     else
-                     {
-                          $(this).hide();
-                     }
-                });
-           }
-      });
+    getdata();
  </script>
   </body>
 </html>

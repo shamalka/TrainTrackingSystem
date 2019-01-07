@@ -38,8 +38,18 @@ crossorigin="anonymous">
     <!-- Login Form -->
     <form action='logprocess.php' method='POST'>
       <input type="email" id="login" class="fadeIn second" name="Email" placeholder="Email">
+      <?php if(isset($_SESSION['emalerr'])){?>
+        <span id="error_message" class="text-danger">'<?php echo $_SESSION['emlerr']?>'</span>
+  <?php   unset($_SESSION['emlerr']);} ?>
       <input type="password" id="password" class="fadeIn third" name="psw" placeholder="password">
+      <?php if(isset($_SESSION['pswerrlerr'])){ ?>
+        <div >
+        <span id="error_message" class="text-danger">'<?php  echo $_SESSION['pswerr']?>'</span>
+        </div>
+      <?php unset($_SESSION['pswerr']);} ?>
+      <div >
       <input type="submit" class="fadeIn fourth" value="Log In">
+    </div>
     </form>
 
     <!-- Remind Passowrd -->

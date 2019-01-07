@@ -63,3 +63,15 @@ function deleterow(id){
       alert("Cancelled");
     }
 }
+
+function deleterow2(id){
+    var der=id;
+    var r= confirm("Are you sure you want to DELETE this RESERVATION");
+    if(r==true){
+      document.cookie='delete='+der+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}

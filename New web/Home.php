@@ -67,42 +67,11 @@ crossorigin="anonymous">
       </div>
       </div>
     </div>
-    <br><br>
-
-    <div class="row">
-    <div class="column">
-    <div class="card2">
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-<div class="column">
-    <div class="card2">
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-<div class="column">
-    <div class="card2">
-
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-      <div class="column">
-          <div class="card2">
-
-              <h2><b>Chanuka</b></h2>
-              <p>System Admin</p>
-            </div>
-            </div>
-            </div>
-          </div>
-
-
+    <br>
+    <br>
+    <div class="txt">
+      <h3><?php echo "WELCOME".' '.$_SESSION['username'].' '.'!!!'; ?></h3>
+    </div>
 
 
 

@@ -4,6 +4,7 @@ if(!isset($_SESSION['email'])){
     header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
     exit;
 }
+include('dbcon.php');
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

@@ -61,6 +61,7 @@ include('dbcon.php');
 </nav>
 <div class="container">
   <h5>Recent Posts</h5>
+  <input type="button" style="color:black;background-color:#66e0ff;font-size:15px;" name="refresh" value="Click on me to refresh page" class="form-control" onclick="window.location.reload();">
 
 </div>
 <br>
@@ -80,12 +81,16 @@ if(mysqli_num_rows($result)>0){
                   <p><?php echo $row[2] ?></p>
                   <br>
                   <ul class="list-inline list-unstyled">
+                    <div >
     			             <li><span><i class="glyphicon glyphicon-calendar"></i> <?php echo $row[4]?></span></li>
+                     </div>
+                     <br>
+                       <li><span><i class="glyphicon glyphicon-bell"></i> <?php echo $row[5]?></span></li>
 
   			                </ul>
                       </div>
                     </div>
-                    <?php if ($row[5]!="VERIFIED") {?>
+                    <?php if ($row[6]!="VERIFIED") {?>
                       <div class="button1">
                         <button id="btn1" type="submit" name="btn_verify" class="btn btn-success" onclick="verify('<?php echo $row[0]?>')">VERIFY</button>
                       </div>
@@ -107,10 +112,8 @@ if(mysqli_num_rows($result)>0){
 <?php
 if(isset($_COOKIE['verify'])) {
   $data=$_COOKIE['verify'];
-  $data2=(int)$data;
-  $query1="UPDATE news SET verify='VERIFIED' WHERE news_id='$data2'";
+  $query1="UPDATE news SET verify='VERIFIED' WHERE news_id='$data'";
   mysqli_query($connect,$query1);
-  //mysqli_close($connect);
 }
 else{
   echo "error";
@@ -118,24 +121,16 @@ else{
 
 if(isset($_COOKIE['delete'])){
     $del=$_COOKIE['delete'];
-    $del2=(int)$del;
-    echo $del2;
-    echo $del;
     $query2="DELETE FROM news WHERE news_id='$del'";
     mysqli_query($connect,$query2);
-    //mysqli_close($connect);
+
 }
 else{
   echo "error";
 }
-
-
-
-
-
-
+mysqli_close($connect);
  ?>
-
 <!--end delete and verify-->
+
   </body>
 </html>

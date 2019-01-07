@@ -4,6 +4,7 @@ if(!isset($_SESSION['email'])){
     header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
     exit;
 }
+include('dbcon.php');
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -30,6 +31,8 @@ if(!isset($_SESSION['email'])){
    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
    crossorigin="anonymous">
    </script>
+   <script type="text/javascript" src="js/action.js"></script>
+   <script type="text/javascript" src="js/action2.js"></script>
     <title></title>
   </head>
   <body>
@@ -51,30 +54,125 @@ if(!isset($_SESSION['email'])){
   </div>
 </nav>
 
-<h1 class="left">MANAGE RESERVATIONS</h1>
-<br><br>
+
 <div class="container">
+  <h1 style="margin-left:350px">MANAGE RESERVATIONS</h1>
+  <br><br>
 <div class="panel panel-default">
     <div class="panel-heading" style="color:black;text-align:center"><b>CURRENT RESERVATIONS</b></div>
+    <br>
+    <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+      <div class="form-group">
+        <label id="select" for="Select">Select Train ID : </label>
+        <select  name="select">
+          <?php $query="SELECT train_id FROM trains"; ?>
+          <?php $result= mysqli_query($connect,$query); ?>
+          <?php while($row= mysqli_fetch_array($result)) { ?>
+              <option value='<?php echo $row['train_id'];?>'><?php echo $row['train_id']; ?>  </option>
+          <?php } ?>
+        </select>
+      </div>
+      <div class="form-group">
+      <input type="submit" name="submit" class="form-control" style="background-color:#ccccb3; color:black" placeholder="Ok" >
+      </div>
+      <div class="form-group">
+      <input type="text" id="search" class="form-control"  placeholder="Search" >
+      </div>
+      <div class="form-group">
+        <input type="button" style="color:black;background-color:#66e0ff" name="refresh" value="Refresh" class="form-control" onclick="window.location.reload();">
+        </div>
+    </form>
     <div class="panel-body">
      <span id="message"></span>
      <div class="table-responsive" id="user_data">
+       <div class="tbody1">
 <div style="overflow-x:auto;">
-  <table class="table table-striped">
+  <table id="data" class="table table-striped">
     <thead style="color:black">
   <tr>
     <th >ID</th>
-    <th >TRAIN</th>
-    <th >USER</th>
+    <th >USER EMAIL</th>
     <th >FIRST CLASS</th>
     <th >SECOND CLASS</th>
     <th >THIRD CLASS</th>
     <th >DATE</th>
-    <th >STATUS</th>
     <th >PAYMENT</th>
-    <th >ACTION</th>
+    <th >STATUS</th>
+    <th> ACTION</th>
   </tr>
 
 </thead>
+<?php
+if(isset($_POST['select'])){
+  $val=$_POST['select'];
+  $query="SELECT reservations.*,trains.name FROM reservations,trains WHERE reservations.train_id=trains.train_id AND reservations.train_id='$val' ORDER BY reservations.reservation_id DESC";
+  $res=mysqli_query($connect,$query);
+  if(mysqli_num_rows($res)>0){
+    while($row=mysqli_fetch_array($res)){
+      $status='';
+      if($row[9]=='CONFIRMED'){
+        $status='<span class="label label-success" style="font-size:12px"> CONFIRMED </span>';
+      }
+      elseif($row[9]=='PENDING'){
+        $status='<span class="label label-warning" style="font-size:12px">PENDING</span>';
+      }
+      else{
+        $status='<span class="label label-danger" style="font-size:12px">CANCELED</span>';
+      }
+      ?>
+      <tr>
+        <td><?php  echo $row[0]?></td>
+        <td><?php  echo $row[2]?></td>
+        <td><?php  echo $row[3]?></td>
+        <td><?php  echo $row[4]?></td>
+        <td><?php  echo $row[5]?></td>
+        <td><?php  echo $row[8]?></td>
+        <td><?php  echo $row[7]?></td>
+        <td><?php  echo $status?></td>
+        <?php if($row[9]=='CANCEL'){ ?>
+          <td><button id="submit" type="submit" name="action" class="btn btn-danger" onclick="deleterow2('<?php echo $row[0]?>')">DELETE</button></td></td>
+        <?php } ?>
+</tr>
+<?php
+$_COOKIE['vvv']=$row[11];
+  }
+}
+}
+
+else{
+  //echo "<script type='text/javascript'>alert('Please select train')</script>";
+}
+
+ ?>
+
+</div>
+</table>
+
+</div>
+</div>
+</div>
+<?php if(isset($_COOKIE['vvv'])) {?>
+  <label for="train">Train name: <?php echo $_COOKIE['vvv'];?></label>
+<?php }
+ else{?>
+   <label for="train">Train name: <?php echo"Please select TRAIN";?></label>
+ <?php } ?>
+</div>
+</div>
+<?php
+if(isset($_COOKIE['delete'])){
+    $del=$_COOKIE['delete'];
+    $query2="DELETE FROM reservations WHERE reservation_id='$del'";
+    mysqli_query($connect,$query2);
+
+}
+else{
+  echo "error";
+}
+mysqli_close($connect);
+ ?>
+<script>
+   getdata();
+</script>
   </body>
 </html>

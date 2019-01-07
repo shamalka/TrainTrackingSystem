@@ -1,16 +1,15 @@
 <?php
 
-session_start();
 include ('dbcon.php');
-if (isset($_POST['Email']) && isset($_POST['psw'])) {}
-
-
   $emlerr='';
   $pswerr='';
   $logerr='';
 
   if (empty($_POST['Email'])) {
+    session_start();
     $emlerr="Email Field cannot be empty";
+    $_SESSION['emlerr']=$emlerr;
+    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
       }
   else {
     $eml= $_POST['Email'];
@@ -18,7 +17,10 @@ if (isset($_POST['Email']) && isset($_POST['psw'])) {}
       }
 
   if (empty($_POST['psw'])) {
+    session_start();
     $pswerr="Password field cannot be empty";
+    $_SESSION['pswerr']=$pswerr;
+    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
   }
   else{
     $pwd = $_POST['psw'];

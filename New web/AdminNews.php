@@ -50,50 +50,48 @@ if(!isset($_SESSION['email'])){
         </ul>
       </div>
     </nav>
-       <?php date_default_timezone_set('Asia/Colombo'); ?>
 
-						<br><br><br>
 						<div class="container">
-              <h3>ADD NEW NEWS</h3>
+              <h3>ADD NEW POSTS</h3>
               <br>
-              <br>
-              <form class="border" action="addnews.php" method="post">
+              <form id="form" class="border">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="title" class="form-control" name="title" placeholder="Title">
+                  <input id="title" type="title" class="form-control" name="title" placeholder="Title">
                 </div>
                 <br>
-                <div class="form-group">
-                  <label for="Date">Date </label>
-                  <input type ="text" id="time" name="time" value="<?php $date=getdate(date("U"));
-echo "$date[weekday], $date[month] $date[mday], $date[year]";?>"/>
-                  </div>
-                  <br>
-
-                <div class="form-group">
-                  <label for="Time">Time </label>
-                  <input type="text" name="time" id="time" value="<?php echo date("h:i:sa"); ?>"/>
-                </div>
-                <input type="button" class="btn btn-info" value="refresh" onclick='window.location.reload();'></input>
-                <br>
-                <br>
-                <div class="form-group">
-                  <label for="Date">Added By: </label>
-                  <select class="" name="add">
-                    <option value="2018">Admin</option>
-                    <option value="2018">Reservation manager</option>
-                    <option value="2018">Operator</option>
-                  </select>
-                  </div>
-                  <br>
                   <div class="form-group">
 								     <label for="tarea">DESCRIPTION (max 1000 characters)</label>
-								     <textarea class="form-control" rows="20" name"desc" id="tarea" placeholder="Description"></textarea>
+								     <textarea id="tarea" class="form-control" rows="20" name="tarea" placeholder="Description"></textarea>
 							    </div>
 							    <br>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button id="submit" type="submit" class="btn btn-success" value="submit">Submit</button>
               </form>
 
+              <script>
+               $(document).ready(function(){
+                    $('#submit').click(function(){
+                         var title = $('#title').val();
+                         var txt = $('#tarea').val();
+                         if(title == '' ||txt=='')
+                         {
+                              alert("Title and Description fields are required");
+                         }
+                         else
+                         {
+                              $('#error_message').html('');
+                              $.ajax({
+                                   url:"http://localhost/TrainTrackingSystem/New%20web/addnews.php",
+                                   method:"POST",
+                                   data:{title:title,txt:txt},
+                                   success:function(data){
+                                        alert("Submitted successfully");
+                                   }
+                              });
+                         }
+                    });
+               });
+               </script>
 
   </body>
 </html>

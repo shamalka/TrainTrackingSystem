@@ -1,42 +1,26 @@
-function userdata()
-      {
-       var action = 'fetchdata';
-       $.ajax({
-        url:'/AdminUser.php',
-        method:'POST',
-        data:{action:action},
-        success:function(data)
-        {
-         $('#user_data').html(data);
-        }
+function getdata(){
+  $(document).ready(function(){
+       $('#search').keyup(function(){
+            search_table($(this).val());
        });
-      }
-
-      $(document).on('click', '.action', function()) {
-       var user_id = $(this).data('userid');
-       var user_status = $(this).data('status');
-       var action = 'change';
-       $('#message').html('');
-       if(confirm("Do you want to banned this user account "))
-       {
-        $.ajax({
-         url:'/AdminUser.php',
-         method:'POST',
-         data:{userid:userid, status:status, action:action},
-         success:function(data)
-         {
-          if(data != '')
-          {
-           userdata();
-           $('#message').html(data);
-          }
-         }
-        });
+       function search_table(value){
+            $('#data tr').each(function(){
+                 var found = 'false';
+                 $(this).each(function(){
+                      if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                      {
+                           found = 'true';
+                      }
+                 });
+                 if(found == 'true')
+                 {
+                      $(this).show();
+                 }
+                 else
+                 {
+                      $(this).hide();
+                 }
+            });
        }
-       else
-       {
-        return false;
-       }
-      });
-
-     });
+  });
+}

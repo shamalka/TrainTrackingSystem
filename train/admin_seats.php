@@ -22,7 +22,7 @@ if(isset($_POST['INSERT'])){
         echo "An error has occured: ".mysql_error();
     } else {
         foreach($result as $a){
-            $b = ", ";
+            $b = ",";
             $stations = $a.$b;
         }
 

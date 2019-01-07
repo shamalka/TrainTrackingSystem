@@ -3,10 +3,61 @@
  * Created by PhpStorm.
  * User: Kaeshavan
  */
-	include 'header.php';
+include 'header.php';
 
 //$_SESSION['train_id'] = 'train_id';
 //$train_id = $_POST['train_id'];
+
+include 'dbcon.php';
+
+if(isset($_POST['INSERT'])){
+    $train_id = $_POST['train_id'];
+    $title = $_POST['title'];
+    $type = $_POST['type'];
+    $start = $_POST['start'];
+    $dest = $_POST['dest'];
+    $shour = $_POST['shour'];
+    $smin = $_POST['smin'];
+    $ssec = $_POST['ssec'];
+
+
+    $sql1 = "INSERT INTO trains(`train_id`, `name`, `type`, `start_station`, `end_station`, `time`) VALUES ('$train_id', '$title', '$type', '$start', '$dest', '$shour:$smin:$ssec')";
+
+    if($conn->query($sql1)===TRUE){
+        header("Location: admin_ticketprice.php");
+    }else{
+        echo "Error: " . $sql1 . "<br>" . $conn->error;
+    }
+}
+
+
+if(isset($_POST['ADD'])){
+    $train_id = $_POST['train_id'];
+    $station = $_POST['station'];
+    $shour = $_POST['shour'];
+    $smin = $_POST['smin'];
+    $ssec = $_POST['ssec'];
+    $fhour = $_POST['fhour'];
+    $fmin = $_POST['fmin'];
+    $fsec = $_POST['fsec'];
+    $fc = $_POST['fc'];
+    $sc = $_POST['sc'];
+    $tc = $_POST['tc'];
+
+
+    $sql = "INSERT INTO ticket_price(`train_id`, `station`, `arrival_time`, `departure_time`, `first_class_price`, `second_class_price`, `third_class_price`) VALUES ('$train_id', '$station', '$shour:$smin:$ssec', '$fhour:$fmin:$fsec', '$fc', '$sc', '$tc')";
+
+    if($conn->query($sql)===TRUE){
+        header("Location: admin_ticketprice.php");
+    }else{
+        echo "Error: " . $sql1 . "<br>" . $conn->error;
+    }
+}
+
+
+if(isset($_POST['FINISH'])){
+    header("Location: admin_stations.php");
+}
 
 ?>
 
@@ -44,7 +95,7 @@
 						<h2 class="left button">ADD SUB STATIONS</h2>
 						<br><br><br>
 						<div class="container">
-						  <form method="post" action="ticketprice.php">
+						  <form method="post" action="admin_ticketprice.php">
                               <div class="row">
                                   <div class="col-25">
                                       <label for="train_id">TRAIN ID</label>
@@ -419,22 +470,18 @@
                                       <input type="text" id="tc" name="tc" placeholder="third class">
                                   </div>
                               </div>
-
-                        <br><br><br>
-                        <div class="container">
-                            <br>
+                        <br>
 							<div class="row">
 							  <input type="submit" name="ADD" id="ADD" value="ADD">
 							</div>
-
-                              <br>
+                              <br><br>
                           </form>
                         </div>
                     </div>
 
                         <br><br><br>
                         <div class="container">
-                            <form method="post" action="ticketprice.php">
+                            <form method="post" action="admin_ticketprice.php">
                             <div class="row">
                                 <input type="submit" name="FINISH" id="FINISH" value="FINISH">
                             </div>

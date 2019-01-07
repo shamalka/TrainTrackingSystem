@@ -6,6 +6,7 @@ if (!$conn) {
     die("Connection failed: ".mysqli_connect_error());
 }
 
+$train_id = $_GET['train_id'];
 
 if(isset($_POST['INSERT'])){
 
@@ -20,9 +21,9 @@ if(isset($_POST['INSERT'])){
     if (!$result) {
         echo "An error has occured: ".mysql_error();
     } else {
-        while ($tr = mysql_fetch_array($result)) {
-            $stations = $stations.$tr;
-            $stations = $stations.", ";
+        foreach($result as $a){
+            $b = ", ";
+            $stations = $a.$b;
         }
 
     }
@@ -46,7 +47,7 @@ if(isset($_POST['INSERT'])){
     for($x=1; $x <= $fc; $x++){
         if($x < $fc){
             $a = "F".$x;
-            $b = ", ";
+            $b = ",";
             $f_c = $f_c.$a.$b;
         }else{
             $a = "F".$x;
@@ -57,7 +58,7 @@ if(isset($_POST['INSERT'])){
     for($x=1; $x <= $sc; $x++){
         if($x < $sc){
             $a = "S".$x;
-            $b = ", ";
+            $b = ",";
             $s_c = $s_c.$a.$b;
         }else{
             $a = "S".$x;
@@ -68,7 +69,7 @@ if(isset($_POST['INSERT'])){
     for($x=1; $x <= $tc; $x++){
         if($x < $tc){
             $a = "T".$x;
-            $b = ", ";
+            $b = ",";
             $t_c = $t_c.$a.$b;
         }else{
             $a = "T".$x;
@@ -89,7 +90,12 @@ if(isset($_POST['INSERT'])){
     }
 }
 
+header("Location: admin_train.php");
+
 ?>
+
+
+
 
 
 

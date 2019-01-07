@@ -5,9 +5,8 @@
  */
 	include 'header.php';
 
-
-
-$_SESSION['train_id'] = 'train_id';
+//$_SESSION['train_id'] = 'train_id';
+//$train_id = $_POST['train_id'];
 
 ?>
 
@@ -45,13 +44,13 @@ $_SESSION['train_id'] = 'train_id';
 						<h2 class="left button">ADD SUB STATIONS</h2>
 						<br><br><br>
 						<div class="container">
-						  <form method="post" action="admin_stations.php">
+						  <form method="post" action="ticketprice.php">
                               <div class="row">
                                   <div class="col-25">
                                       <label for="train_id">TRAIN ID</label>
                                   </div>
                                   <div class="col-75">
-                                      <input type="text" id="train_id" name="train_id" placeholder="train id">
+                                      <input type="text" id="train_id" name="train_id" placeholder="train_id">
                                   </div>
                               </div>
 							<div class="row">
@@ -68,6 +67,7 @@ $_SESSION['train_id'] = 'train_id';
 							  </div>
 							  <div class="col-25">
 								<select id="shour" name="shour">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -97,6 +97,7 @@ $_SESSION['train_id'] = 'train_id';
 								<br>
 							  <div class="col-25">
 								<select id="smin" name="smin">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -162,6 +163,7 @@ $_SESSION['train_id'] = 'train_id';
 								<br>
 							  <div class="col-25">
 								<select id="ssec" name="ssec">
+                                 <option value="00">00</option>
 								  <option value="01">01</option>
 								  <option value="02">02</option>
 								  <option value="03">03</option>
@@ -232,6 +234,7 @@ $_SESSION['train_id'] = 'train_id';
                                   </div>
                                   <div class="col-25">
                                       <select id="fhour" name="fhour">
+                                          <option value="00">00</option>
                                           <option value="01">01</option>
                                           <option value="02">02</option>
                                           <option value="03">03</option>
@@ -261,6 +264,7 @@ $_SESSION['train_id'] = 'train_id';
                                   <br>
                                   <div class="col-25">
                                       <select id="fmin" name="fmin">
+                                          <option value="00">00</option>
                                           <option value="01">01</option>
                                           <option value="02">02</option>
                                           <option value="03">03</option>
@@ -326,6 +330,7 @@ $_SESSION['train_id'] = 'train_id';
                                   <br>
                                   <div class="col-25">
                                       <select id="fsec" name="fsec">
+                                          <option value="00">00</option>
                                           <option value="01">01</option>
                                           <option value="02">02</option>
                                           <option value="03">03</option>
@@ -419,7 +424,7 @@ $_SESSION['train_id'] = 'train_id';
                         <div class="container">
                             <br>
 							<div class="row">
-							  <input type="submit" name="INSERT" id="INSERT" value="NEXT">
+							  <input type="submit" name="ADD" id="ADD" value="ADD">
 							</div>
 
                               <br>
@@ -429,47 +434,14 @@ $_SESSION['train_id'] = 'train_id';
 
                         <br><br><br>
                         <div class="container">
-                            <form method="post" action="admin_stations.php">
+                            <form method="post" action="ticketprice.php">
                             <div class="row">
                                 <input type="submit" name="FINISH" id="FINISH" value="FINISH">
                             </div>
                             <br><br>
                             </form>
                         </div>
-
-                    <?php
-
-                    $conn = mysqli_connect("localhost", "root", "", "train");
-
-                    if (!$conn) {
-                        die("Connection failed: ".mysqli_connect_error());
-                    }
-
-                    if(isset($_POST['INSERT'])){
-                        $train_id = $_POST['train_id'];
-                        $title = $_POST['title'];
-                        $type = $_POST['type'];
-                        $start = $_POST['start'];
-                        $dest = $_POST['dest'];
-                        $shour = $_POST['shour'];
-                        $smin = $_POST['smin'];
-                        $ssec = $_POST['ssec'];
-
-
-                        $sql1 = "INSERT INTO trains(`train_id`, `name`, `type`, `start_station`, `end_station`, `time`) VALUES ('$train_id', '$title', '$type', '$start', '$dest', '$shour:$smin:$ssec')";
-
-                        if($conn->query($sql1)===TRUE){
-                            //header("Location: admin_ticketprice.php");
-                        }else{
-                            echo "Error: " . $sql1 . "<br>" . $conn->error;
-                        }
-                    }
-
-
-                    ?>
-
-
-					</div>
+	                </div>
 					<!-- End Box Head -->
 					<br>
 

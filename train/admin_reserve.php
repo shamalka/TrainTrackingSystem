@@ -46,8 +46,6 @@
 							  <th align="center">FIRST CLASS SEATS</th>
 							  <th align="center">SECOND CLASS SEATS</th>
 							  <th align="center">THIRD CLASS SEATS</th>
-							  <th align="center">CLASS</th>	
-							  <th align="center">QUANTITY</th>
 							  <th align="center">TOTAL PRICE</th>
 							</tr>
 							
@@ -71,8 +69,6 @@
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
-							  <td align="center"><?php echo $tr[6]; ?></td>
-							  <td align="center"><?php echo $tr[10]; ?></td>
 							  <td align="center"><?php echo $tr[7]; ?></td>
 							</tr>
 
@@ -96,8 +92,6 @@
 							  <th align="center">FIRST CLASS SEATS</th>
 							  <th align="center">SECOND CLASS SEATS</th>
 							  <th align="center">THIRD CLASS SEATS</th>
-							  <th align="center">CLASS</th>	
-							  <th align="center">QUANTITY</th>
 							  <th align="center">TOTAL PRICE</th>
 							</tr>
 							
@@ -120,8 +114,6 @@
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
-							  <td align="center"><?php echo $tr[6]; ?></td>
-							  <td align="center"><?php echo $tr[10]; ?></td>
 							  <td align="center"><?php echo $tr[7]; ?></td>
 							</tr>
 

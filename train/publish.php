@@ -6,16 +6,16 @@
 
 include 'dbcon.php';
 
-$email = $_GET['email'];
+$news_id = $_GET['news_id'];
 
-$sql = "UPDATE user_info SET status = 'ACTIVE' where email = '$email'";
+$sql = "UPDATE news SET verify = 'VERIFIED' where news_id = '$news_id'";
 $result = mysqli_query($conn,$sql);
 if($result==true){
     echo '<script language="javascript">';
-    echo 'alert("Account Activated!!")';
+    echo 'alert("NEWS PUBLISHED!!")';
     echo '</script>';
     ?>
-    <a href="admin_user.php">GO BACK TO USER MANAGEMENT</a>
+    <a href="admin_news.php">GO BACK TO NEWS FEED</a>
     <?php
 }
 

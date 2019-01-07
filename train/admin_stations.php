@@ -79,6 +79,7 @@ include 'header.php';
                                     <div class="row">
                                         <input type="submit" name="INSERT" id="INSERT" value="NEXT">
                                     </div>
+                                    <br><br>
                                 </form>
 
 

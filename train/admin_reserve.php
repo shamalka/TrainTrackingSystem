@@ -65,11 +65,11 @@
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><a href="train.php? txtid=<?php echo $tr[0];?>"><?php echo $tr[1]; ?></a></td>
 							  <td align="center"><a href="profile.php? txtid=<?php echo $tr[1];?>"><?php echo $tr[2]; ?></a></td>
-							  <td align="center"><?php echo $tr[8]; ?></td>
+							  <td align="center"><?php echo $tr[7]; ?></td>
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
-							  <td align="center"><?php echo $tr[7]; ?></td>
+							  <td align="center"><?php echo $tr[6]; ?></td>
 							</tr>
 
 						<?php
@@ -110,11 +110,11 @@
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><a href="train.php? txtid=<?php echo $tr[0];?>"><?php echo $tr[1]; ?></a></td>
 							  <td align="center"><a href="profile.php? txtid=<?php echo $tr[1];?>"><?php echo $tr[2]; ?></a></td>
-							  <td align="center"><?php echo $tr[8]; ?></td>
+							  <td align="center"><?php echo $tr[7]; ?></td>
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
-							  <td align="center"><?php echo $tr[7]; ?></td>
+							  <td align="center"><?php echo $tr[6]; ?></td>
 							</tr>
 
 						<?php

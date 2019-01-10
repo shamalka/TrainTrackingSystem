@@ -38,6 +38,7 @@ include('dbcon.php');
     <title></title>
   </head>
   <body>
+    <!--  -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -47,6 +48,7 @@ include('dbcon.php');
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li class="active"><a href="AdminRating.php">Ratings</a></li>
@@ -57,14 +59,18 @@ include('dbcon.php');
 </nav>
   <!-- end nav-->
 
+
   <div class="container">
       <h1 style="margin-left:500px">Ratings</h1>
       <br><br>
   <div class="panel panel-default">
       <div class="panel-heading" style="color:black;text-align:center"><b>CURRENT RATINGS</b></div>
       <br>
+      <!--pannel form -->
       <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-group">
+
+          <!-- train id selection -->
           <label id="select" for="Select">Select Train ID : </label>
           <select  name="select">
             <?php $query="SELECT train_id FROM trains"; ?>
@@ -75,16 +81,24 @@ include('dbcon.php');
             <?php } ?>
           </select>
         </div>
+
+        <!--submit button  -->
         <div class="form-group">
         <input type="submit" name="submit" class="form-control" style="background-color:#ccccb3; color:black" placeholder="Ok" >
         </div>
+
+        <!--search bar  -->
         <div class="form-group">
         <input type="text" id="search" class="form-control"  placeholder="Search" >
         </div>
+
+        <!--refersh button  -->
         <div class="form-group">
           <input type="button" style="color:black;background-color:#66e0ff" name="refresh" value="Refresh" class="form-control" onclick="window.location.reload();">
           </div>
       </form>
+
+      <!--pannel table  -->
       <div class="panel-body">
        <span id="message"></span>
        <div class="table-responsive" id="user_data">
@@ -100,6 +114,8 @@ include('dbcon.php');
     </tr>
 
   </thead>
+
+  <!--retriving data for pannel table -->
   <?php
   $count=0;
   $count2=0;
@@ -140,6 +156,8 @@ include('dbcon.php');
   </div>
   </div>
   </div>
+
+  <!-- display stars for rating -->
   <?php if(isset($_COOKIE['rate'])) { ?>
 
     <div class="">

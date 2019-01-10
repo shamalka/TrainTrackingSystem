@@ -1,3 +1,5 @@
+//time displayed in home page
+
 function renderTime() {
   //date
   var mydate=new Date();

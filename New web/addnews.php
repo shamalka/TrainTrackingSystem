@@ -14,7 +14,7 @@ $date=date("F j, Y"); ;
 $time=date("h:i:sa");
 
 $title=mysqli_escape_string($connect,$_POST['title']);
-$add=mysqli_escape_string($connect,$_SESSION['position']);
+$add="Admin";
 $des=mysqli_escape_string($connect,$_POST['txt']);
 $ver="VERIFIED";
 

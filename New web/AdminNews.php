@@ -24,7 +24,7 @@ if(!isset($_SESSION['email'])){
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/3/cerulean/bootstrap.min.css">
-    <link rel="stylesheet" href="design/basic.css">
+    <link rel="stylesheet" href="design/form.css">
     <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -33,6 +33,7 @@ if(!isset($_SESSION['email'])){
     <title></title>
   </head>
   <body>
+    <!-- navigation bar -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -42,6 +43,7 @@ if(!isset($_SESSION['email'])){
           <li><a href="Home.php">Home</a></li>
           <li><a href="AdminReserve.php">Reservations</a></li>
           <li><a href="AdminTrain.php">Trains</a></li>
+            <li><a href="station.php">Stations</a></li>
           <li><a href="AdminUser.php">Users</a></li>
           <li class="active"><a href="AdminNews.php">Add News</a></li>
           <li><a href="AdminRating.php">Ratings</a></li>
@@ -50,24 +52,26 @@ if(!isset($_SESSION['email'])){
         </ul>
       </div>
     </nav>
+<!-- end navigation -->
 
+<!--registration form  -->
 						<div class="container">
-              <h3>ADD NEW POSTS</h3>
-              <br>
-              <form id="form" class="border">
-                <div class="form-group">
+              <div class="form-style-5">
+              <form id="form" >
+                <fieldset>
+                <legend><span class="number"></span>ADD NEW POST</legend>
                   <label for="title">Title</label>
-                  <input id="title" type="title" class="form-control" name="title" placeholder="Title">
-                </div>
-                <br>
+                  <input id="title" type="text"  name="title" placeholder="Title">
                   <div class="form-group">
 								     <label for="tarea">DESCRIPTION (max 1000 characters)</label>
-								     <textarea id="tarea" class="form-control" rows="20" name="tarea" placeholder="Description"></textarea>
-							    </div>
-							    <br>
-                <button id="submit" type="submit" class="btn btn-success" value="submit">Submit</button>
-              </form>
+								     <textarea id="tarea"  rows="20" name="tarea" placeholder="Description"></textarea>
+                      <input id="submit" type="submit" value="submit">
+                  </fieldset>
+            </form>
+            </div>
+            <!--end registraion form  -->
 
+            <!-- ajax for input data to database -->
               <script>
                $(document).ready(function(){
                     $('#submit').click(function(){
@@ -85,13 +89,15 @@ if(!isset($_SESSION['email'])){
                                    method:"POST",
                                    data:{title:title,txt:txt},
                                    success:function(data){
-                                        alert("Submitted successfully");
+                                        alert("Published successfully");
                                    }
                               });
                          }
                     });
                });
                </script>
+
+               <!--end of script  -->
 
   </body>
 </html>

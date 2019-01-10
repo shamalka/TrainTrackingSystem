@@ -75,3 +75,7 @@ function deleterow2(id){
       alert("Cancelled");
     }
 }
+function cf2(id){
+  var id=id;
+  document.cookie = 'trainid='+id+'';
+}

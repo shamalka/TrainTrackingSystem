@@ -35,6 +35,8 @@ if(!isset($_SESSION['email'])){
     <title></title>
   </head>
   <body>
+
+    <!--navigation bar-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -44,6 +46,7 @@ if(!isset($_SESSION['email'])){
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li class="active"><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li><a href="AdminRating.php">Ratings</a></li>
@@ -55,6 +58,9 @@ if(!isset($_SESSION['email'])){
 
           <h1 class="left">MANAGE USER ACCOUNTS</h1>
           <br><br>
+
+          <!--pannel for table-->
+
           <div class="container">
           <div class="panel panel-default">
               <div class="panel-heading" style="color:black;text-align:center"><b>ACCOUNTS DETAILS</b></div>
@@ -74,7 +80,7 @@ if(!isset($_SESSION['email'])){
           <div style="overflow-x:auto;">
             <table id="data" class="table table-striped">
               <thead style="color:black">
-            <tr>
+            <tr style="font-size:25px">
 
               <th >NAME</th>
               <th >Email</th>
@@ -85,7 +91,7 @@ if(!isset($_SESSION['email'])){
             </tr>
 
           </thead>
-
+<!--retriving data to table rows-->
           <?php
           include('dbcon.php');
           $query='SELECT * FROM user_info';
@@ -101,7 +107,7 @@ if(!isset($_SESSION['email'])){
               $status='<span class="label label-danger" style="font-size:15px">Banned</span>';
             }
             ?>
-              <tr>
+              <tr style="font-size:20px">
                 <td><?php  echo $row[0]?></td>
                 <td><?php  echo $row[1]?></td>
                 <td><?php  echo $row[3]?></td>
@@ -133,6 +139,8 @@ if(!isset($_SESSION['email'])){
     </div>
 
 <?php
+//set active and banned STATUS
+//cookie is created in action2.js file
 if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
 
   include('dbcon.php');
@@ -149,6 +157,7 @@ if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
   else{
     exit;
   }
+  //update database with new status
   $query="UPDATE user_info SET status='$staus' WHERE nic='$nic'";
   mysqli_query($connect,$query);
   mysqli_close($connect);

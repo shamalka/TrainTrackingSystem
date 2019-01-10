@@ -4,8 +4,6 @@
  * User: Kaeshavan
  */
 include 'header.php';
-
-
     $news_id = $_GET['news_id'];
     // including the database connection in this page
     $conn = mysqli_connect("localhost", "root", "","train");
@@ -31,10 +29,7 @@ include 'header.php';
         $year = "";
         $month = "";
         $day = "";
-
     }
-
-
 ?>
 
 <!-- Navigation -->
@@ -92,7 +87,7 @@ include 'header.php';
                                     <label for="desc">DESCRIPTION (max 1000 characters)</label>
                                 </div>
                                 <div class="col-75">
-                                    <input type="text" id="desc" name="desc" value="<?php echo $description;?>">
+                                    <input type="text" id="description" name="description" value="<?php echo $description;?>">
 <!--                                    <textarea id="desc" name="desc" value="--><?php //echo $description;?><!--" style="height:200px"></textarea>-->
                                 </div>
                             </div>

@@ -18,31 +18,31 @@ if(isset($_POST['UPDATE'])){
     $year = $_POST['year'];
     $month = $_POST['month'];
     $day = $_POST['day'];
-    $desc = $_POST['desc'];
+    $description = $_POST['description'];
     $author = $_POST['author'];
-//
-//
-//    $sql1 = "UPDATE news SET `title` = '$title', `date` = '$year-$month-$day', `description` = '$desc', `author` = '$author' where `news_id` = '$news_id'";
-//
-//    if($conn->query($sql1)===TRUE){
-//        echo '<script language="javascript">';
-//        echo 'alert("NEWS SUCCESSFULLY UPDATED!!")';
-//        echo '</script>';
-//        ?>
-<!--        <a href="admin_news.php">GO BACK TO NEWS FEED</a>-->
-<!--        --><?php
-//    }else{
-//    echo "Error: " . $sql1 . "<br>" . $conn->error;
-//    }
 
 
+    $sql1 = "UPDATE news SET `title` = '$title', `date` = '$year-$month-$day', `description` = '$description', `author` = '$author' where `news_id` = '$news_id'";
 
-    $i = mysqli_query($conn,"UPDATE news SET title='$title', date='$year-$month-$day', description='$desc', author='$author' WHERE news_id='$news_id'");
-    if($i==true) {
-        header('Location: admin_news.php');
+    if($conn->query($sql1)===TRUE){
+        echo '<script language="javascript">';
+        echo 'alert("NEWS SUCCESSFULLY UPDATED!!")';
+        echo '</script>';
+        ?>
+        <a href="admin_news.php">GO BACK TO NEWS FEED</a>
+        <?php
     }else{
-        echo "Error: " . $i . "<br>" . $conn->error;
+    echo "Error: " . $sql1 . "<br>" . $conn->error;
     }
+
+
+
+//    $i = mysqli_query($conn,"UPDATE news SET title='$title', date='$year-$month-$day', description='$desc', author='$author' WHERE news_id='$news_id'");
+//    if($i==true) {
+//        header('Location: admin_news.php');
+//    }else{
+//        echo "Error: " . $i . "<br>" . $conn->error;
+//    }
 
 
 }

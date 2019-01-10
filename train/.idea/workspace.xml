@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660f0e9a-62a3-410a-ae70-ccaf8e5f0359" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/edit_seat_train.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edit_sub_train.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edit_train.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/post_edit_train.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android App/TrainTracking2/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android App/TrainTracking2/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_reserve.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_train.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_train.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edit_news.php" beforeDir="false" afterPath="$PROJECT_DIR$/edit_news.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post_edit_news.php" beforeDir="false" afterPath="$PROJECT_DIR$/post_edit_news.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,15 +17,16 @@
     <session id="-1801893334">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.25" value="2" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.30" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,12 +43,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="5391" />
+          <entry key="php" value="5425" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="5384" />
+          <entry key="PHP" value="5418" />
           <entry key="SQL" value="7" />
         </counts>
       </usages-collector>
@@ -59,11 +56,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/edit_news.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="105" column="36" lean-forward="true" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
+            <state relative-caret-position="623">
+              <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post_edit_news.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -71,16 +77,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edit_train.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="1819">
               <caret line="110" column="85" selection-start-line="110" selection-start-column="85" selection-end-line="110" selection-end-column="85" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/post_edit_train.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
+            <state relative-caret-position="850">
               <caret line="53" column="52" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
             </state>
           </provider>
@@ -89,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin_train.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="374">
               <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="36" />
             </state>
           </provider>
@@ -99,16 +105,7 @@
         <entry file="file://$PROJECT_DIR$/login.inc.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="20" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/post_edit_news.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="39" column="123" lean-forward="true" selection-end-line="48" selection-end-column="2" />
+              <caret line="20" column="9" selection-start-line="16" selection-start-column="3" selection-end-line="20" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -117,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/edit_sub_train.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -125,7 +122,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edit_seat_train.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="1751">
               <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
             </state>
           </provider>
@@ -156,7 +153,6 @@
         <option value="$PROJECT_DIR$/act_acc.php" />
         <option value="$PROJECT_DIR$/deletenews.php" />
         <option value="$PROJECT_DIR$/delete_train.php" />
-        <option value="$PROJECT_DIR$/post_edit_news.php" />
         <option value="$PROJECT_DIR$/admin_news.php" />
         <option value="$PROJECT_DIR$/publish.php" />
         <option value="$PROJECT_DIR$/unpublish.php" />
@@ -168,11 +164,12 @@
         <option value="$PROJECT_DIR$/login.inc.php" />
         <option value="$PROJECT_DIR$/admin_reserve.php" />
         <option value="$PROJECT_DIR$/admin_train.php" />
-        <option value="$PROJECT_DIR$/edit_news.php" />
         <option value="$PROJECT_DIR$/edit_seat_train.php" />
         <option value="$PROJECT_DIR$/edit_sub_train.php" />
         <option value="$PROJECT_DIR$/edit_train.php" />
         <option value="$PROJECT_DIR$/post_edit_train.php" />
+        <option value="$PROJECT_DIR$/edit_news.php" />
+        <option value="$PROJECT_DIR$/post_edit_news.php" />
       </list>
     </option>
   </component>
@@ -185,9 +182,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="950" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -214,7 +211,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../admin" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -246,12 +243,14 @@
       <workItem from="1546752365997" duration="6818000" />
       <workItem from="1546791365197" duration="14318000" />
       <workItem from="1546849137509" duration="6354000" />
-      <workItem from="1546861340531" duration="7237000" />
+      <workItem from="1546861340531" duration="9131000" />
+      <workItem from="1547052318194" duration="939000" />
+      <workItem from="1547114666139" duration="654000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61195000" />
+    <option name="totallyTimeSpent" value="64682000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -263,10 +262,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18322147" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24765101" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -455,13 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edit_news.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="105" column="36" lean-forward="true" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin_stations.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -483,52 +475,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edit_seat_train.php">
+    <entry file="file://$PROJECT_DIR$/edit_news.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+        <state relative-caret-position="623">
+          <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/post_edit_news.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="39" column="123" lean-forward="true" selection-end-line="48" selection-end-column="2" />
+        <state relative-caret-position="459">
+          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edit_train.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1819">
+          <caret line="110" column="85" selection-start-line="110" selection-start-column="85" selection-end-line="110" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post_edit_train.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="53" column="52" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin_train.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login.inc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="20" selection-end-column="9" />
+          <caret line="20" column="9" selection-start-line="16" selection-start-column="3" selection-end-line="20" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/edit_sub_train.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edit_train.php">
+    <entry file="file://$PROJECT_DIR$/edit_seat_train.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="110" column="85" selection-start-line="110" selection-start-column="85" selection-end-line="110" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin_train.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/post_edit_train.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="53" column="52" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+        <state relative-caret-position="1751">
+          <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
         </state>
       </provider>
     </entry>

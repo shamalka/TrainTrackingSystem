@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
+    header("location: Login.php");
     exit;
 }
 include('dbcon.php');

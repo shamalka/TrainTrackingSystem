@@ -87,7 +87,7 @@ if(isset($_POST["log"]))
                           $_SESSION['email']=$Email;
                           $_SESSION['firstname']=$row['firstname'];
                           $_SESSION['lastname']=$row['lastname'];
-                          header('location:http://localhost/TrainTrackingSystem/New%20web/Home.php');
+                          header('location:Home.php');
                      }
                      else
                      {

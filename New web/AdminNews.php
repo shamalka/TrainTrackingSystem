@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
+    header("location:Login.php");
     exit;
 }
 ?>
@@ -85,7 +85,7 @@ if(!isset($_SESSION['email'])){
                          {
                               $('#error_message').html('');
                               $.ajax({
-                                   url:"http://localhost/TrainTrackingSystem/New%20web/addnews.php",
+                                   url:"addnews.php",
                                    method:"POST",
                                    data:{title:title,txt:txt},
                                    success:function(data){

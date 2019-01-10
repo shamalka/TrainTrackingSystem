@@ -15,8 +15,12 @@ if(!$row = mysqli_fetch_assoc($result)) {
     echo 'alert("Your credintials are INVALID!!!")';
     echo '</script>';
     ?>
+    <br>
     <a href="index.php">GO BACK TO HOME PAGE</a>
-<?php
+
+    <?php
+
+
 } else {	
 		header("Location: admin.php");
 		}

@@ -53,6 +53,7 @@ if(isset($_SESSION['arr'])){
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li class="active"><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li><a href="AdminRating.php">Ratings</a></li>
@@ -65,7 +66,7 @@ if(isset($_SESSION['arr'])){
 <!--form for add seats-->
 
 <div class="container">
-<div class="form-style-5">
+<div class="form-style">
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"  class="border">
             <legend><span class="number"></span>ADD SEATS</legend>
             <fieldset>
@@ -83,7 +84,7 @@ if(isset($_SESSION['arr'])){
 
 <!--add seats for databse-->
     <?php
-    if(isset($_POST['fcs'])){
+    if(isset($_POST['submit_reg'])){
       $td=$_SESSION['tid'];
       $fcs=$_POST['fcs'];
       $scs=$_POST['scs'];

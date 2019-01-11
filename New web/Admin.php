@@ -57,7 +57,7 @@ else{
     }
     else{
       $pass1=mysqli_real_escape_string($connect,$_POST['password']);
-      $phash=password_hash($pass1,PASSWORD_DEFAULT);
+    //  $phash=password_hash($pass1,PASSWORD_DEFAULT);
 
     }
     if(empty($_POST['passwordagain'])){
@@ -67,8 +67,10 @@ else{
         $pass2=mysqli_real_escape_string($connect,$_POST['passwordagain']);
     }
     if($pass1==$pass2){
-      $query="INSERT INTO loginfo(firstname,lastname,Email,password)VALUES('".$fname."','".$lname."','".$email."','".$phash."') ";
+      $query="INSERT INTO loginfo(firstname,lastname,Email,password)VALUES('".$fname."','".$lname."','".$email."','".$pass1."') ";
       $result=mysqli_query($connect,$query);
+      echo "<script type='text/javascript'>alert('Registered successfully')</script>";
+
     }
     else{
       echo "<script type='text/javascript'>alert('Passowrd are mismatch')</script>";

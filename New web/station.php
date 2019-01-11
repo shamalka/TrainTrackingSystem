@@ -61,7 +61,7 @@ include('dbcon.php');
 
 <!--form for add station-->
 <div class="container">
-<div class="form-style-5">
+<div class="form-style">
           <form action="stationprocess.php" method="post"  class="border">
 <fieldset>
   <legend><span class="number"></span>ADD NEW  STATION</legend>

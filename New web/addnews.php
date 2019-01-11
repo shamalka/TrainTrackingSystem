@@ -9,7 +9,6 @@ if(!isset($_SESSION['email'])){
 include('dbcon.php');
 
 date_default_timezone_set('Asia/Colombo');
-
 $date=date("F j, Y"); ;
 $time=date("h:i:sa");
 

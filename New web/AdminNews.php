@@ -56,7 +56,7 @@ if(!isset($_SESSION['email'])){
 
 <!--registration form  -->
 						<div class="container">
-              <div class="form-style-5">
+              <div class="form-style">
               <form id="form" >
                 <fieldset>
                 <legend><span class="number"></span>ADD NEW POST</legend>

@@ -45,6 +45,7 @@ if(!isset($_SESSION['email'])){
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li class="active"><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li><a href="AdminRating.php">Ratings</a></li>
@@ -66,7 +67,7 @@ $row=mysqli_fetch_assoc($res);
 
  <!--form design-->
 <div class="container">
-<div class="form-style-5">
+<div class="form-style">
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"  class="border">
             <legend><span class="number"></span>EDIT DETAILS</legend>
             <fieldset>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NewApplication2</string>
+    <string name="loginname">LOGIN</string>
+    <string name="idno">ID No</string>
+    <string name="formname">Name</string>
+    <string name="formaddress">Address</string>
+    <string name="formcont">Contact No</string>
+    <string name="formsubmit">Submit</string>
+    <string name="login">LOGIN</string>
+</resources>

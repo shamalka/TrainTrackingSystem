@@ -36,5 +36,46 @@ function cf(id){
   document.cookie = 'nic='+id+'';
 }
 function refresh(){
-        childWindow.location.href="http://localhost/TrainTrackingSystem/New%20web/AdminUser.php";
+        window.location.reload();
     }
+//setInterval('refresh()', 30000);
+
+function verify(id){
+    var ver=id;
+    var r= confirm("Are you sure you want to VERIFY this post");
+    if(r==true){
+      document.cookie='verify='+ver+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}
+
+function deleterow(id){
+    var der=id;
+    var r= confirm("Are you sure you want to DELETE this post");
+    if(r==true){
+      document.cookie='delete='+der+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}
+
+function deleterow2(id){
+    var der=id;
+    var r= confirm("Are you sure you want to DELETE this RESERVATION");
+    if(r==true){
+      document.cookie='delete='+der+'';
+      location.reload();
+    }
+    else{
+      alert("Cancelled");
+    }
+}
+function cf2(id){
+  var id=id;
+  document.cookie = 'trainid='+id+'';
+}

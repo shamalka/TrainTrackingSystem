@@ -7,8 +7,10 @@
   <a href="admin.php">Dashboard</a>
   <a href="admin_reserve.php">Reservations</a>
   <a href="admin_train.php">Trains</a>
+  <a href="admin_addtrain.php">Add Trains</a>
   <a href="admin_user.php" class="active">User Management</a>
   <a href="admin_news.php">News Feed</a>
+  <a href="admin_addnews.php">Add News</a>
   <a href="admin_rating.php">Ratings & Feedback</a>
 </div>
 
@@ -64,7 +66,7 @@
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center">
-							  <a href="Edit_Form.php? txtid=<?php echo $tr[0];?>">BAN ACCOUNT</a>
+							  <a href="ban_acc.php? email=<?php echo $tr[1];?>">BAN ACCOUNT</a>
 							  </td>
 							</tr>
 
@@ -108,7 +110,7 @@
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center">
-							  <a href="Edit_Form.php? txtid=<?php echo $tr[0];?>">ACTIVATE ACCOUNT</a>
+							  <a href="act_acc.php? email=<?php echo $tr[1];?>">ACTIVATE ACCOUNT</a>
 							  </td>
 							</tr>
 
@@ -121,7 +123,12 @@
 						</div>
 						<br><br><br>
 
-	
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+
 	
 
 <!-- Footer -->

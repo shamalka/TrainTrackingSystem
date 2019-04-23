@@ -1,10 +1,14 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
+    header("location:Login.php");
     exit;
 }
 ?>
+<!-- get db connection-->
+<?php
+include('dbcon.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -31,6 +35,10 @@ if(!isset($_SESSION['email'])){
    crossorigin="anonymous">
    </script>
 
+   <script type="text/javascript" src="js/action2.js">
+
+   </script>
+
     <title></title>
   </head>
   <body>
@@ -43,6 +51,7 @@ if(!isset($_SESSION['email'])){
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li><a href="AdminRating.php">Ratings</a></li>
@@ -51,28 +60,78 @@ if(!isset($_SESSION['email'])){
     </ul>
   </div>
 </nav>
-<h5>Recent Posts</h5>
-<br>
 <div class="container">
-  <div class="well">
-      <div class="media">
-  		<div class="media-body">
-    		<h4 class="media-heading">Train delayed</h4>
-          <p class="adder">By Admin</p>
-          <br>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-Aliquam in felis sit amet augue.</p>
-<br>
-          <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours </span></li>
+  <h5>Recent Posts</h5>
+  <input type="button" style="color:black;background-color:#66e0ff;font-size:15px;" name="refresh" value="Click on me to refresh page" class="form-control" onclick="window.location.reload();">
 
-			</ul>
-       </div>
-    </div>
-  </div>
 </div>
+<br>
+<!-- Data retrive for page-->
+<?php
+$query="SELECT * FROM news ORDER BY news_id DESC";
+$result=mysqli_query($connect,$query);
+if(mysqli_num_rows($result)>0){
+  while ($row=mysqli_fetch_array($result)) {?>
+    <div class="container">
+      <div class="well">
+          <div class="media">
+    		      <div id='row' class="media-body">
+      		        <h4 class="media-heading"><?php echo $row[1]; ?></h4>
+                  <p class="adder">By <?php echo "". $row[3] ?></p>
+                  <br>
+                  <p><?php echo $row[2] ?></p>
+                  <br>
+                  <ul class="list-inline list-unstyled">
+                    <div >
+    			             <li><span><i class="glyphicon glyphicon-calendar"></i> <?php echo $row[4]?></span></li>
+                     </div>
+                     <br>
+                       <li><span><i class="glyphicon glyphicon-bell"></i> <?php echo $row[5]?></span></li>
+
+  			                </ul>
+                      </div>
+                    </div>
+                    <?php if ($row[6]!="VERIFIED") {?>
+                      <div class="button1">
+                        <button id="btn1" type="submit" name="btn_verify" class="btn btn-success" onclick="verify('<?php echo $row[0]?>')">VERIFY</button>
+                      </div>
+                  <?php  } ?>
+                    <div class="button1">
+                      <button id="btn2" type="submit" name="btn_delete" class="btn btn-danger" onclick="deleterow('<?php echo $row[0]?>')">DELETE</button>
+                    </div>
+                  </div>
+                </div>
+            <?php  }
+     }
+     else {
+       echo " Data not found";
+     }
+        ?>
+<!-- End of php for data retriving-->
+
+<!-- delete and verify-->
+<?php
+if(isset($_COOKIE['verify'])) {
+  $data=$_COOKIE['verify'];
+  $query1="UPDATE news SET verify='VERIFIED' WHERE news_id='$data'";
+  mysqli_query($connect,$query1);
+}
+else{
+  echo "error";
+}
+
+if(isset($_COOKIE['delete'])){
+    $del=$_COOKIE['delete'];
+    $query2="DELETE FROM news WHERE news_id='$del'";
+    mysqli_query($connect,$query2);
+
+}
+else{
+  echo "error";
+}
+mysqli_close($connect);
+ ?>
+<!--end delete and verify-->
 
   </body>
 </html>

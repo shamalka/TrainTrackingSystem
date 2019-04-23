@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
+    header("location: Login.php");
     exit;
 }
 ?>
@@ -29,6 +29,7 @@ crossorigin="anonymous">
     <link rel="stylesheet" href="design/style2.css">
     <title></title>
   </head>
+  <!--navigation  -->
   <body onload="renderTime();">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -39,6 +40,7 @@ crossorigin="anonymous">
           <li class="active"><a href="Home.php">Home</a></li>
           <li><a href="AdminReserve.php">Reservations</a></li>
           <li><a href="AdminTrain.php">Trains</a></li>
+          <li><a href="station.php">Stations</a></li>
           <li><a href="AdminUser.php">Users</a></li>
           <li><a href="AdminNews.php">Add News</a></li>
           <li><a href="AdminRating.php">Ratings</a></li>
@@ -47,74 +49,28 @@ crossorigin="anonymous">
         </ul>
       </div>
     </nav>
+    <!--end navigation  -->
+
+    <!--display time in home  -->
     <div id="clock" class="date">
 
-    </div>
-<div class="container">
+  </div>
+  <div class="container">
 
-
+<!--admin info card  -->
     <div class="card">
       <img src="img/633.jpg" alt="Avatar" style="width:100%">
       <div class="container">
-        <h2><b><?php echo $_SESSION['username']; ?></b></h2>
-        <p><?php echo $_SESSION['position']; ?></p>
+        <h2><b><?php echo $_SESSION['firstname'].' '. $_SESSION['lastname']; ?></b></h2>
+        <p><?php echo "System admin"; ?></p>
         <form class="" action="logout.php " method="post">
           <div class="Button1">
           <p><button type="submit" name="logout">Logout</button></p>
         </form>
+<!--end admin info card  -->
 
-
-      </div>
+        </div>
       </div>
     </div>
-    <br><br>
-
-    <div class="row">
-    <div class="column">
-    <div class="card2">
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-<div class="column">
-    <div class="card2">
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-<div class="column">
-    <div class="card2">
-
-        <h2><b>Chanuka</b></h2>
-        <p>System Admin</p>
-      </div>
-      </div>
-
-      <div class="column">
-          <div class="card2">
-
-              <h2><b>Chanuka</b></h2>
-              <p>System Admin</p>
-            </div>
-            </div>
-            </div>
-          </div>
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
-
   </body>
 </html>

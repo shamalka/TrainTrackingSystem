@@ -7,8 +7,10 @@
   <a href="admin.php">Dashboard</a>
   <a href="admin_reserve.php" class="active">Reservations</a>  
   <a href="admin_train.php">Trains</a>
+  <a href="admin_addtrain.php">Add Trains</a>
   <a href="admin_user.php">User Management</a>
   <a href="admin_news.php">News Feed</a>
+  <a href="admin_addnews.php">Add News</a>
   <a href="admin_rating.php">Ratings & Feedback</a>
 </div>
 
@@ -44,8 +46,6 @@
 							  <th align="center">FIRST CLASS SEATS</th>
 							  <th align="center">SECOND CLASS SEATS</th>
 							  <th align="center">THIRD CLASS SEATS</th>
-							  <th align="center">CLASS</th>	
-							  <th align="center">QUANTITY</th>
 							  <th align="center">TOTAL PRICE</th>
 							</tr>
 							
@@ -65,13 +65,11 @@
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><a href="train.php? txtid=<?php echo $tr[0];?>"><?php echo $tr[1]; ?></a></td>
 							  <td align="center"><a href="profile.php? txtid=<?php echo $tr[1];?>"><?php echo $tr[2]; ?></a></td>
-							  <td align="center"><?php echo $tr[8]; ?></td>
+							  <td align="center"><?php echo $tr[7]; ?></td>
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center"><?php echo $tr[6]; ?></td>
-							  <td align="center"><?php echo $tr[10]; ?></td>
-							  <td align="center"><?php echo $tr[7]; ?></td>
 							</tr>
 
 						<?php
@@ -94,8 +92,6 @@
 							  <th align="center">FIRST CLASS SEATS</th>
 							  <th align="center">SECOND CLASS SEATS</th>
 							  <th align="center">THIRD CLASS SEATS</th>
-							  <th align="center">CLASS</th>	
-							  <th align="center">QUANTITY</th>
 							  <th align="center">TOTAL PRICE</th>
 							</tr>
 							
@@ -114,13 +110,11 @@
 							  <td align="center"><?php echo $tr[0]; ?></td>
 							  <td align="center"><a href="train.php? txtid=<?php echo $tr[0];?>"><?php echo $tr[1]; ?></a></td>
 							  <td align="center"><a href="profile.php? txtid=<?php echo $tr[1];?>"><?php echo $tr[2]; ?></a></td>
-							  <td align="center"><?php echo $tr[8]; ?></td>
+							  <td align="center"><?php echo $tr[7]; ?></td>
 							  <td align="center"><?php echo $tr[3]; ?></td>
 							  <td align="center"><?php echo $tr[4]; ?></td>
 							  <td align="center"><?php echo $tr[5]; ?></td>
 							  <td align="center"><?php echo $tr[6]; ?></td>
-							  <td align="center"><?php echo $tr[10]; ?></td>
-							  <td align="center"><?php echo $tr[7]; ?></td>
 							</tr>
 
 						<?php
@@ -131,6 +125,11 @@
 						  </table>
 						</div>
 						<br><br><br>
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
 
 <!-- Footer -->
 <div id="footer">

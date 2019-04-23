@@ -36,10 +36,16 @@ crossorigin="anonymous">
     </div>
 
     <!-- Login Form -->
-    <form action='logprocess.php' method='POST'>
+    <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='POST'>
       <input type="email" id="login" class="fadeIn second" name="Email" placeholder="Email">
+        <span id="error_message" class="text-danger"></span>
       <input type="password" id="password" class="fadeIn third" name="psw" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+        <div >
+        <span id="error_message" class="text-danger">
+        </div>
+      <div >
+      <input type="submit" class="fadeIn fourth" name="log" value="Log In">
+    </div>
     </form>
 
     <!-- Remind Passowrd -->
@@ -49,8 +55,53 @@ crossorigin="anonymous">
 
   </div>
 </div>
+<!--  -->
+<?php
+include('dbcon.php');
+if(isset($_POST["log"]))
+ {
+      if(empty($_POST["Email"]) && empty($_POST["psw"]))
+      {
+           echo '<script>alert("Both Fields are required")</script>';
+      }
+      elseif (empty($_POST['Email'])) {
+         echo '<script>alert("Email is required")</script>';
+      }
+      elseif(empty($_POST['psw'])){
+         echo '<script>alert("Passowrd is required")</script>';
+      }
+      else
+      {
+           $Email = mysqli_real_escape_string($connect, $_POST["Email"]);
+           $password = mysqli_real_escape_string($connect, $_POST["psw"]);
+           $query = "SELECT * FROM loginfo WHERE Email = '$Email'";
+           $result = mysqli_query($connect, $query);
+           if(mysqli_num_rows($result) > 0)
+           {
+                while($row = mysqli_fetch_array($result))
+                {
+                     if($password==$row['password'])
+                     {
+                          //return true;
+                          session_start();
+                          $_SESSION['email']=$Email;
+                          $_SESSION['firstname']=$row['firstname'];
+                          $_SESSION['lastname']=$row['lastname'];
+                          header('location:Home.php');
+                     }
+                     else
+                     {
 
-
-
+                          echo '<script>alert("Invalid User Details")</script>';
+                     }
+                }
+           }
+           else
+           {
+                echo '<script>alert("Invalid details")</script>';
+           }
+      }
+ }
+?>
   </body>
 </html>

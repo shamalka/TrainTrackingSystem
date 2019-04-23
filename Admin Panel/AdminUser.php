@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    header("location: http://localhost/TrainTrackingSystem/New%20web/Login.php");
+    header("location:Login.php");
     exit;
 }
 ?>
@@ -30,11 +30,13 @@ if(!isset($_SESSION['email'])){
     crossorigin="anonymous">
     </script>
 
-
+<script type="text/javascript" src="js/action.js"></script>
 <script type="text/javascript" src="js/action2.js"></script>
     <title></title>
   </head>
   <body>
+
+    <!--navigation bar-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -44,6 +46,7 @@ if(!isset($_SESSION['email'])){
       <li><a href="Home.php">Home</a></li>
       <li><a href="AdminReserve.php">Reservations</a></li>
       <li><a href="AdminTrain.php">Trains</a></li>
+      <li><a href="station.php">Stations</a></li>
       <li class="active"><a href="AdminUser.php">Users</a></li>
       <li><a href="AdminNews.php">Add News</a></li>
       <li><a href="AdminRating.php">Ratings</a></li>
@@ -55,16 +58,29 @@ if(!isset($_SESSION['email'])){
 
           <h1 class="left">MANAGE USER ACCOUNTS</h1>
           <br><br>
+
+          <!--pannel for table-->
+
           <div class="container">
           <div class="panel panel-default">
               <div class="panel-heading" style="color:black;text-align:center"><b>ACCOUNTS DETAILS</b></div>
+              <form class="form-inline" action="index.html" method="post">
+                <div class="form-group">
+                <input type="text" id="search" class="form-control"  placeholder="Search" >
+                </div>
+                <div class="form-group">
+                  <input type="button" style="color:black;background-color:#66e0ff" name="refresh" value="Refresh" class="form-control" onclick="window.location.reload();">
+                  </div>
+              </form>
+
               <div class="panel-body">
                <span id="message"></span>
                <div class="table-responsive" id="user_data">
+                   <div class="tbody1">
           <div style="overflow-x:auto;">
             <table id="data" class="table table-striped">
               <thead style="color:black">
-            <tr>
+            <tr style="font-size:25px">
 
               <th >NAME</th>
               <th >Email</th>
@@ -75,6 +91,7 @@ if(!isset($_SESSION['email'])){
             </tr>
 
           </thead>
+<!--retriving data to table rows-->
           <?php
           include('dbcon.php');
           $query='SELECT * FROM user_info';
@@ -84,13 +101,13 @@ if(!isset($_SESSION['email'])){
       while ($row=mysqli_fetch_array($result)) {
             $status='';
             if($row[5]=='ACTIVE'){
-              $status='<span class="label label-success"> ACTIVE </span>';
+              $status='<span class="label label-success" style="font-size:15px"> ACTIVE </span>';
             }
             else{
-              $status='<span class="label label-danger">Banned</span>';
+              $status='<span class="label label-danger" style="font-size:15px">Banned</span>';
             }
             ?>
-              <tr>
+              <tr style="font-size:20px">
                 <td><?php  echo $row[0]?></td>
                 <td><?php  echo $row[1]?></td>
                 <td><?php  echo $row[3]?></td>
@@ -98,7 +115,7 @@ if(!isset($_SESSION['email'])){
                 <td><?php  echo $status?></td>
                 <?php if($row[5]=='ACTIVE'){?>
 
-                <td><button id="submit_data" type="submit" name="action" class="btn btn-danger" onclick="confirmation1();cf('<?php echo $row[4]?>');refresh();">BANNED</button></td>
+                <td><button id="submit_data" type="submit" name="action" class="btn btn-warning" onclick="confirmation1();cf('<?php echo $row[4]?>');refresh();">BANNED</button></td>
               <?php }
                 else { ?>
                     <td><button id="submit_data" type="submit" name="action" class="btn btn-success" onclick="confirmation2(); cf('<?php echo $row[4] ?>'); refresh();">ACTIVATE</button></td>
@@ -107,9 +124,11 @@ if(!isset($_SESSION['email'])){
 
             </tr>
 
+
           <?php
           }
           ?>
+        </div>
           </table>
 
 
@@ -120,7 +139,9 @@ if(!isset($_SESSION['email'])){
     </div>
 
 <?php
-if(isset($_COOKIE['message'])){
+//set active and banned STATUS
+//cookie is created in action2.js file
+if(isset($_COOKIE['message']) && ($_COOKIE['nic']) ){
 
   include('dbcon.php');
   $data=$_COOKIE['message'];
@@ -136,14 +157,20 @@ if(isset($_COOKIE['message'])){
   else{
     exit;
   }
+  //update database with new status
   $query="UPDATE user_info SET status='$staus' WHERE nic='$nic'";
   mysqli_query($connect,$query);
   mysqli_close($connect);
+
 
 }
 else{
   echo "error";
 }
+
  ?>
+ <script>
+    getdata();
+ </script>
   </body>
 </html>

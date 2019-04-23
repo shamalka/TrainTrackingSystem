@@ -214,6 +214,7 @@ public class SharingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     //Toast.makeText(SharingActivity.this, "Show Location", Toast.LENGTH_SHORT).show();
+                    //update the location every 1 second
                     locationManager.requestLocationUpdates("gps",1000,0,locationListener);
                 }catch(Exception e){
                     e.printStackTrace();

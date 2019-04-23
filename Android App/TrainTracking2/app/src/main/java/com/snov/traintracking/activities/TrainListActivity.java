@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.Feedback.AddFeedbackActivity;
 import com.snov.traintracking.activities.Reservation.ReservationHomeActivity;
 import com.snov.traintracking.activities.Reservation.SelectSeatsActivity;
 import com.snov.traintracking.model.Train;
@@ -305,14 +306,41 @@ public class TrainListActivity extends AppCompatActivity {
                         //CHECK_TRAIN_LIST_REQUEST=1 if you view shared location
                         //CHECK_TRAIN_LIST_REQUEST=2 if you are in reservation(to_do)
                         if(Config.CHECK_TRAIN_LIST_REQUEST=="0"){
+                            if(TrainID[position].equals("T001")){
+                                Config.TRAIN_ID="Rajini";
+                                Config.JSON_PATH="rajarata_rajini";
+                            }else if(TrainID[position].equals("T002")){
+                                Config.TRAIN_ID="Manike";
+                                Config.JSON_PATH="udarata_manike";
+                            }else if(TrainID[position].equals("T003")){
+                                Config.TRAIN_ID="Kumari";
+                                Config.JSON_PATH="ruhunu_kumari";
+                            }
+                            Toast.makeText(getContext(), "Go to  " + Config.JSON_PATH, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(TrainListActivity.this, SharingActivity.class);
                             startActivity(intent);
                         }else if(Config.CHECK_TRAIN_LIST_REQUEST=="1"){
+                            if(TrainID[position].equals("T001")){
+                                Config.TRAIN_ID="Rajini";
+                                Config.JSON_PATH="rajarata_rajini";
+                            }else if(TrainID[position].equals("T002")){
+                                Config.TRAIN_ID="Manike";
+                                Config.JSON_PATH="udarata_manike";
+                            }else if(TrainID[position].equals("T003")){
+                                Config.TRAIN_ID="Kumari";
+                                Config.JSON_PATH="ruhunu_kumari";
+                            }
+                            //Toast.makeText(getContext(), "Go to  " + Config.JSON_PATH, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(TrainListActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }else if(Config.CHECK_TRAIN_LIST_REQUEST=="2"){
+                            Config.SELECTED_TRAIN_ID=TrainID[position];
+                            Toast.makeText(getContext(), "Go to  " + TrainID[position], Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(TrainListActivity.this, SelectSeatsActivity.class);
                             startActivity(intent);
                         }else{
                             Config.SELECTED_TRAIN_ID=TrainID[position];
-                            Intent intent = new Intent(TrainListActivity.this, SelectSeatsActivity.class);
+                            Intent intent = new Intent(TrainListActivity.this, AddFeedbackActivity.class);
                             startActivity(intent);
                         }
 

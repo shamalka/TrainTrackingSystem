@@ -69,7 +69,29 @@
             android:name=".activities.NewsViewActivity"
             android:label="@string/title_activity_news_view"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Reservation.MyReservationViewActivity"></activity>
+        <activity android:name=".activities.Reservation.MyReservationViewActivity" />
+
+        <service android:name=".activities.GeofenceTransitionService" />
+        <service android:name=".activities.Firebase.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".activities.Firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".activities.Feedback.FeedbackHomeActivity"
+            android:label="@string/title_activity_feedback_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.Feedback.AddFeedbackActivity" />
+        <activity android:name=".activities.RequestLocationActivity" />
+        <activity android:name=".activities.ShowRequestedActivity" />
+        <activity android:name=".activities.SendMailActivity" />
+        <activity android:name=".activities.SettingsActivity"></activity>
     </application>
 
 </manifest>

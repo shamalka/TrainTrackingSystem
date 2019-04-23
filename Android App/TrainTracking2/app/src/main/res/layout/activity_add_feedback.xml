@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Feedback.AddFeedbackActivity"
+    android:orientation="vertical"
+    android:background="@drawable/backgrounds">
+
+    <LinearLayout
+        android:id="@+id/rating_linlaHeaderProgress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/rating_pbHeaderProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ProgressBar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/stations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stations"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate this train ride"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="130dp"
+            tools:layout_editor_absoluteY="59dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="30dp"/>
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="72dp"
+            tools:layout_editor_absoluteY="110dp"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:id="@+id/feedback_description"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/feedback_submit"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:background="#7986CB"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

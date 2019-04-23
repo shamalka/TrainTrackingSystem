@@ -54,6 +54,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String PhoneNumber = params[4];
             String NIC = params[5];
 
+
+
             try {
                 URL url = new URL(RegisterUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();

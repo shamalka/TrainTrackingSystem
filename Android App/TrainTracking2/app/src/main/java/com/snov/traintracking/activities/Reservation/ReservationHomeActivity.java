@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snov.traintracking.R;
 import com.snov.traintracking.activities.LoginActivity;
+import com.snov.traintracking.activities.MainActivity;
 import com.snov.traintracking.utilities.Config;
 
 public class ReservationHomeActivity extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class ReservationHomeActivity extends AppCompatActivity {
     Button NewBooking;
     Button MyBookings;
     Button CancelBookings;
+    TextView Response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +57,16 @@ public class ReservationHomeActivity extends AppCompatActivity {
             }
         });
 
+        Response = (TextView)findViewById(R.id.response);
+        Response.setText(Config.RESPONSE);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(ReservationHomeActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.snov.traintracking.activities.Reservation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,12 +117,14 @@ public class SelectSeatsActivity extends AppCompatActivity {
         GetTicketPrice();
         GetArrivalTime();
 
+
         Config.ARRIVAL_TIME=ArrivalTimeArray[0];
        // Toast.makeText(SelectSeatsActivity.this, ArrivalTimeArray[0], Toast.LENGTH_SHORT).show();
 
         SeatCount.setText(TicketPriceArray[0]);
         Config.SELECTED_TICKET_PRICE=TicketPriceArray[0];
 
+        SetTestReservation();
         SubmitButton = (Button)findViewById(R.id.done_seats_button);
         SubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -131,10 +134,16 @@ public class SelectSeatsActivity extends AppCompatActivity {
                 CheckSimilerSeats();
                 //Toast.makeText(SelectSeatsActivity.this, "Similar Seats: " + SimilarSeats, Toast.LENGTH_SHORT).show();
 
+                if(SelectedSeats.equals("")){
+                    //Toast.makeText(SelectSeatsActivity.this, "Please Select Seats", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Please Select Seats.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
                 if(SimilarSeats){
-                    Toast.makeText(SelectSeatsActivity.this, "Seats are taken.", Toast.LENGTH_SHORT).show();
-                }else if(SelectedSeats.equals("")){
-                    Toast.makeText(SelectSeatsActivity.this, "Please Select Seats", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SelectSeatsActivity.this, "Seats are taken.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Seats are taken.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }else{
                     SetTempReservation();
                     Intent intent = new Intent(SelectSeatsActivity.this, PlaceOrderActivity.class);
@@ -247,6 +256,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
 //            l1.addView(cb);
 //        }
     }
+
 
     private void CollectReservationData(){
 
@@ -551,7 +561,7 @@ public class SelectSeatsActivity extends AppCompatActivity {
         String EndStation = Config.END_STATION;
         String ArrivalTime = Config.ARRIVAL_TIME;
         String Date = Config.RESERVATION_DATE;
-        String Status = "Pending";
+        String Status = "PENDING";
         String Empty="";
 
         ReservationTask reservationTask = new ReservationTask(this);
@@ -656,9 +666,9 @@ public class SelectSeatsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent = new Intent(SelectSeatsActivity.this, ReservationActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void GetReservedSeats(){
@@ -734,6 +744,11 @@ public class SelectSeatsActivity extends AppCompatActivity {
         GetReservedSeats();
         String[] TempArray;
         List<String> TempList = new ArrayList<String>();
+
+        for(int k=0; k<11; k++){
+            TempList.add("S1");
+        }
+
         for(int i=0; i<CheckReservedSeats.length; i++){
             TempArray=CheckReservedSeats[i].split(",");
             for(int j=0; j<TempArray.length; j++){
@@ -808,6 +823,118 @@ public class SelectSeatsActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public void SetTestReservation(){
+        CalculateTotalTicketPrice();
+
+        String Method = "reserve_test";
+
+        String TrainID = Config.SELECTED_TRAIN_ID;
+        String UserID = Config.USER_EMAIL;
+        String Seats = "";
+        String TicketPrice = "";
+        String StartStation = Config.START_STATION;
+        String EndStation = Config.END_STATION;
+        String ArrivalTime = Config.ARRIVAL_TIME;
+        String Date = Config.RESERVATION_DATE;
+        String Status = "TEST";
+        String Empty="";
+
+        ReservationTestTask reservationTestTask = new ReservationTestTask(this);
+        if(Config.RESERVATION_CLASS.equals("1st Class")){
+            reservationTestTask.execute(Method,TrainID,UserID,Seats,Empty,Empty,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
+        }else if(Config.RESERVATION_CLASS.equals("2nd Class")){
+            reservationTestTask.execute(Method,TrainID,UserID,Empty,Seats,Empty,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
+        }else{
+            reservationTestTask.execute(Method,TrainID,UserID,Empty,Empty,Seats,TicketPrice,StartStation,EndStation,ArrivalTime,Date,Status);
+        }
+    }
+
+    public class ReservationTestTask extends AsyncTask<String,Void,String> {
+
+        Context context;
+
+
+        ReservationTestTask(Context context){
+            this.context = context;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String TempReserveUrl = Constants.TEST_RESERVE_URL;
+            String LoginUrl = Constants.SERVER_URL;
+
+            String method = params[0];
+            if(method.equals("reserve_test")){
+                String TrainID = params[1];
+                String UserID = params[2];
+                String FirstClassSeats = params[3];
+                String SecondClassSeats = params[4];
+                String ThirdClassSeats = params[5];
+                String TotalPrice = params[6];
+                String StartStation = params[7];
+                String EndStation = params[8];
+                String ArrivalTime = params[9];
+                String Date = params[10];
+                String Status = params[11];
+
+                try {
+                    URL url = new URL(TempReserveUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    OutputStream OS = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+
+                    String data = URLEncoder.encode("train_id","UTF-8") + "=" + URLEncoder.encode(TrainID,"UTF-8") + "&" +
+                            URLEncoder.encode("user_id","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8") + "&" +
+                            URLEncoder.encode("first_class_seats","UTF-8") + "=" + URLEncoder.encode(FirstClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("second_class_seats","UTF-8") + "=" + URLEncoder.encode(SecondClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("third_class_seats","UTF-8") + "=" + URLEncoder.encode(ThirdClassSeats,"UTF-8") + "&" +
+                            URLEncoder.encode("total_price","UTF-8") + "=" + URLEncoder.encode(TotalPrice,"UTF-8") + "&" +
+                            URLEncoder.encode("start_station","UTF-8") + "=" + URLEncoder.encode(StartStation,"UTF-8") + "&" +
+                            URLEncoder.encode("end_station","UTF-8") + "=" + URLEncoder.encode(EndStation,"UTF-8") + "&" +
+                            URLEncoder.encode("arrival_time","UTF-8") + "=" + URLEncoder.encode(ArrivalTime,"UTF-8") + "&" +
+                            URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(Date,"UTF-8") + "&" +
+                            URLEncoder.encode("status","UTF-8") + "=" + URLEncoder.encode(Status,"UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    OS.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    inputStream.close();
+                    return "Succesful..!!";
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 
 
 }

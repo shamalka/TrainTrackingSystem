@@ -79,8 +79,12 @@ public class SelectStationsActivity extends AppCompatActivity {
                 if(Config.CHECK_TRAIN_LIST_REQUEST=="0"){
                     Intent intent = new Intent(SelectStationsActivity.this, SharingTrainListActivity.class);
                     startActivity(intent);
-                }else{
+                }else if(Config.CHECK_TRAIN_LIST_REQUEST=="3"){
                     Intent intent = new Intent(SelectStationsActivity.this, TrainListActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(SelectStationsActivity.this, TrackingTrainListActivity.class);
                     startActivity(intent);
                 }
 

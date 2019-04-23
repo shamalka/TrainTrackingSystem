@@ -1,21 +1,28 @@
 package com.snov.traintracking.activities;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +36,14 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,6 +54,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseError;
 import com.snov.traintracking.R;
 import com.snov.traintracking.utilities.Config;
@@ -48,7 +63,9 @@ import com.snov.traintracking.utilities.Constants;
 
 import java.util.Random;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+import kotlin.collections.MapAccessorsKt;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener, LocationListener, ResultCallback<Status> {
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -71,6 +88,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     GeoFire geoFire;
 
+    GeofencingRequest geoRequest;
+    LatLng InvalidArea;
+
+    private GeofencingClient mGeofencingClient;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,15 +103,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        mGeofencingClient = LocationServices.getGeofencingClient(this);
+        Toast.makeText(MapsActivity.this, Config.TRAIN_ID, Toast.LENGTH_SHORT).show();
 
-
-        Toast.makeText(MapsActivity.this, Config.TRAIN_ID , Toast.LENGTH_SHORT).show();
-
-        latitxt = (TextView)findViewById(R.id.lati_t);
-        longtxt = (TextView)findViewById(R.id.longi_t);
+        latitxt = (TextView) findViewById(R.id.lati_t);
+        longtxt = (TextView) findViewById(R.id.longi_t);
 
         Firebase.setAndroidContext(this);
 
+        //get firebase data from the given path and set them to latitxt textview
         GetFirebaseData(RefLat, latitxt, Config.JSON_PATH + "/Latitude");
         //GetFirebaseData(RefLong, longtxt, Config.JSON_PATH + "/Longitude");
 
@@ -97,7 +120,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 //        latt = Double.parseDouble((String) latitxt.getText());
 //        longg = Double.parseDouble((String) longtxt.getText());
-
 
 
         latitxt.addTextChangedListener(new TextWatcher() {
@@ -118,9 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 
 
-
-
-
             }
 
             @Override
@@ -129,14 +148,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
+        //StartGeofence();
 
 //        String latitudeString = (String) latitxt.getText();
 //        String longitudeString = (String) longtxt.getText();
 
         //Toast.makeText(MapsActivity.this, latitudeString + " " + longi , Toast.LENGTH_SHORT).show();
 
+        Button GeofenceButton = (Button)findViewById(R.id.geofence_btn);
+        GeofenceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartGeofence();
+                //DrawGeofence();
+            }
+        });
 
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.map_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            if (item.getItemId() == R.id.add_geofence) {
+                StartGeofence();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void StartGeofence() {
+        Geofence geofence = CreateGeofence(InvalidArea, 4000f);
+        geoRequest = CreateGeoRequest(geofence);
+        AddGeofence(geofence);
     }
 
 
@@ -153,31 +208,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        LatLng InvalidArea = new LatLng(6.738947,79.9734234);
-        mMap.addCircle(new CircleOptions()
-                    .center(InvalidArea)
-                    .radius(30000)
-                    .strokeColor(Color.BLUE)
-                    .fillColor(0x22000FF)
-                    .strokeWidth(5.0f)
-        );
+        InvalidArea = new LatLng(6.738947, 79.9734234);
 
+        mMap.setOnMarkerClickListener(this);
+        mMap.setOnMapClickListener(this);
+
+
+
+       // StartGeofence();
+
+
+//        Geofence geofence = CreateGeofence(InvalidArea, 400f);
+//        geoRequest = CreateGeoRequest(geofence);
+//        AddGeofence(geofence);
 //        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(InvalidArea.latitude,InvalidArea.longitude), 0.5f);
 //        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
 //            @Override
 //            public void onKeyEntered(String key, GeoLocation location) {
-//                SendNotification("Train Tracking App", String.format("%s Invalid Location"),key);
+//                //SendNotification("Train Tracking App", String.format("%s Invalid Location"),key);
+//                Toast.makeText(MapsActivity.this, "Entered", Toast.LENGTH_SHORT).show();
 //            }
 //
 //            @Override
 //            public void onKeyExited(String key) {
-//
+//                Toast.makeText(MapsActivity.this, "Entered", Toast.LENGTH_SHORT).show();
 //            }
 //
 //            @Override
 //            public void onKeyMoved(String key, GeoLocation location) {
-//
+//                Toast.makeText(MapsActivity.this, "Entered", Toast.LENGTH_SHORT).show();
 //            }
 //
 //            @Override
@@ -187,10 +248,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 //            @Override
 //            public void onGeoQueryError(DatabaseError error) {
-//
+//                Toast.makeText(MapsActivity.this, "Error", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
 //        Circle circle = mMap.addCircle(new CircleOptions()
 //                .center(new LatLng(6, 79))
 //                .radius(10000)
@@ -204,11 +264,90 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
-
         //mMap.setMinZoomPreference(11);
 
 
+    }
 
+    @Override
+    public void onResult(@NonNull Status status) {
+        DrawGeofence();
+    }
+
+    Circle geofenceLimits;
+
+    private void DrawGeofence() {
+        if (geofenceLimits != null) {
+            geofenceLimits.remove();
+        }
+
+        CircleOptions circleOptions = new CircleOptions()
+                .center(GeofenceMarker.getPosition())
+                .strokeColor(Color.argb(50, 70, 70, 70))
+                .fillColor(Color.argb(100, 150, 150, 150))
+                .radius(4000f);
+
+        geofenceLimits = mMap.addCircle(circleOptions);
+        Toast.makeText(MapsActivity.this, "Grofence Drew", Toast.LENGTH_SHORT).show();
+    }
+
+    private void AddGeofence(Geofence geofence) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+//        LocationServices.GeofencingApi.addGeofences(mGoogleApiClient, geoRequest, createGeofencingPendingIntent())
+//                .setResultCallback(this);
+
+        mGeofencingClient.addGeofences(CreateGeoRequest(geofence), createGeofencingPendingIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MapsActivity.this, "Grofence added", Toast.LENGTH_SHORT).show();
+                        DrawGeofence();
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MapsActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        // ...
+                    }
+                });
+    }
+
+
+    PendingIntent geofencePendingIntent;
+    private PendingIntent createGeofencingPendingIntent() {
+        if(geofencePendingIntent!=null){
+            return geofencePendingIntent;
+        }
+
+        Intent intent = new Intent(this, GeofenceTransitionService.class);
+        return PendingIntent.getService(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+    }
+
+    private GeofencingRequest CreateGeoRequest(Geofence geofence) {
+        return new GeofencingRequest.Builder()
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .addGeofence(geofence)
+                .build();
+    }
+
+    private Geofence CreateGeofence(LatLng position, float v){
+        return new Geofence.Builder()
+                .setRequestId("Geofence")
+                .setCircularRegion(position.latitude,position.longitude,v)
+                .setExpirationDuration(60*60*1000)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build();
 
 
     }
@@ -233,6 +372,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        //Get current location of the device
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -248,6 +388,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
+        //get the text from the latitxt and longtxt and set them to float variables
+        //latitxt and longxt are filled with firebase data
         lati = Float.parseFloat((String) latitxt.getText());
         longi = Float.parseFloat((String) longtxt.getText());
         //mMap.clear();
@@ -255,6 +397,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
 
 
     //Retrieve realtime data from firebase and set them into textview
@@ -278,10 +421,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     LatLng latlng = new LatLng(latiDouble, lngDouble);
 
+                    //add new marker whenever text in data from firebase is changed
                     MarkerOptions MapMarker = new MarkerOptions().position(latlng).title("Marker in Sydney");
                     MapMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.train_marker));
                     mMap.addMarker(MapMarker);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
 
 
 
@@ -309,6 +454,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
     private void UpdateMap(){
         //Toast.makeText(MapsActivity.this, lati + " " + longi, Toast.LENGTH_SHORT).show();
         Log.d("data", lati + " " + longi );
@@ -318,4 +464,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    Marker GeofenceMarker;
+    @Override
+    public void onMapClick(LatLng latLng) {
+        MarkerForGeofence(latLng);
+    }
+
+    private void MarkerForGeofence(LatLng latLng) {
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(latLng)
+                .title("Geofence Marker");
+
+        if(mMap!=null){
+            if(GeofenceMarker!=null){
+                GeofenceMarker.remove();
+            }
+
+            GeofenceMarker = mMap.addMarker(markerOptions);
+            
+        }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
 }

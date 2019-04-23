@@ -9,24 +9,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.Reservation.ReservationHomeActivity"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/backgrounds">
 
     <Button
+        android:layout_marginTop="100dp"
         android:id="@+id/new_booking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Booking"/>
+        android:text="New Booking"
+        android:background="#006064"
+        android:textColor="#fff"/>
 
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/my_bookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Bookings"/>
+        android:text="My Bookings"
+        android:background="#006064"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/cancel_bookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel/Edit Bookings"/>
+        android:text="Cancel/Edit Bookings"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/response"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="response"
+        android:visibility="gone"/>
 
 </LinearLayout>

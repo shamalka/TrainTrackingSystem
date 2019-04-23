@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -22,6 +23,8 @@ import com.snov.traintracking.activities.SharingTrainListActivity;
 import com.snov.traintracking.activities.TrackingTrainListActivity;
 import com.snov.traintracking.activities.TrainListActivity;
 import com.snov.traintracking.utilities.Config;
+
+import java.sql.Date;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -126,12 +129,25 @@ public class ReservationActivity extends AppCompatActivity {
         SearchTrain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                try{
-                    Intent intent = new Intent(ReservationActivity.this, TrainListActivity.class);
-                    startActivity(intent);
-                }catch(Exception e){
-                    Toast.makeText(ReservationActivity.this, "Try Again.!!", Toast.LENGTH_SHORT).show();
+                if(Config.START_STATION.equals(Config.END_STATION)){
+                    Snackbar.make(v, "Select Different Stations", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else if(Config.RESERVATION_DATE.equals("")){
+                    Snackbar.make(v, "Please Select a Date", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else if(Config.RESERVATION_CLASS.equals("Select Class")){
+                    Snackbar.make(v, "Please Select a Class", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else{
+                    try{
+                        Intent intent = new Intent(ReservationActivity.this, TrainListActivity.class);
+                        startActivity(intent);
+                    }catch(Exception e){
+                        Toast.makeText(ReservationActivity.this, "Try Again.!!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
             }
         });
 
@@ -148,9 +164,9 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    calender = Calendar.getInstance();
-                }
+
+                calender = Calendar.getInstance();
+
 
                 int Day = calender.get(Calendar.DAY_OF_MONTH);
                 int Month = calender.get(Calendar.MONTH);
@@ -163,7 +179,16 @@ public class ReservationActivity extends AppCompatActivity {
                         Config.RESERVATION_DATE=DateText.getText().toString();
                     }
                 },Day , Month , Year);
-                Datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+               // Datepickerdialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+               // Datepickerdialog.getDatePicker().setMaxDate(calender.MONTH+1);
+
+                Datepickerdialog.getDatePicker().setMinDate(calender.getTimeInMillis());
+
+                // Subtract 6 days from Calendar updated date
+                calender.add(Calendar.MONTH, +1);
+
+                // Set the Calendar new date as minimum date of date picker
+                Datepickerdialog.getDatePicker().setMaxDate(calender.getTimeInMillis());
                 Datepickerdialog.show();
             }
         });
@@ -171,5 +196,10 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ReservationActivity.this, ReservationHomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

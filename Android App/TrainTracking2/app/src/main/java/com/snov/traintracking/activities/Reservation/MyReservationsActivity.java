@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class MyReservationsActivity extends AppCompatActivity {
 
-    //String[] ReservationID;
+    int[] ReservationID;
     String[] TrainID;
     String[] UserID;
     String[] StartStation;
@@ -66,21 +66,21 @@ public class MyReservationsActivity extends AppCompatActivity {
 
 
         collectData();
-        Toast.makeText(MyReservationsActivity.this, TrainID[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, StartStation[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, EndStation[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, FirstClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, SecondClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, ThirdClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, ArrivalTime[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, TotalPrice[0], Toast.LENGTH_SHORT).show();
-        Toast.makeText(MyReservationsActivity.this, Date[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, TrainID[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, StartStation[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, EndStation[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, FirstClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, SecondClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, ThirdClassSeatNumbers[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, ArrivalTime[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, TotalPrice[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyReservationsActivity.this, Date[0], Toast.LENGTH_SHORT).show();
 
 
         //MyReservationsAdapter myReservationsAdapter = new MyReservationsAdapter(this, TrainID, StartStation, EndStation, FirstClassSeatNumbers, SecondClassSeatNumbers, ThirdClassSeatNumbers, ArrivalTime, TotalPrice, Date);
         //listView.setAdapter(myReservationsAdapter);
 
-        NewsListAdapter newsListAdapter = new NewsListAdapter(this, TrainID, StartStation, EndStation, FirstClassSeatNumbers, SecondClassSeatNumbers, ThirdClassSeatNumbers, ArrivalTime, TotalPrice, Date);
+        NewsListAdapter newsListAdapter = new NewsListAdapter(this,  TrainID, ReservationID, StartStation, EndStation, FirstClassSeatNumbers, SecondClassSeatNumbers, ThirdClassSeatNumbers, ArrivalTime, TotalPrice, Date);
         listView.setAdapter(newsListAdapter);
 
     }
@@ -114,8 +114,9 @@ public class MyReservationsActivity extends AppCompatActivity {
         try {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
-           // ReservationID = new String[jsonarray.length()];
+
             TrainID = new String[jsonarray.length()];
+            ReservationID = new int[jsonarray.length()];
             UserID = new String[jsonarray.length()];
             StartStation = new String[jsonarray.length()];
             EndStation = new String[jsonarray.length()];
@@ -131,8 +132,9 @@ public class MyReservationsActivity extends AppCompatActivity {
             for(int i=0;i<=jsonarray.length();i++){
 
                 jsonobject = jsonarray.getJSONObject(i);
-               // ReservationID[i]=jsonobject.getString("reservation_id");
+
                 TrainID[i]=jsonobject.getString("train_id");
+                ReservationID[i]=jsonobject.getInt("reservation_id");
                 UserID[i]=jsonobject.getString("user_id");
                 StartStation[i]=jsonobject.getString("start_station");
                 EndStation[i]=jsonobject.getString("end_station");
@@ -159,6 +161,7 @@ public class MyReservationsActivity extends AppCompatActivity {
     private class NewsListAdapter extends ArrayAdapter<String> {
 
         private String[] TrainID;
+        private int[] ReservationID;
         //private String[] UserID;
         private String[] StartStation;
         private String[] EndStation;
@@ -170,11 +173,12 @@ public class MyReservationsActivity extends AppCompatActivity {
         private String[] Date;
         private Activity context;
 
-        private NewsListAdapter(Activity context, String[] TrainID, String[] StartStation, String[] EndStation, String[] FirstClassSeatNumbers, String[] SecondClassSeatNumbers, String[] ThirdClassSeatNumbers, String[] ArrivalTime, String[] TotalPrice, String[] Date) {
-            super(context, R.layout.activity_my_reservations, StartStation);
+        private NewsListAdapter(Activity context,  String[] TrainID, int[] ReservationID, String[] StartStation, String[] EndStation, String[] FirstClassSeatNumbers, String[] SecondClassSeatNumbers, String[] ThirdClassSeatNumbers, String[] ArrivalTime, String[] TotalPrice, String[] Date) {
+            super(context, R.layout.activity_my_reservations, TrainID);
             this.context = context;
-            //this.ReservationID = ReservationID;
+
             this.TrainID = TrainID;
+            this.ReservationID = ReservationID;
             //this.UserID = UserID;
             this.StartStation = StartStation;
             this.EndStation = EndStation;
@@ -206,6 +210,9 @@ public class MyReservationsActivity extends AppCompatActivity {
                         Config.MY_DATE=Date[position];
                         Config.MY_SEAT_NUMBERS=FirstClassSeatNumbers[position]+SecondClassSeatNumbers[position]+ThirdClassSeatNumbers[position];
                         Config.MY_TIME=ArrivalTime[position];
+                        Config.MY_PRICE=TotalPrice[position];
+                        Config.MY_RESERVATION_ID = String.valueOf(ReservationID[position]);
+                       // Toast.makeText(getContext(), "Go to  " + Config.MY_RESERVATION_ID, Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(getContext(), "Go to  " + NewsID[position], Toast.LENGTH_SHORT).show();
 //                        Config.NEWS_DESCRIPTION=NewsDescription[position];
 //                        Config.NEWS_TITLE=NewsTitle[position];

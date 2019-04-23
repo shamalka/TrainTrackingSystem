@@ -2,10 +2,13 @@ package com.snov.traintracking.activities.Reservation;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +32,12 @@ import com.braintreepayments.api.interfaces.HttpResponseCallback;
 import com.braintreepayments.api.internal.HttpClient;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.snov.traintracking.R;
+import com.snov.traintracking.activities.EmailHelpers.GMailSender;
 import com.snov.traintracking.activities.MainActivity;
+import com.snov.traintracking.activities.NewsActivity;
+import com.snov.traintracking.activities.NewsViewActivity;
+import com.snov.traintracking.activities.PostNewsActivity;
+import com.snov.traintracking.activities.SendMailActivity;
 import com.snov.traintracking.activities.SharingActivity;
 import com.snov.traintracking.utilities.Config;
 import com.snov.traintracking.utilities.Constants;
@@ -58,7 +66,7 @@ public class PaymentActivity extends AppCompatActivity {
     HashMap<String,String> paramsHash;
 
     Button ButtonPay;
-    EditText EditAmount;
+    TextView EditAmount;
     LinearLayout GroupWaiting, GroupPayment;
 
     private static final int REQUEST_CODE = 1234;
@@ -74,7 +82,7 @@ public class PaymentActivity extends AppCompatActivity {
         ButtonPay = (Button)findViewById(R.id.pay_button);
 
 
-        EditAmount = (EditText)findViewById(R.id.edit_amount);
+        EditAmount = (TextView)findViewById(R.id.edit_amount);
         EditAmount.setText(Config.TOTAL_TICKET_PRICE);
 
         new GetToken().execute();
@@ -130,12 +138,31 @@ public class PaymentActivity extends AppCompatActivity {
                         Log.d("Done", response.toString());
                         if(response.toString().contains("Successful")){
                             Toast.makeText(PaymentActivity.this, "Transaction Successful.!", Toast.LENGTH_SHORT).show();
-
+                            UpdateReservation();
+                            Config.RESPONSE=token;
+                            sendMessage();
+                            Intent intent = new Intent(PaymentActivity.this, ReservationHomeActivity.class);
+                            startActivity(intent);
+//                            AlertDialog alertDialog = new AlertDialog.Builder(PaymentActivity.this).create();
+//                            alertDialog.setTitle("Transaction Successfull");
+//                            alertDialog.setMessage("Your ticket will be recived by an email.");
+//                            alertDialog.setIcon(R.drawable.done);
+//                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            Intent intent = new Intent(PaymentActivity.this, NewsActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+//                                        }
+//                                    });
+//                            alertDialog.show();
                         }else{
                             Toast.makeText(PaymentActivity.this, "Transaction Failed.!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(PaymentActivity.this, ReservationHomeActivity.class);
+                            startActivity(intent);
 
                         }
-                        Toast.makeText(PaymentActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PaymentActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -217,4 +244,144 @@ public class PaymentActivity extends AppCompatActivity {
             mDialog.dismiss();
         }
     }
+
+    public void UpdateReservation(){
+        String Method = "update_temp";
+
+        String UserID = Config.USER_EMAIL;
+
+        UpdateTask updateTask = new UpdateTask(this);
+        updateTask.execute(Method,UserID);
+    }
+
+    public class UpdateTask extends AsyncTask<String,Void,String> {
+
+        Context context;
+
+
+        UpdateTask(Context context){
+            this.context = context;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String TempReserveUrl = Constants.UPDATE_RESERVATION_URL;
+            String LoginUrl = Constants.SERVER_URL;
+
+            String method = params[0];
+            if(method.equals("update_temp")){
+                String UserID = params[1];
+
+                try {
+                    URL url = new URL(TempReserveUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    OutputStream OS = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+
+                    String data = URLEncoder.encode("user_id","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    OS.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    inputStream.close();
+                    return "Paid";
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    String Ticket = "<html>\n" +
+            "<head>\n" +
+            "\t<title></title>\n" +
+            "\t<link href=\"https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css\" rel=\"stylesheet\" type=\"text/css\" />\n" +
+            "\t<link href=\"https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css\" rel=\"stylesheet\" type=\"text/css\" />\n" +
+            "\t<link href=\"https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css\" rel=\"stylesheet\" type=\"text/css\" />\n" +
+            "\t<link href=\"https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css\" rel=\"stylesheet\" type=\"text/css\" />\n" +
+            "</head>\n" +
+            "<body aria-readonly=\"false\" style=\"cursor: auto;\">\n" +
+            "<h1><u><span style=\"font-size:24px\"><strong>This is your ticket</strong></span></u></h1>\n" +
+            "\n" +
+            "<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\n" +
+            "\t<tbody>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Train ID</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.SELECTED_TRAIN_ID+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Train Name</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.TRAIN_ID+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Start Station</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.START_STATION+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">End Station</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.END_STATION+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Date | Arrival Time</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.RESERVATION_DATE+ " | " + Config.ARRIVAL_TIME+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Seat Numbers</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.SELECTED_SEATS+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t\t<tr>\n" +
+            "\t\t\t<td style=\"width:200px\">Price</td>\n" +
+            "\t\t\t<td style=\"width:287px\">"+Config.TOTAL_TICKET_PRICE+"</td>\n" +
+            "\t\t</tr>\n" +
+            "\t</tbody>\n" +
+            "</table>\n" +
+            "</body>\n" +
+            "</html>\n";
+
+    private void sendMessage() {
+
+        Thread sender = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    GMailSender sender = new GMailSender("ps4.snov@gmail.com", "0713631082");
+                    sender.sendMail("Train Tracking & Reservation",
+                            Ticket,
+                            "ps4.snov@gmail.com",
+                            Config.USER_EMAIL);
+
+                } catch (Exception e) {
+                    Log.e("mylog", "Error: " + e.getMessage());
+                }
+            }
+        });
+        sender.start();
+    }
+
 }

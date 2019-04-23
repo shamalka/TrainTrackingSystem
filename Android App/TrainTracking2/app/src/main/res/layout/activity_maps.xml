@@ -29,6 +29,13 @@ tools:context=".activities.MapsActivity" >
         android:text="80.4581773311761"
         android:paddingTop="20dp"
         android:id="@+id/longi_t"/>
+    <Button
+        android:id="@+id/geofence_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Geofence"
+        android:layout_gravity="right"/>
+
 
 
 

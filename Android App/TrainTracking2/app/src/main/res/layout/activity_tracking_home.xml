@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.snov.traintracking.activities.TrackingHomeActivity"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/backgrounds">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:text="View Shared Location"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="12dp"/>
         </android.support.v7.widget.CardView>
 
@@ -48,9 +48,47 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:text="Share Train Location"
+                android:textColor="#fff"
+                android:textSize="12dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/request_train"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:cardCornerRadius="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            float:cardBackgroundColor="@color/button_background">
+            <TextView
+                android:gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:text="Request Train Location"
                 android:textColor="#000"
                 android:textSize="12dp"/>
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/requested_trains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:cardCornerRadius="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            float:cardBackgroundColor="@color/button_background">
+            <TextView
+                android:gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:text="Requested Trains"
+                android:textColor="#000"
+                android:textSize="12dp"/>
+        </android.support.v7.widget.CardView>
+
+
 
 
 

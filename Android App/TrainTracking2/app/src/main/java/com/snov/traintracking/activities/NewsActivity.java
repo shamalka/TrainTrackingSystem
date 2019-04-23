@@ -39,6 +39,7 @@ public class NewsActivity extends AppCompatActivity {
     String[] NewsDescription;
     String[] NewsAuthor;
     String[] NewsDate;
+    String[] NewsTime;
     ListView listView;
     BufferedInputStream bis;
     String line = null;
@@ -52,11 +53,14 @@ public class NewsActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.NewsList);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
+
         collectData();
 
-        NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsID, NewsDescription, NewsAuthor, NewsDate);
+
+        NewsListAdapter newsListAdapter = new NewsListAdapter(this, NewsTitle, NewsID, NewsDescription, NewsAuthor, NewsDate,NewsTime);
         listView.setAdapter(newsListAdapter);
 
+        //floating action button to allow users to post news
         FloatingActionButton AddNews = findViewById(R.id.add_news);
         AddNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +72,11 @@ public class NewsActivity extends AppCompatActivity {
 
     }
 
+    //get news Title,Description,Date,Author and time of approved news and add them to corresponding arrays
     private void collectData(){
         //connection
         try {
+            //php script url
             URL url = new URL(Constants.SERVER_URL+"?"+ JsonConfig.GET_NEWS_TITLE);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
@@ -94,6 +100,7 @@ public class NewsActivity extends AppCompatActivity {
         }
 
         //JSON
+        //set array lengths according to query result which comes in json format
         try {
             JSONArray jsonarray = new JSONArray(result);
             JSONObject jsonobject = null;
@@ -102,9 +109,10 @@ public class NewsActivity extends AppCompatActivity {
             NewsDescription = new String[jsonarray.length()];
             NewsAuthor = new String[jsonarray.length()];
             NewsDate = new String[jsonarray.length()];
+            NewsTime = new String[jsonarray.length()];
             Log.d("data", "received");
 
-
+            //add data to arrays
             for(int i=0;i<=jsonarray.length();i++){
 
                 jsonobject = jsonarray.getJSONObject(i);
@@ -112,7 +120,8 @@ public class NewsActivity extends AppCompatActivity {
                 NewsDescription[i]=jsonobject.getString("description");
                 NewsID[i]=jsonobject.getString("news_id");
                 NewsAuthor[i]=jsonobject.getString("author");
-                NewsDate[i]=jsonobject.getString("date");
+                NewsDate[i]=jsonobject.getString("dates");
+                NewsTime[i]=jsonobject.getString("Times");
 
 
 
@@ -125,6 +134,7 @@ public class NewsActivity extends AppCompatActivity {
         }
     }
 
+    //adapter is used to bind the data from above arrays to respective UI components
     private class NewsListAdapter extends ArrayAdapter<String> {
 
         private String[] NewsID;
@@ -132,9 +142,11 @@ public class NewsActivity extends AppCompatActivity {
         private String[] NewsDescription;
         private String[] NewsAuthor;
         private String[] NewsDate;
+        private String[] NewsTime;
         private Activity context;
 
-        private NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsID, String[] NewsDescription, String[] NewsAuthor, String[] NewsDate) {
+        //adapter constructor
+        private NewsListAdapter(Activity context, String[] NewsTitle, String[] NewsID, String[] NewsDescription, String[] NewsAuthor, String[] NewsDate, String[] NewsTime) {
             super(context, R.layout.activity_news, NewsTitle);
             this.context = context;
             this.NewsTitle = NewsTitle;
@@ -142,6 +154,7 @@ public class NewsActivity extends AppCompatActivity {
             this.NewsDescription = NewsDescription;
             this.NewsAuthor = NewsAuthor;
             this.NewsDate = NewsDate;
+            this.NewsTime = NewsTime;
         }
 
 
@@ -153,6 +166,7 @@ public class NewsActivity extends AppCompatActivity {
             View r = convertView;
             ViewHolder viewHolder = null;
 
+            //things to do onclick of an item
             if(r==null){
                 LayoutInflater layoutInflater = context.getLayoutInflater();
                 r = layoutInflater.inflate(R.layout.news_list_item,null,true);
@@ -173,25 +187,29 @@ public class NewsActivity extends AppCompatActivity {
                 viewHolder = (ViewHolder)r.getTag();
             }
 
+            //bind data to UI components
             viewHolder.news_title.setText(NewsTitle[position]);
             viewHolder.news_author.setText(NewsAuthor[position]);
             viewHolder.news_date.setText(NewsDate[position]);
-
+            viewHolder.news_time.setText(NewsTime[position]);
 
             return r;
 
         }
 
+        //Defining UI components
         class ViewHolder{
             TextView news_title;
             TextView news_author;
             TextView news_date;
+            TextView news_time;
 
 
             ViewHolder(View v){
                 news_title = (TextView)v.findViewById(R.id.title);
                 news_author = (TextView)v.findViewById(R.id.author);
                 news_date = (TextView)v.findViewById(R.id.date);
+                news_time = (TextView)v.findViewById(R.id.news_time);
             }
 
 

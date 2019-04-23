@@ -10,7 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.SharingActivity"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/backgrounds"
+    >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -114,7 +115,7 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:text="Share Location"
-                android:textColor="#000"/>
+                android:textColor="#fff"/>
         </android.support.v7.widget.CardView>
 
     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
@@ -122,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Share Location"
+
         android:background="@drawable/shape_default"
         app:spinning_bar_color="#fff"
         app:spinning_bar_padding="6dp"
@@ -145,7 +147,7 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:text="Stop Sharing"
-                android:textColor="#000"/>
+                android:textColor="#fff"/>
         </android.support.v7.widget.CardView>
 
     <!--<Button-->

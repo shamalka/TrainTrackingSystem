@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tain Tracking and Reservation System</string>
+    <string name="app_name">TTRS</string>
 
     <string-array name="Start_Station_Array">
         <item>Anuradhapura</item>
@@ -123,6 +123,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_feedback_home">FeedbackHomeActivity</string>
 
 
 </resources>

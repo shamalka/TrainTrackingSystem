@@ -55,5 +55,8 @@ public class Config implements Serializable {
     public static String MY_TIME;
     public static String MY_SEAT_NUMBERS;
     public static String MY_PRICE;
+    public static String MY_RESERVATION_ID;
+
+    public static String RESPONSE="Res";
 
 }

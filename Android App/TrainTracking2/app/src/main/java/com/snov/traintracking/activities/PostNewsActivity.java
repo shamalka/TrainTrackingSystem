@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -51,18 +52,24 @@ public class PostNewsActivity extends AppCompatActivity {
 
     }
 
+    //method to execute onclick of the submit button
     public void AddNews(View view){
         Title = NewsTitle.getText().toString();
         Description = NewsDescription.getText().toString();
         Author = "User";
+        //get current date and time
         NewsDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String mytime = (DateFormat.format("hh:mm:ss", new java.util.Date()).toString());
 
+        //method identifire
         String Method = "add_news";
 
         AddNewsTask addNewsTask = new AddNewsTask(this);
-        addNewsTask.execute(Method,Title,Description,Author,NewsDate);
+        addNewsTask.execute(Method,Title,Description,Author,NewsDate,mytime);
     }
 
+    //AsyncTask enables proper and easy use of the UI thread.
+    // This class allows you to perform background operations and publish results on the UI thread without having to manipulate threads and/or handlers.
     private class AddNewsTask extends AsyncTask<String,Void,String> {
         Context context;
         LinearLayout linlaHeaderProgress = (LinearLayout) findViewById(R.id.linlaHeaderProgress);
@@ -88,6 +95,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 String Description = params[2];
                 String Author = params[3];
                 String NewsDate = params[4];
+                String Time = params[5];
 
 
                 try {
@@ -101,7 +109,8 @@ public class PostNewsActivity extends AppCompatActivity {
                     String data = URLEncoder.encode("title","UTF-8") + "=" + URLEncoder.encode(Title,"UTF-8") + "&" +
                             URLEncoder.encode("description","UTF-8") + "=" + URLEncoder.encode(Description,"UTF-8") + "&" +
                             URLEncoder.encode("author","UTF-8") + "=" + URLEncoder.encode(Author,"UTF-8") + "&" +
-                            URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(NewsDate,"UTF-8");
+                            URLEncoder.encode("dates","UTF-8") + "=" + URLEncoder.encode(NewsDate,"UTF-8") + "&" +
+                            URLEncoder.encode("time","UTF-8") + "=" + URLEncoder.encode(Time,"UTF-8");
 
                     bufferedWriter.write(data);
                     bufferedWriter.flush();
@@ -132,6 +141,7 @@ public class PostNewsActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
             linlaHeaderProgress.setVisibility(View.GONE);
+
 
             AlertDialog alertDialog = new AlertDialog.Builder(PostNewsActivity.this).create();
             alertDialog.setTitle("News Posted");

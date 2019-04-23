@@ -12,6 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:id="@+id/linear_view"
+
     tools:context="com.snov.traintracking.activities.Reservation.SelectSeatsActivity">
 
 
@@ -22,8 +23,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="gone"/>
 
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="This is all available seats | Please select your seat"
+        />
     <TextView
         android:id="@+id/resevation_class"
         android:layout_width="wrap_content"
@@ -31,7 +42,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/date"
@@ -40,7 +52,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/seat_count"
@@ -49,14 +62,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="gone"/>
 
 
     <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/done_seats_button"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:background="@color/button_background"
         android:text="Done"/>
 
 
